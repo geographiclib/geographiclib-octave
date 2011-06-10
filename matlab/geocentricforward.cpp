@@ -1,21 +1,21 @@
 /**
- * \file geodesicdirect.cpp
+ * \file geocentricforward.cpp
  * \brief Matlab mex file for geographic to UTM/UPS conversions
  *
- * Copyright (c) Charles Karney (2010) <charles@karney.com> and licensed under
+ * Copyright (c) Charles Karney (2011) <charles@karney.com> and licensed under
  * the LGPL.  For more information, see http://geographiclib.sourceforge.net/
  **********************************************************************/
 
 // Compile in Matlab with
 // [Unix]
-// mex -I/usr/local/include -L/usr/local/lib -Wl,-rpath=/usr/local/lib -lGeographic geodesicdirect.cpp
+// mex -I/usr/local/include -L/usr/local/lib -Wl,-rpath=/usr/local/lib -lGeographic geocentricforward.cpp
 // [Windows]
-// mex -I../include -L../windows/Release -lGeographic geodesicdirect.cpp
+// mex -I../include -L../windows/Release -lGeographic geocentricforward.cpp
 
-// $Id: 035764e37d7336b6eca1ee47cd6159a599247d7c $
+// $Id: 574f875184822688f4df14f9a0dee9eef3d4687e $
 
 #include <algorithm>
-#include <GeographicLib/Geodesic.hpp>
+#include <GeographicLib/Geocentric.hpp>
 #include <mex.h>
 
 using namespace std;
@@ -34,10 +34,10 @@ void mexFunction( int nlhs, mxArray* plhs[],
     mexErrMsgTxt("More than two output arguments specified.");
 
   if (!( mxIsDouble(prhs[0]) && !mxIsComplex(prhs[0]) ))
-    mexErrMsgTxt("geodesic coordinates are not of type double.");
+    mexErrMsgTxt("geodetic coordinates are not of type double.");
 
-  if (mxGetN(prhs[0]) != 4)
-    mexErrMsgTxt("geodesic coordinates must be M x 4 matrix.");
+  if (mxGetN(prhs[0]) != 3)
+    mexErrMsgTxt("geodetic coordinates must be M x 3 matrix.");
 
   double a = Constants::WGS84_a(), r = Constants::WGS84_r();
   if (nrhs == 3) {
@@ -53,43 +53,34 @@ void mexFunction( int nlhs, mxArray* plhs[],
 
   int m = mxGetM(prhs[0]);
 
-  double* lat1 = mxGetPr(prhs[0]);
-  double* lon1 = lat1 + m;
-  double* azi1 = lat1 + 2*m;
-  double* s12 = lat1 + 3*m;
+  double* lat = mxGetPr(prhs[0]);
+  double* lon = lat + m;
+  double* h = lat + 2*m;
 
   plhs[0] = mxCreateDoubleMatrix(m, 3, mxREAL);
-  double* lat2 = mxGetPr(plhs[0]);
-  std::fill(lat2, lat2 + 3*m, Math::NaN());
-  double* lon2 = lat2 + m;
-  double* azi2 = lat2 + 2*m;
-  double* m12 = NULL;
-  double* M12 = NULL;
-  double* M21 = NULL;
-  double* S12 = NULL;
-  bool aux = nlhs == 2;
+  double* x = mxGetPr(plhs[0]);
+  std::fill(x, x + 3*m, Math::NaN());
+  double* y = x + m;
+  double* z = x + 2*m;
+  double* rot = NULL;
+  bool rotp = nlhs == 2;
 
-  if (aux) {
-    plhs[1] = mxCreateDoubleMatrix(m, 4, mxREAL);
-    m12 = mxGetPr(plhs[1]);
-    std::fill(m12, m12 + 4*m, Math::NaN());
-    M12 = m12 + m;
-    M21 = m12 + 2*m;
-    S12 = m12 + 3*m;
+  if (rotp) {
+    plhs[1] = mxCreateDoubleMatrix(m, 9, mxREAL);
+    rot = mxGetPr(plhs[1]);
+    std::fill(rot, rot + 9*m, Math::NaN());
   }
 
   try {
-    const Geodesic g(a, r);
+    std::vector<double> rotv(rotp ? 9 : 0);
+    const Geocentric c(a, r);
     for (int i = 0; i < m; ++i) {
-      if (!(abs(lat1[i]) > 90) &&
-          !(lon1[i] < -180 || lon1[i] > 360) &&
-          !(azi1[i] < -180 || azi1[i] > 360)) {
-        if (aux) 
-          g.Direct(lat1[i], lon1[i], azi1[i], s12[i],
-                   lat2[i], lon2[i], azi2[i], m12[i], M12[i], M21[i], S12[i]);
-        else
-          g.Direct(lat1[i], lon1[i], azi1[i], s12[i],
-                   lat2[i], lon2[i], azi2[i]);
+      if (!(abs(lat[i]) > 90) && !(lon[i] < -180 || lon[i] > 360)) {
+        c.Forward(lat[i], lon[i], h[i], x[i], y[i], z[i], rotv);
+        if (rotp) {
+          for (int k = 0; k < 9; ++k)
+            rot[m * k + i] = rotv[k];
+        }
       }
     }
   }
