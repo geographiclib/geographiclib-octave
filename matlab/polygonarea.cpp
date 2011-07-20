@@ -1,21 +1,22 @@
 /**
- * \file geocentricreverse.cpp
- * \brief Matlab mex file for UTM/UPS to geographic conversions
+ * \file polygonarea.cpp
+ * \brief Matlab mex file for computing the area of a geodesicpolygon
  *
- * Copyright (c) Charles Karney (2011) <charles@karney.com> and licensed under
- * the MIT/X11 License.  For more information, see
+ * Copyright (c) Charles Karney (2011) <charles@karney.com> and licensed
+ * under the MIT/X11 License.  For more information, see
  * http://geographiclib.sourceforge.net/
  **********************************************************************/
 
 // Compile in Matlab with
 // [Unix]
-// mex -I/usr/local/include -L/usr/local/lib -Wl,-rpath=/usr/local/lib -lGeographic geocentricreverse.cpp
+// mex -I/usr/local/include -L/usr/local/lib -Wl,-rpath=/usr/local/lib -lGeographic polygonarea.cpp
 // [Windows]
-// mex -I../include -L../windows/Release -lGeographic geocentricreverse.cpp
+// mex -I../include -L../windows/Release -lGeographic polygonarea.cpp
 
-// $Id: e07cf8bd723b1549b92102586969cd612f42056f $
+// $Id: caafda5dbef60e3f6a5299e5767cb620a58d6ea0 $
 
-#include <GeographicLib/Geocentric.hpp>
+#include <algorithm>
+#include <GeographicLib/PolygonArea.hpp>
 #include <mex.h>
 
 using namespace std;
@@ -34,10 +35,10 @@ void mexFunction( int nlhs, mxArray* plhs[],
     mexErrMsgTxt("More than two output arguments specified.");
 
   if (!( mxIsDouble(prhs[0]) && !mxIsComplex(prhs[0]) ))
-    mexErrMsgTxt("geocentric coordinates are not of type double.");
+    mexErrMsgTxt("latlong coordinates are not of type double.");
 
-  if (mxGetN(prhs[0]) != 3)
-    mexErrMsgTxt("geocentric coordinates must be M x 3 matrix.");
+  if (mxGetN(prhs[0]) != 2)
+    mexErrMsgTxt("latlong coordinates must be M x 2 matrix.");
 
   double a = Constants::WGS84_a<double>(), f = Constants::WGS84_f<double>();
   if (nrhs == 3) {
@@ -53,32 +54,33 @@ void mexFunction( int nlhs, mxArray* plhs[],
 
   int m = mxGetM(prhs[0]);
 
-  double* x = mxGetPr(prhs[0]);
-  double* y = x + m;
-  double* z = x + 2*m;
-
-  plhs[0] = mxCreateDoubleMatrix(m, 3, mxREAL);
-  double* lat = mxGetPr(plhs[0]);
+  double* lat = mxGetPr(prhs[0]);
   double* lon = lat + m;
-  double* h = lat + 2*m;
-  double* rot = NULL;
-  bool rotp = nlhs == 2;
 
-  if (rotp) {
-    plhs[1] = mxCreateDoubleMatrix(m, 9, mxREAL);
-    rot = mxGetPr(plhs[1]);
+  plhs[0] = mxCreateDoubleMatrix(1, 1, mxREAL);
+  double* area = mxGetPr(plhs[0]);
+  double* perimeter = NULL;
+  bool perimeterp = nlhs == 2;
+
+  if (perimeterp) {
+    plhs[1] = mxCreateDoubleMatrix(1, 1, mxREAL);
+    perimeter = mxGetPr(plhs[1]);
   }
-
+  
   try {
-    std::vector<double> rotv(rotp ? 9 : 0);
-    const Geocentric c(a, f);
+    const Geodesic g(a, f);
+    PolygonArea p(g, false);
     for (int i = 0; i < m; ++i) {
-      c.Reverse(x[i], y[i], z[i], lat[i], lon[i], h[i], rotv);
-      if (rotp) {
-          for (int k = 0; k < 9; ++k)
-            rot[m * k + i] = rotv[k];
-      }
+      if (abs(lat[i]) > 90)
+        throw GeographicErr("Invalid latitude");
+      if (lon[i] < -180 || lon[i] > 360)
+        throw GeographicErr("Invalid longitude");
+      p.AddPoint(lat[i], lon[i]);
     }
+    double tp, ta;
+    p.Compute(false, true, tp, ta);
+    *area = ta;
+    if (perimeterp) *perimeter = tp;
   }
   catch (const std::exception& e) {
     mexErrMsgTxt(e.what());
