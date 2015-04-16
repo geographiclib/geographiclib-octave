@@ -1,4 +1,4 @@
-function polygonarea(~, ~, ~)
+function [area, perimeter] = polygonarea_a(latlong, a, f)
 %polygonarea  Compute area of a geodesic polygon
 %
 %   [area, perimeter] = polygonarea(latlong)
@@ -28,20 +28,15 @@ function polygonarea(~, ~, ~)
 %     https://dx.doi.org/10.1007/s00190-012-0578-z
 %     Addenda: http://geographiclib.sf.net/geod-addenda.html
 %
-% This is an interface to the GeographicLib C++ class
-%     Geodesic::PolygonArea
-% See the documentation on this function for more information:
-% http://geographiclib.sf.net/html/classGeographicLib_1_1PolygonArea
-%
 % A native MATLAB implementation is available as GEODAREA.
 %
 % See also GEODAREA.
-
-  error('Error: executing .m file instead of compiled routine');
+  if (nargin < 2)
+    ellipsoid = defaultellipsoid;
+  elseif (nargin < 3)
+    ellipsoid = [a, 0];
+  else
+    ellipsoid = [a, flat2ecc(f)];
+  end
+ [area, perimeter] = geodarea(latlong(:,1), latlong(:,2), ellipsoid);
 end
-% polygonarea.m
-% Matlab .m file for finding polygon areas
-%
-% Copyright (c) Charles Karney (2011) <charles@karney.com> and licensed under
-% the MIT/X11 License.  For more information, see
-% http://geographiclib.sourceforge.net/

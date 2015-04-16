@@ -1,4 +1,4 @@
-function geodesicinverse(~, ~, ~)
+function [geodesic, aux] = geodesicinverse_a(latlong, a, f)
 %geodesicinverse  Solve inverse geodesic problem
 %
 %   [geodesic, aux] = geodesicinverse(latlong)
@@ -32,20 +32,18 @@ function geodesicinverse(~, ~, ~)
 %     https://dx.doi.org/10.1007/s00190-012-0578-z
 %     Addenda: http://geographiclib.sf.net/geod-addenda.html
 %
-% This is an interface to the GeographicLib C++ routine
-%     Geodesic::Inverse
-% See the documentation on this function for more information:
-% http://geographiclib.sf.net/html/classGeographicLib_1_1Geodesic.html
-%
 % A native MATLAB implementation is available as GEODDISTANCE.
 %
 % See also GEODDISTANCE.
-
-  error('Error: executing .m file instead of compiled routine');
+  if (nargin < 2)
+    ellipsoid = defaultellipsoid;
+  elseif (nargin < 3)
+    ellipsoid = [a, 0];
+  else
+    ellipsoid = [a, flat2ecc(f)];
+  end
+  [s12, azi1, azi2, S12, m12, M12, M21, a12] = geoddistance ...
+      (latlong(:,1), latlong(:,2), latlong(:,3), latlong(:,4), ellipsoid);
+  geodesic = [azi1, azi2, s12];
+  aux = [a12, m12, M12, M21, S12];
 end
-% geodesicinverse.m
-% Matlab .m file for solving inverse geodesic problem
-%
-% Copyright (c) Charles Karney (2010-2011) <charles@karney.com> and licensed
-% under the MIT/X11 License.  For more information, see
-% http://geographiclib.sourceforge.net/

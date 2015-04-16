@@ -1,4 +1,4 @@
-function geodesicdirect(~, ~, ~)
+function [latlong, aux] = geodesicdirect_a(geodesic, a, f)
 %geodesicdirect  Solve direct geodesic problem
 %
 %   [latlong, aux] = geodesicdirect(geodesic)
@@ -32,20 +32,19 @@ function geodesicdirect(~, ~, ~)
 %     https://dx.doi.org/10.1007/s00190-012-0578-z
 %     Addenda: http://geographiclib.sf.net/geod-addenda.html
 %
-% This is an interface to the GeographicLib C++ routine
-%     Geodesic::Direct
-% See the documentation on this function for more information:
-% http://geographiclib.sf.net/html/classGeographicLib_1_1Geodesic.html
-%
 % A native MATLAB implementation is available as GEODRECKON.
 %
 % See also GEODRECKON.
-
-  error('Error: executing .m file instead of compiled routine');
+  if (nargin < 2)
+    ellipsoid = defaultellipsoid;
+  elseif (nargin < 3)
+    ellipsoid = [a, 0];
+  else
+    ellipsoid = [a, flat2ecc(f)];
+  end
+  [lat2, lon2, azi2, S12, m12, M12, M21, a12] = geodreckon ...
+      (geodesic(:,1), geodesic(:,2), geodesic(:,4), geodesic(:,3), ...
+       ellipsoid);
+  latlong = [lat2, lon2, azi2];
+  aux = [a12, m12, M12, M21, S12];
 end
-% geodesicdirect.m
-% Matlab .m file for solving direct geodesic problem
-%
-% Copyright (c) Charles Karney (2010-2011) <charles@karney.com> and licensed
-% under the MIT/X11 License.  For more information, see
-% http://geographiclib.sourceforge.net/

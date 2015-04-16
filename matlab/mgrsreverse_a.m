@@ -1,4 +1,4 @@
-function mgrsreverse(~)
+function [utmups, prec] = mgrsreverse_a(mgrs)
 %mgrsreverse  Convert UTM/UPS coordinates to MGRS
 %
 %   [utmups, prec] = mgrsreverse(mgrs)
@@ -21,16 +21,6 @@ function mgrsreverse(~)
 %
 %   The position is the center of the MGRS square.  To obtain the
 %   SW corner subtract 0.5 * 10^(5-prec) from the easting and northing.
-%
-% This is an interface to the GeographicLib C++ routine
-%     MGRS::Reverse
-% See the documentation on this function for more information:
-% http://geographiclib.sf.net/html/classGeographicLib_1_1MGRS.html
-  error('Error: executing .m file instead of compiled routine');
+  [x, y, z, h, prec] = mgrs_rev(mgrs);
+  utmups = [x, y, z, h];
 end
-% mgrsreverse.m
-% Matlab .m file for MGRS to UTM/UPS conversions
-%
-% Copyright (c) Charles Karney (2010-2011) <charles@karney.com> and licensed
-% under the MIT/X11 License.  For more information, see
-% http://geographiclib.sourceforge.net/

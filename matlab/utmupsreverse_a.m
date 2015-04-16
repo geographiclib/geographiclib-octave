@@ -1,4 +1,4 @@
-function utmupsreverse(~)
+function [latlong, scale] = utmupsreverse_a(utmups)
 %utmupsreverse  Convert UTM/UPS coordinates to geographic
 %
 %   [latlong, scale] = utmupsreverse(utmups)
@@ -18,16 +18,8 @@ function utmupsreverse(~)
 %   scale is an M x 2 matrix
 %       gamma = scale(:,1) meridian convergence in degrees
 %       k = scale(:,2) scale
-%
-% This is an interface to the GeographicLib C++ routine
-%     UTMUPS::Reverse
-% See the documentation on this function for more information:
-% http://geographiclib.sf.net/html/classGeographicLib_1_1MGRS.html
-  error('Error: executing .m file instead of compiled routine');
+  [lat, lon, gam, k] = ...
+      utmups_inv(utmups(:,1), utmups(:,2), utmups(:,3), utmups(:,4));
+  latlong = [lat, lon];
+  scale = [gam, k];
 end
-% utmupsreverse.m
-% Matlab .m file for UTM/UPS to geographic conversions
-%
-% Copyright (c) Charles Karney (2010-2011) <charles@karney.com> and licensed
-% under the MIT/X11 License.  For more information, see
-% http://geographiclib.sourceforge.net/

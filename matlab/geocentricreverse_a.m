@@ -1,4 +1,4 @@
-function geocentricreverse(~, ~, ~)
+function [geodetic, rot] = geocentricreverse_a(geocentric, a, f)
 %geocentricreverse  Convert geocentric coordinates to geographic
 %
 %   [geodetic, rot] = geocentricreverse(geocentric)
@@ -22,16 +22,15 @@ function geocentricreverse(~, ~, ~)
 %   a = major radius (meters)
 %   f = flattening (0 means a sphere)
 %   If a and f are omitted, the WGS84 values are used.
-%
-% This is an interface to the GeographicLib C++ routine
-%     Geocentric::Reverse
-% See the documentation on this function for more information:
-% http://geographiclib.sf.net/html/classGeographicLib_1_1Geocentric.html
-  error('Error: executing .m file instead of compiled routine');
+  if (nargin < 2)
+    ellipsoid = defaultellipsoid;
+  elseif (nargin < 3)
+    ellipsoid = [a, 0];
+  else
+    ellipsoid = [a, flat2ecc(f)];
+  end
+  [lat, lon, h, M] = geocent_inv(geocentric(:,1), geocentric(:,2), ...
+                                 geocentric(:,3), ellipsoid);
+  geodetic = [lat, lon, h];
+  rot = reshape(permute(M, [3, 2 1]), [], 9);
 end
-% geocentricreverse.m
-% Matlab .m file for geocentric to geographic conversions
-%
-% Copyright (c) Charles Karney (2011) <charles@karney.com> and licensed
-% under the MIT/X11 License.  For more information, see
-% http://geographiclib.sourceforge.net/

@@ -1,4 +1,4 @@
-function geocentricforward(~, ~, ~)
+function [geocentric, rot] = geocentricforward_a(geodetic, a, f)
 %geocentricforward  Convert geographic coordinates to geocentric
 %
 %   [geocentric, rot] = geocentricforward(geodetic)
@@ -17,20 +17,19 @@ function geocentricforward(~, ~, ~)
 %       M = rot(:,1:9) rotation matrix in row major order.  Pre-multiplying
 %           a unit vector in local cartesian coordinates (east, north, up)
 %           by M transforms the vector to geocentric coordinates.
-%
-%   a = major radius (meters)
-%   f = flattening (0 means a sphere)
-%   If a and f are omitted, the WGS84 values are used.
-%
-% This is an interface to the GeographicLib C++ routine
-%     Geocentric::Forward
-% See the documentation on this function for more information:
-% http://geographiclib.sf.net/html/classGeographicLib_1_1Geocentric.html
-  error('Error: executing .m file instead of compiled routine');
+  if (nargin < 2)
+    ellipsoid = defaultellipsoid;
+  elseif (nargin < 3)
+    ellipsoid = [a, 0];
+  else
+    ellipsoid = [a, flat2ecc(f)];
+  end
+  if size(geodetic,2) < 3
+    h = 0;
+  else
+    h = geodetic(:,3);
+  end
+  [X, Y, Z, M] = geocent_fwd(geodetic(:,1), geodetic(:,2), h,  ellipsoid);
+  geocentric = [X, Y, Z];
+  rot = reshape(permute(M, [3, 2 1]), [], 9);
 end
-% geocentricforward.m
-% Matlab .m file for geographic to geocentric conversions
-%
-% Copyright (c) Charles Karney (2011) <charles@karney.com> and licensed
-% under the MIT/X11 License.  For more information, see
-% http://geographiclib.sourceforge.net/

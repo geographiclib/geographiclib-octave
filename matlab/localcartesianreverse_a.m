@@ -1,4 +1,4 @@
-function localcartesianreverse(~, ~, ~, ~)
+function [geodetic, rot] = localcartesianreverse_a(origin, cartesian, a, f)
 %localcartesianreverse  Convert local cartesian coordinates to geographic
 %
 %   [geodetic, rot] = localcartesianreverse(origin, cartesian)
@@ -27,15 +27,21 @@ function localcartesianreverse(~, ~, ~, ~)
 %   f = flattening (0 means a sphere)
 %   If a and f are omitted, the WGS84 values are used.
 %
-% This is an interface to the GeographicLib C++ routine
-%     LocalCartesian::Reverse
-% See the documentation on this function for more information:
-% http://geographiclib.sf.net/html/classGeographicLib_1_1LocalCartesian.html
-  error('Error: executing .m file instead of compiled routine');
+  if (nargin < 3)
+    ellipsoid = defaultellipsoid;
+  elseif (nargin < 4)
+    ellipsoid = [a, 0];
+  else
+    ellipsoid = [a, flat2ecc(f)];
+  end
+  if length(origin) == 3
+    h0 = origin(3);
+  elseif length(origin) ~= 2
+    error('origin is not vector of length 2 or 3')
+  end
+  [lat, lon, h, M] = ...
+      loccart_inv(origin(1), origin(2), h0, ...
+                  cartesian(:,1), cartesian(:,2), cartesian(:,3), ellipsoid);
+  geodetic = [lat, lon, h];
+  rot = reshape(permute(M, [3, 2 1]), [], 9);
 end
-% localcartesianreverse.m
-% Matlab .m file for local cartesian to geographic conversions
-%
-% Copyright (c) Charles Karney (2011) <charles@karney.com> and licensed under
-% the MIT/X11 License.  For more information, see
-% http://geographiclib.sourceforge.net/
