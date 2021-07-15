@@ -1,5 +1,5 @@
 % GeographicLib toolbox
-% Version 1.52 2021-06-20
+% Version @PROJECT_VERSION@ @RELEASE_DATE@
 %
 %   This toolbox provides native MATLAB implementations of a subset of the
 %   C++ library, GeographicLib.  Key components of this toolbox are
@@ -16,7 +16,7 @@
 %   available in the documentation for the GeographicLib, which is
 %   available at
 %
-%       https://geographiclib.sourceforge.io/1.52
+%       https://geographiclib.sourceforge.io/@PROJECT_VERSION@
 %
 %   Some common features of these functions:
 %     * Angles (latitude, longitude, azimuth, meridian convergence) are
