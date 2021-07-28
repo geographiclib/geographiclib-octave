@@ -37,6 +37,7 @@ function geographiclib_test
   i = GeodSolve80; if i, n=n+1; fprintf('GeodSolve80 fail: %d\n', i); end
   i = GeodSolve84; if i, n=n+1; fprintf('GeodSolve84 fail: %d\n', i); end
   i = GeodSolve92; if i, n=n+1; fprintf('GeodSolve92 fail: %d\n', i); end
+  i = GeodSolve94; if i, n=n+1; fprintf('GeodSolve94 fail: %d\n', i); end
   i = Planimeter0 ; if i, n=n+1; fprintf('Planimeter0  fail: %d\n', i); end
   i = Planimeter5 ; if i, n=n+1; fprintf('Planimeter5  fail: %d\n', i); end
   i = Planimeter6 ; if i, n=n+1; fprintf('Planimeter6  fail: %d\n', i); end
@@ -615,6 +616,15 @@ function n = GeodSolve92
   n = n + assertEquals(azi1, 89.99999923, 1e-7  );
   n = n + assertEquals(azi2, 90.00000106, 1e-7  );
   n = n + assertEquals(s12,   0.264,      0.5e-3);
+end
+
+function n = GeodSolve94
+% Check fix for lat2 = nan being treated as lat2 = 0 (bug found 2021-07-26)
+  n = 0;
+  [s12, azi1, azi2] = geoddistance(0, 0, NaN, 90);
+  n = n + assertNaN(azi1);
+  n = n + assertNaN(azi2);
+  n = n + assertNaN(s12);
 end
 
 function n = Planimeter0

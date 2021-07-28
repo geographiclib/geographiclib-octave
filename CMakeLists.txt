@@ -20,7 +20,7 @@ if (NOT CMAKE_CONFIGURATION_TYPES AND NOT CMAKE_BUILD_TYPE)
 endif ()
 
 set (INSTALL_PATH "share/matlab"
-  CACHE PATH "Installation directory GeographicLib-MATLAB")
+  CACHE PATH "Installation directory GeographicLib-Octave")
 
 enable_testing ()
 
