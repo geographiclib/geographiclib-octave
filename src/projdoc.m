@@ -68,5 +68,5 @@ function projdoc
 
 % Copyright (c) Charles Karney (2012-2015) <charles@karney.com>.
 
-  help projdoc
+  help(mfilename)
 end

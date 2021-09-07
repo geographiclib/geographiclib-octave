@@ -91,3 +91,5 @@
 %   gedoc            - Great ellipses on an ellipsoid of revolution
 
 % Copyright (c) Charles Karney (2015-2021) <charles@karney.com>.
+
+help(mfilename)

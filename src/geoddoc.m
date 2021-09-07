@@ -167,5 +167,5 @@ function geoddoc
 
 % Copyright (c) Charles Karney (2012-2017) <charles@karney.com>.
 
-  help geoddoc
+  help(mfilename)
 end
