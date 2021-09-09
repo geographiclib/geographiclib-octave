@@ -53,6 +53,7 @@ function geographiclib_test
   i = TransverseMercatorProj5;
   if i, n=n+1; fprintf('TransverseMercatorProj5 fail: %d\n', i); end
   i = geodreckon0; if i, n=n+1; fprintf('geodreckon0 fail: %d\n', i); end
+  i = geodreckon1; if i, n=n+1; fprintf('geodreckon1 fail: %d\n', i); end
   i = gedistance0; if i, n=n+1; fprintf('gedistance0 fail: %d\n', i); end
   i = tranmerc0; if i, n=n+1; fprintf('tranmerc0 fail: %d\n', i); end
   i = mgrs0; if i, n=n+1; fprintf('mgrs0 fail: %d\n', i); end
@@ -805,6 +806,40 @@ function n = geodreckon0
   % atan2dx needs to accommodate scalar + array arguments: 2017-03-27
   lat2 = geodreckon(3, 4, [1, 2], 90);
   if length(lat2) ~= 2, n = n+1; end
+end
+
+function n = geodreckon1
+% Check mixed column + row vector invocations of geodreckon
+  n = 0;
+  M = 3; N = 5; Z = zeros(M, N); a = 6.4e6;
+  lat1 = asind(2 * rand(M,1) - 1); lat1e = lat1 + Z;
+  lon1 = 180* (2 * rand(M,1) - 1); lon1e = lon1 + Z;
+  azi1 = 180* (2 * rand(M,1) - 1); azi1e = azi1 + Z;
+  s12 = rand(1, N); s12e = s12 + Z;
+  for f = [1/300, 1/50]
+    ell = [a, flat2ecc(f)];
+    for flags = 0 : 3
+      if bitand(flags, 1)
+        m = 360;
+      else
+        m = 4*pi*a;
+      end
+    [lat2e, lon2e, azi2e, S12e, m12e, M12e, M21e, a12e] = ...
+        geodreckon(lat1e, lon1e, s12e * m, azi1e, ell, flags);
+    [lat2, lon2, azi2, S12, m12, M12, M21, a12] = ...
+        geodreckon(lat1, lon1, s12 * m, azi1, ell, flags);
+    e = [];
+    d = abs(lat2-lat2e); e=[e, max(d(:))];
+    d = abs(lon2-lon2e); e=[e, max(d(:))];
+    d = abs(azi2-azi2e); e=[e, max(d(:))];
+    d = abs(S12-S12e); e=[e, max(d(:))];
+    d = abs(m12-m12e); e=[e, max(d(:))];
+    d = abs(M12-M12e); e=[e, max(d(:))];
+    d = abs(M21-M21e); e=[e, max(d(:))];
+    d = abs(a12-a12e); e=[e, max(d(:))];
+    if max(e) > 0, n = n+1; end
+    end
+  end
 end
 
 function n = gedistance0

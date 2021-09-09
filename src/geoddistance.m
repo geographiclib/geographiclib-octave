@@ -61,8 +61,8 @@ function [s12, azi1, azi2, S12, m12, M12, M21, a12] = geoddistance ...
     error('ellipsoid must be a vector of size 2')
   end
   Z = zeros(S);
-  lat1 = lat1 + Z; lon1 = lon1 + Z;
-  lat2 = lat2 + Z; lon2 = lon2 + Z;
+  lat1 = AngRound(LatFix(lat1)) + Z; lon1 = lon1 + Z;
+  lat2 = AngRound(LatFix(lat2)) + Z; lon2 = lon2 + Z;
   Z = Z(:);
 
   degree = pi/180;
@@ -106,8 +106,8 @@ function [s12, azi1, azi2, S12, m12, M12, M21, a12] = geoddistance ...
   [slam12( l), clam12( l)] = sincosdx(lon12s(l)); clam12(l) = -clam12(l);
   [slam12(~l), clam12(~l)] = sincosdx(lon12(~l));
 
-  lat1 = AngRound(LatFix(lat1(:)));
-  lat2 = AngRound(LatFix(lat2(:)));
+  lat1 = lat1(:);
+  lat2 = lat2(:);
   swapp = 2 * ~(abs(lat1) < abs(lat2) | isnan(lat2)) - 1;
   lonsign(swapp < 0) = - lonsign(swapp < 0);
   [lat1(swapp < 0), lat2(swapp < 0)] = swap(lat1(swapp < 0), lat2(swapp < 0));

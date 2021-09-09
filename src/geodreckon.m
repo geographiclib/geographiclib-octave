@@ -40,11 +40,13 @@ function [lat2, lon2, azi2, S12, m12, M12, M21, a12_s12] = geodreckon ...
 %
 %   When given a combination of scalar and array inputs, GEODRECKON behaves
 %   as though the inputs were expanded to match the size of the arrays.
-%   However, in the particular case where lat1 and azi1 are the same for
-%   all the input points, they should be specified as scalars since this
-%   will considerably speed up the calculations.  (In particular a series
-%   of points along a single geodesic is efficiently computed by specifying
-%   an array for s12 only.)
+%   However, the setting up of the geodesic lines depends only on lat1 and
+%   azi1.  So the combination of these arrays should be made as small as
+%   possible.  For example, lat1, lon1, and azi1 could be specified as
+%   column vectors of length M, while s12 is a row vector of length N.  The
+%   result will be an M x N matrices however some portion of the compution
+%   will performed on the smaller, size M, problem involving lat1 and azi1.
+%   For N large, this speeds up the computation by about a factor of 2.
 %
 %   This is an implementation of the algorithm given in
 %
@@ -76,7 +78,11 @@ function [lat2, lon2, azi2, S12, m12, M12, M21, a12_s12] = geodreckon ...
 
   narginchk(4, 6)
   try
-    S = size(lat1 + lon1 + s12_a12 + azi1);
+    % Use -0.0 for Z1 and Z to preserve the sign of 0.0.  geodreckon is one of
+    % the few functions where this matters (to distinguish between
+    % east-going and west-going meridional geodesics).
+    S1 = size(lat1 + azi1); Z1 = -zeros(S1); % The size of geodesic line prob
+    S = size(Z1 + lon1 + s12_a12); Z = -zeros(S); % The size of the full prob
   catch
     error('lat1, lon1, s12, azi1 have incompatible sizes')
   end
@@ -104,9 +110,13 @@ function [lat2, lon2, azi2, S12, m12, M12, M21, a12_s12] = geodreckon ...
   if ~isscalar(flags)
     error('flags must be a scalar')
   end
+
   arcmode = bitand(flags, 1);
   long_unroll = bitand(flags, 2);
-  Z = zeros(prod(S),1);
+  lat1 = AngRound(LatFix(lat1)) + Z1; azi1 = AngRound(azi1) + Z1;
+  lat1 = lat1(:); azi1 = azi1(:);
+  % expand lon1 to full size
+  lon1 = lon1 + Z; lon1 = lon1(:);
 
   degree = pi/180;
   tiny = sqrt(realmin);
@@ -126,11 +136,6 @@ function [lat2, lon2, azi2, S12, m12, M12, M21, a12_s12] = geodreckon ...
   A3x = A3coeff(n);
   C3x = C3coeff(n);
 
-  lat1 = AngRound(LatFix(lat1(:)));
-  lon1 = lon1(:);
-  azi1 = AngRound(azi1(:));
-  s12_a12 = s12_a12(:);
-
   [salp1, calp1] = sincosdx(azi1);
   [sbet1, cbet1] = sincosdx(lat1);
   sbet1 = f1 * sbet1; cbet1 = max(tiny, cbet1);
@@ -147,18 +152,68 @@ function [lat2, lon2, azi2, S12, m12, M12, M21, a12_s12] = geodreckon ...
   A1m1 = A1m1f(epsi);
   C1a = C1f(epsi);
   B11 = SinCosSeries(true, ssig1, csig1, C1a);
-  s = sin(B11); c = cos(B11);
-  stau1 = ssig1 .* c + csig1 .* s; ctau1 = csig1 .* c - ssig1 .* s;
-
-  C1pa = C1pf(epsi);
+  if ~arcmode
+    s = sin(B11); c = cos(B11);
+    stau1 = ssig1 .* c + csig1 .* s; ctau1 = csig1 .* c - ssig1 .* s;
+    C1pa = C1pf(epsi);
+  end
   C3a = C3f(epsi, C3x);
   A3c = -f * salp0 .* A3f(epsi, A3x);
   B31 = SinCosSeries(true, ssig1, csig1, C3a);
 
+  if redlp || scalp
+    A2m1 = A2m1f(epsi);
+    C2a = C2f(epsi);
+    B21 = SinCosSeries(true, ssig1, csig1, C2a);
+  end
+
+  if areap
+    C4x = C4coeff(n);
+    C4a = C4f(epsi, C4x);
+    A4 = (a^2 * e2) * calp0 .* salp0;
+    B41 = SinCosSeries(false, ssig1, csig1, C4a);
+  end
+
+  if prod(S) ~= prod(S1)
+    if arcmode || abs(f) > 0.01
+      C1a = expand(C1a, S1, Z);
+    end
+    k2 = expand(k2, S1, Z);
+    dn1 = expand(dn1, S1, Z);
+    A1m1 = expand(A1m1, S1, Z);
+    B11 = expand(B11, S1, Z);
+    C3a = expand(C3a, S1, Z);
+    B31 = expand(B31, S1, Z);
+    A3c = expand(A3c, S1, Z);
+
+    salp0 = expand(salp0, S1, Z); calp0 = expand(calp0, S1, Z);
+    ssig1 = expand(ssig1, S1, Z); csig1 = expand(csig1, S1, Z);
+    somg1 = expand(somg1, S1, Z); comg1 = expand(comg1, S1, Z);
+    if ~arcmode
+      stau1 = expand(stau1, S1, Z); ctau1 = expand(ctau1, S1, Z);
+      C1pa = expand(C1pa, S1, Z);
+    end
+    if redlp || scalp
+      A2m1 = expand(A2m1, S1, Z);
+      C2a = expand(C2a, S1, Z);
+      B21 = expand(B21, S1, Z);
+    end
+    if areap
+      % C4x isn't used again
+      C4a = expand(C4a, S1, Z);
+      A4 = expand(A4, S1, Z);
+      B41 = expand(B41, S1, Z);
+    end
+  end
+
   if arcmode
     sig12 = s12_a12 * degree;
     [ssig12, csig12] = sincosdx(s12_a12);
+    sig12 = sig12 + Z; sig12 = sig12(:);
+    ssig12 = ssig12 + Z; ssig12 = ssig12(:);
+    csig12 = csig12 + Z; csig12 = csig12(:);
   else
+    s12_a12 = s12_a12 + Z; s12_a12 = s12_a12(:);
     tau12 = s12_a12 ./ (b * (1 + A1m1));
     s = sin(tau12); c = cos(tau12);
     B12 = - SinCosSeries(true, stau1 .* c + ctau1 .* s, ...
@@ -214,33 +269,26 @@ function [lat2, lon2, azi2, S12, m12, M12, M21, a12_s12] = geodreckon ...
   else
     a12_s12 = sig12 / degree;
   end
-  a12_s12 = reshape(a12_s12 + Z, S);
+  a12_s12 = reshape(a12_s12, S);
 
   if redlp || scalp
-    A2m1 = A2m1f(epsi);
-    C2a = C2f(epsi);
-    B21 = SinCosSeries(true, ssig1, csig1, C2a);
     B22 = SinCosSeries(true, ssig2, csig2, C2a);
     AB2 = (1 + A2m1) .* (B22 - B21);
     J12 = (A1m1 - A2m1) .* sig12 + (AB1 - AB2);
     if redlp
       m12 = b * ((dn2 .* (csig1 .* ssig2) - dn1 .* (ssig1 .* csig2)) ...
                  - csig1 .* csig2 .* J12);
-      m12 = reshape(m12 + Z, S);
+      m12 = reshape(m12, S);
     end
     if scalp
       t = k2 .* (ssig2 - ssig1) .* (ssig2 + ssig1) ./ (dn1 + dn2);
       M12 = csig12 + (t .* ssig2 - csig2 .* J12) .* ssig1 ./ dn1;
       M21 = csig12 - (t .* ssig1 - csig1 .* J12) .* ssig2 ./  dn2;
-      M12 = reshape(M12 + Z, S); M21 = reshape(M21 + Z, S);
+      M12 = reshape(M12, S); M21 = reshape(M21, S);
     end
   end
 
   if areap
-    C4x = C4coeff(n);
-    C4a = C4f(epsi, C4x);
-    A4 = (a^2 * e2) * calp0 .* salp0;
-    B41 = SinCosSeries(false, ssig1, csig1, C4a);
     B42 = SinCosSeries(false, ssig2, csig2, C4a);
     salp12 = calp0 .* salp0 .* ...
              cvmgt(csig1 .* (1 - csig12) + ssig12 .* ssig1, ...
@@ -248,25 +296,44 @@ function [lat2, lon2, azi2, S12, m12, M12, M21, a12_s12] = geodreckon ...
                    (csig1 .* ssig12 ./ max(1, (1 + csig12)) + ssig1), ...
                    csig12 <= 0);
     calp12 = salp0.^2 + calp0.^2 .* csig1 .* csig2;
-    % Deal with geodreckon(10, 0, [], 0) which has calp2 = []
-    if ~isempty(Z)
-      % Enlarge salp1, calp1 is case lat1 is an array and azi1 is a scalar
-      s = zeros(size(salp0)); salp1 = salp1 + s; calp1 = calp1 + s;
-      s = calp0 == 0 | salp0 == 0;
-      salp12(s) = salp2(s) .* calp1(s) - calp2(s) .* salp1(s);
-      calp12(s) = calp2(s) .* calp1(s) + salp2(s) .* salp1(s);
-    end
+    s = calp0 == 0 | salp0 == 0;
+    salp12(s) = salp2(s) .* calp1(s) - calp2(s) .* salp1(s);
+    calp12(s) = calp2(s) .* calp1(s) + salp2(s) .* salp1(s);
     if e2 ~= 0
       c2 = (a^2 + b^2 * eatanhe(1, e2) / e2) / 2;
     else
       c2 = a^2;
     end
     S12 = c2 * atan2(salp12, calp12) + A4 .* (B42 - B41);
-    S12 = reshape(S12 + Z, S);
+    S12 = reshape(S12, S);
   end
 
-  lat2 = reshape(lat2 + Z, S);
+  lat2 = reshape(lat2, S);
   lon2 = reshape(lon2, S);
-  azi2 = reshape(azi2 + Z, S);
+  azi2 = reshape(azi2, S);
 
+end
+
+function B = expand(A, in, out)
+% Expand a matrix to go from the setup of geodesic lines to the
+% calculation of positions along the lines.
+%
+% A is a column vector of size prod(in).  in is a row vector representing
+% the shape of A before it was converted to a column vector. out is a zero
+% matrix with a shape of the full problem.  B is a column vector of size
+% prod(size(out)).  in and out must be compatible, i.e.,
+%
+%   size( zeros(in) + out ) == size( out )
+%
+  k = size(A, 2);
+  if k == 1
+    B = reshape(A, in) + out;
+    B = B(:);
+  else
+    % k > 1: Allow A/B to be k such columnized matrices
+    B = repmat( out(:), 1, k );
+    for i = 1 : k
+      B(:, i) = expand(A(:, i), in, out);
+    end
+  end
 end
