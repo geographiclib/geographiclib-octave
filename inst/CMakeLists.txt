@@ -28,6 +28,7 @@ set (SOURCES
   ecc2flat.m
   flat2ecc.m
   geographiclib_test.m
+  geographiclib_signtest.m
   geoddoc.m
   projdoc.m
   gedoc.m)
@@ -61,34 +62,50 @@ set (PRIVATE_SOURCES
   private/norm2.m
   private/remx.m
   private/sincosdx.m
+  private/signbitx.m
   private/sumx.m
-  private/swap.m
   private/tauf.m
   private/taupf.m)
 
-configure_file (Contents.m.in Contents.m @ONLY)
+configure_file (Contents.m.in ${DISTDIR}/inst/Contents.m @ONLY)
 foreach (f ${SOURCES} ${PRIVATE_SOURCES})
-  configure_file (${f} ${f} COPYONLY)
+  configure_file (${f} ${DISTDIR}/inst/${f} COPYONLY)
 endforeach ()
 
-install (FILES ${SOURCES} DESTINATION ${INSTALL_PATH}/geographiclib)
-install (FILES ${PRIVATE_SOURCES}
-  DESTINATION ${INSTALL_PATH}/geographiclib/private)
+install (FILES ${SOURCES} DESTINATION ${INSTDIR}/geographiclib)
+install (FILES ${PRIVATE_SOURCES} DESTINATION ${INSTDIR}/geographiclib/private)
+install (FILES ${DISTDIR}/inst/Contents.m DESTINATION ${INSTDIR}/geographiclib)
 
+foreach (f ${METAFILES})
+  install (FILES ${DISTDIR}/${f} DESTINATION ${INSTDIR}/geographiclib/packinfo)
+endforeach ()
+
+set (TOOLBOX
+  ${DISTDIR}/../geographiclib-toolbox-${PROJECT_VERSION}.zip)
 set (PACKAGE
-  ${PROJECT_BINARY_DIR}/dist/geographiclib_toolbox_${PROJECT_VERSION}.zip)
+  ${DISTDIR}/../geographiclib-octave-${PROJECT_VERSION}.tar.gz)
+
+add_custom_command (OUTPUT ${TOOLBOX}
+  WORKING_DIRECTORY ${DISTDIR}/inst
+  COMMAND ${CMAKE_COMMAND} -E
+  tar cf ${TOOLBOX} --format=zip -- Contents.m ${SOURCES} ${PRIVATE_SOURCES}
+  COMMENT "Creating toolbox")
 
 add_custom_command (OUTPUT ${PACKAGE}
-  COMMAND ${CMAKE_COMMAND} -E make_directory ${PROJECT_BINARY_DIR}/dist
+  WORKING_DIRECTORY ${DISTDIR}/..
   COMMAND ${CMAKE_COMMAND} -E
-  tar cf ${PACKAGE} --format=zip -- Contents.m ${SOURCES} ${PRIVATE_SOURCES}
+  tar cfz ${PACKAGE} --format=gnutar -- geographiclib-octave-${PROJECT_VERSION}
   COMMENT "Creating package")
 
-add_custom_target (package ALL DEPENDS ${PACKAGE})
+add_custom_target (package ALL DEPENDS ${TOOLBOX} ${PACKAGE})
 
 find_program (OCTAVE octave)
 if (OCTAVE)
   add_test (NAME testsuite
-    COMMAND ${OCTAVE} --no-gui --no-window-system --eval geographiclib_test)
+    COMMAND ${OCTAVE} --no-gui --no-window-system --eval geographiclib_test
+    WORKING_DIRECTORY ${DISTDIR}/inst)
+  add_test (NAME signtest
+    COMMAND ${OCTAVE} --no-gui --no-window-system --eval geographiclib_signtest
+    WORKING_DIRECTORY ${DISTDIR}/inst)
 endif ()
   

@@ -1,0 +1,100 @@
+geographiclib-octave-2.0
+
+Version 2.0 (release 2022-mm-dd)
+  
+
+Version 1.52 (released 2021-06-22)
+  * Be more aggressive in preventing negative s12 and m12 for short
+    lines (all languages).
+
+Version 1.50 (released 2019-09-24)
+  * BUG fixes:
+    - fix bug in mgrs_inv which resulted in incorrect results for UPS
+      zones with prec = -1;
+    - in geodreckon and geoddistance, suppress (innocuous) "warning:
+      division by zero" messages from Octave.
+  * geodarea can now handle arbitrarily complex polygons.  In the case of
+    self-intersecting polygons the area is accumulated "algebraically",
+    e.g., the areas of the 2 loops in a figure-8 polygon will partially
+    cancel.
+  * private/cbrtx now preserves the sign of -0.
+  * Improve code coverage in the tests.
+
+Version 1.48 (released 2017-04-09)
+  * The default range for longitude and azimuth is now (-180 deg, 180
+    deg], instead of [-180 deg, 180 deg).
+  * Fix BUG in geodreckon with mixed scalar and array arguments.
+
+Version 1.47 (released 2017-02-15)
+  * Improve accuracy of area calculation (fixing a flaw introduced in
+    version 1.46).
+
+Version 1.46 (released 2016-02-15)
+  * More accurate solution of the inverse problem when longitude
+    difference is close to 180 deg.
+
+Version 1.45 (released 2015-09-30)
+  * Fix array size mismatch in geoddistance by avoiding calls to
+    subfunctions with zero-length arrays.
+  * Fix tranmerc_{fwd,inv} so that they work with arrays and mixed
+    array/scalar arguments.
+  * Work around Octave problem which causes mgrs_fwd to return garbage
+    with prec = 10 or 11.
+  * Add geographiclib_test.m to run a test suite.
+     
+Version 1.44 (released 2015-08-14)
+  * Various changes to improve accuracy, e.g., by minimizing round-off
+    errors:
+    - add sincosdx which take its arguments in degrees.  This does
+      exact range reduction and thus they obey exactly the elementary
+      properties of the trigonometric functions, e.g., sin 9 deg = cos
+      81 deg = - sin 123456789 deg;
+    - AngNormalize now works for any angles, instead of angles in
+      the range [-540 deg, 540 deg);
+    - this means that there is now no restriction on longitudes and
+      azimuths; any values can be used;
+    - improve the accuracy of atan2dx.
+  * mgrs_fwd now treats treats prec &gt; 11 as prec = 11.
+  * Illegal letter combinations are now correctly detected by mgrs_inv.
+  * Fixed bug where mgrs_inv returned the wrong results for prec = 0
+     strings and center = 0.
+  * mgrs_inv now decodes prec = 11 strings properly.
+  * Routines now return array results with the right shape.
+  * Routines now properly handle mixed scalar and array arguments.
+
+Version 1.43 (released 2015-05-23)
+  * LONG_NOWRAP is now called LONG_UNROLL (a less negative sounding
+    term).
+  * Fixed a bad BUG in the implementation of this capability: it gave
+    incorrect results for west-going geodesics.
+  * mgrs_inv now takes an optional center argument and strips white
+    space from both beginning and end of the string.
+
+Version 1.42 (released 2015-04-28)
+  * Reorganize directories, so that
+    - matlab/geographiclib contains the native matlab code;
+    - matlab/geographiclib-legacy contains wrapper functions to mimic
+      the previous compiled functionality.
+  * matlab/geographiclib is now packaged and distributed as MATLAB File
+    Exchange package
+     https://www.mathworks.com/matlabcentral/fileexchange/50605
+  * Point fix for geodarea.m to correct bug in area of polygons which
+     encircle a pole multiple times.
+
+Version 1.39 (released 2014-11-11)
+  * Fix BLUNDER in area calculation in MATLAB routine geodreckon;
+  * Add area calculation to routines for great ellipses.
+
+Version 1.38 (released 2014-10-02)
+  * MATLAB/Octave routines for great ellipses added.
+
+Version 1.32 (released 2013-07-12)
+  * Accumulate the perimeter and area of polygons via a double-wide
+    accumulator.
+
+Version 1.28 (released 2012-12-11)
+  * add MATLAB implementations of the geodesic projections
+
+Version 1.27 (released 2012-11-29)
+  * add native MATLAB implementations: geoddistance.m, geodreckon.m,
+    geodarea.m.

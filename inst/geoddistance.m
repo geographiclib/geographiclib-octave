@@ -110,7 +110,8 @@ function [s12, azi1, azi2, S12, m12, M12, M21, a12] = geoddistance ...
   lat2 = lat2(:);
   swapp = 2 * ~(abs(lat1) < abs(lat2) | isnan(lat2)) - 1;
   lonsign(swapp < 0) = - lonsign(swapp < 0);
-  [lat1(swapp < 0), lat2(swapp < 0)] = swap(lat1(swapp < 0), lat2(swapp < 0));
+  % swap
+  [lat1(swapp < 0), lat2(swapp < 0)] = deal(lat2(swapp < 0), lat1(swapp < 0));
 
   latsign = 2 * (lat1 < 0) - 1;
   lat1 = latsign .* lat1;
@@ -308,10 +309,11 @@ function [s12, azi1, azi2, S12, m12, M12, M21, a12] = geoddistance ...
     S12 = 0 + swapp .* lonsign .* latsign .* (S12 + c2 * alp12);
   end
 
-  [salp1(swapp<0), salp2(swapp<0)] = swap(salp1(swapp<0), salp2(swapp<0));
-  [calp1(swapp<0), calp2(swapp<0)] = swap(calp1(swapp<0), calp2(swapp<0));
+  % swap
+  [salp1(swapp<0), salp2(swapp<0)] = deal(salp2(swapp<0), salp1(swapp<0));
+  [calp1(swapp<0), calp2(swapp<0)] = deal(calp2(swapp<0), calp1(swapp<0));
   if scalp
-    [M12(swapp<0), M21(swapp<0)] = swap(M12(swapp<0), M21(swapp<0));
+    [M12(swapp<0), M21(swapp<0)] = deal(M21(swapp<0), M12(swapp<0)); % swap
     M12 = reshape(M12, S); M21 = reshape(M21, S);
   end
   salp1 = salp1 .* swapp .* lonsign; calp1 = calp1 .* swapp .* latsign;

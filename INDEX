@@ -1,0 +1,42 @@
+geographiclib >> Geography utilities from GeographicLib
+Geodesics
+  geoddistance
+  geodreckon
+  geodarea
+Projections
+  tranmerc_fwd
+  tranmerc_inv
+  polarst_fwd
+  polarst_inv
+  eqdazim_fwd
+  eqdazim_inv
+  cassini_fwd
+  cassini_inv
+  gnomonic_fwd
+  gnomonic_inv
+Grid systems
+  utmups_fwd
+  utmups_inv
+  mgrs_fwd
+  mgrs_inv
+Geoid lookup
+  geoid_height
+  geoid_load
+Geometric transformations
+  geocent_fwd
+  geocent_inv
+  loccart_fwd
+  loccart_inv
+Great ellipses
+  gedistance
+  gereckon
+Utility
+  defaultellipsoid
+  ecc2flat
+  flat2ecc
+  geographiclib_test
+  geographiclib_signtest
+Documentation
+  geoddoc
+  projdoc
+  gedoc

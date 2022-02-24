@@ -59,7 +59,7 @@ function [lat, lon, h, M] = geocent_inv(X, Y, Z, ellipsoid)
     q = e2m * (Z / a).^2;
     r = (p + q - e4a) / 6;
     if e2 < 0
-      [p, q] = swap(p, q);
+      [p, q] = deal(q, p);              % swap
     end
 
     % Avoid possible division by zero when r = 0 by multiplying
@@ -113,7 +113,7 @@ function [lat, lon, h, M] = geocent_inv(X, Y, Z, ellipsoid)
       % f < 0: R -> 0, k + e2 -> - e2 * sqrt(q)/sqrt(e4 - p)
       zz = e4a - p(c); xx = p(c);
       if e2 < 0
-        [zz, xx] = swap(zz, xx);
+        [zz, xx] = deal(xx, zz);        % swap
       end
       zz = sqrt(zz / e2m);
       xx = sqrt(xx);

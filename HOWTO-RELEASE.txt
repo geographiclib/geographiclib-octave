@@ -1,0 +1,25 @@
+To make toolbox and package
+
+cmake -B BUILD -S .
+make -C BUILD package
+
+To install in ${INSTDIR} default share/octave/packages
+make -C BUILD install
+
+Guidlines for Octave packages
+  https://octave.org/doc/v6.4.0/Packages.html
+  https://octave.org/doc/v6.4.0/Creating-Packages.html
+
+https://github.com/gnu-octave/packages
+https://gnu-octave.github.io/packages/
+
+# MATLAB
+#   matlab/geographiclib/Contents.m version (multiple places) + date
+#   matlab/geographiclib-blurb.txt version (multiple places) + date
+#   update version number "%2F15%2F" in documentation link in index.html,
+#     GeographicLib.dox.in, geodesic-{c,for}.dox,
+#     java/src/main/java/net/sf/geographiclib/package-info.java,
+#     js/GeographicLib.md, python/doc/index.rst
+#   mathworks has switched to an uglier URL.  Only update if there are
+#   changes.
+# use MATLAB's analyze code
