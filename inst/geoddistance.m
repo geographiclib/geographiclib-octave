@@ -98,7 +98,7 @@ function [s12, azi1, azi2, S12, m12, M12, M21, a12] = geoddistance ...
   C3x = C3coeff(n);
 
   [lon12, lon12s] = AngDiff(lon1(:), lon2(:));
-  lonsign = 2 * (lon12 >= 0) - 1;
+  lonsign = copysignx(1, lon12);
   lon12 = lonsign .* AngRound(lon12);
   lon12s = AngRound((180 -lon12) - lonsign .* lon12s);
   lam12 = lon12 * degree; slam12 = Z; clam12 = Z;
@@ -113,7 +113,7 @@ function [s12, azi1, azi2, S12, m12, M12, M21, a12] = geoddistance ...
   % swap
   [lat1(swapp < 0), lat2(swapp < 0)] = deal(lat2(swapp < 0), lat1(swapp < 0));
 
-  latsign = 2 * (lat1 < 0) - 1;
+  latsign = copysignx(1, -lat1);
   lat1 = latsign .* lat1;
   lat2 = latsign .* lat2;
 
@@ -146,8 +146,8 @@ function [s12, azi1, azi2, S12, m12, M12, M21, a12] = geoddistance ...
     ssig2(m) = sbet2(m); csig2(m) = calp2(m) .* cbet2(m);
 
     sig12(m) = ...
-        atan2(0 + max(0, csig1(m) .* ssig2(m) - ssig1(m) .* csig2(m)), ...
-              csig1(m) .* csig2(m) + ssig1(m) .* ssig2(m));
+        atan2(max(0, csig1(m) .* ssig2(m) - ssig1(m) .* csig2(m)), ...
+                     csig1(m) .* csig2(m) + ssig1(m) .* ssig2(m));
 
     [s12(m), m12(m), ~, M12(m), M21(m)] = ...
         Lengths(n, sig12(m), ...
@@ -306,7 +306,7 @@ function [s12, azi1, azi2, S12, m12, M12, M21, a12] = geoddistance ...
     else
       c2 = a^2;
     end
-    S12 = 0 + swapp .* lonsign .* latsign .* (S12 + c2 * alp12);
+    S12 = swapp .* lonsign .* latsign .* (S12 + c2 * alp12);
   end
 
   % swap
@@ -319,8 +319,8 @@ function [s12, azi1, azi2, S12, m12, M12, M21, a12] = geoddistance ...
   salp1 = salp1 .* swapp .* lonsign; calp1 = calp1 .* swapp .* latsign;
   salp2 = salp2 .* swapp .* lonsign; calp2 = calp2 .* swapp .* latsign;
 
-  azi1 = atan2dx(salp1, calp1);
-  azi2 = atan2dx(salp2, calp2);
+  azi1 = atan2d(salp1, calp1);
+  azi2 = atan2d(salp2, calp2);
   a12 = sig12 / degree;
 
   s12 = reshape(s12, S); azi1 = reshape(azi1, S); azi2 = reshape(azi2, S);
@@ -505,11 +505,11 @@ function [lam12, dlam12, ...
   csig2 = calp2 .* cbet2;  comg2 = csig2;
   [ssig2, csig2] = norm2(ssig2, csig2);
 
-  sig12 = atan2(0 + max(0, csig1 .* ssig2 - ssig1 .* csig2), ...
-                csig1 .* csig2 + ssig1 .* ssig2);
+  sig12 = atan2(max(0, csig1 .* ssig2 - ssig1 .* csig2), ...
+                       csig1 .* csig2 + ssig1 .* ssig2);
 
-  somg12 = 0 + max(0, comg1 .* somg2 - somg1 .* comg2);
-  comg12 =            comg1 .* comg2 + somg1 .* somg2;
+  somg12 = max(0, comg1 .* somg2 - somg1 .* comg2);
+  comg12 =        comg1 .* comg2 + somg1 .* somg2;
   eta = atan2(somg12 .* clam120 - comg12 .* slam120, ...
               comg12 .* clam120 + somg12 .* slam120);
   k2 = calp0.^2 * ep2;

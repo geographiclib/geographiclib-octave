@@ -105,9 +105,9 @@ function cross = transit(lon1, lon2)
 %   CROSS = TRANSIT(LON1, LON2) return 1 or -1 if crossing prime meridian
 %   in east or west direction.  Otherwise return zero.
 
+  lon12 = AngDiff(lon1, lon2);
   lon1 = AngNormalize(lon1);
   lon2 = AngNormalize(lon2);
-  lon12 = AngDiff(lon1, lon2);
   cross = zeros(length(lon1), 1);
   cross(lon1 <= 0 & lon2 > 0 & lon12 > 0) =  1;
   cross(lon2 <= 0 & lon1 > 0 & lon12 < 0) = -1;

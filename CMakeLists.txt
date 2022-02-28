@@ -25,6 +25,7 @@ set (INSTDIR "share/octave/packages"
   CACHE PATH "Installation directory GeographicLib-Octave")
 # directory for bundling up toolbox and packate
 set (DISTDIR ${PROJECT_BINARY_DIR}/dist/geographiclib-octave-${PROJECT_VERSION})
+file (REMOVE_RECURSE ${DISTDIR})
 
 set (METAFILES COPYING INDEX NEWS)
 foreach (f ${METAFILES})

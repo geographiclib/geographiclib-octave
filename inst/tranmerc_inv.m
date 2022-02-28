@@ -77,8 +77,8 @@ function [lat, lon, gam, k] = tranmerc_inv(lat0, lon0, x, y, ellipsoid)
 
   xi = y / a1;
   eta = x(:) / a1 + Z;
-  xisign = 1 - 2 * (xi < 0 );
-  etasign = 1 - 2 * (eta < 0 );
+  xisign = copysignx(1, xi);
+  etasign = copysignx(1, eta);
   xi = xi .* xisign;
   eta = eta .* etasign;
   backside = xi > pi/2;
@@ -105,17 +105,17 @@ function [lat, lon, gam, k] = tranmerc_inv(lat0, lon0, x, y, ellipsoid)
   z1 = 1 - z1 + z0 .* a;
   a = complex(s0 .* ch0, c0 .* sh0);
   y1 = complex(xi, eta) + y0 .* a;
-  gam = atan2dx(imag(z1), real(z1));
+  gam = atan2d(imag(z1), real(z1));
   k = b1 ./ abs(z1);
   xip = real(y1); etap = imag(y1);
   s = sinh(etap);
   c = max(0, cos(xip));
   r = hypot(s, c);
-  lon = atan2dx(s, c);
+  lon = atan2d(s, c);
   sxip = sin(xip);
   tau = tauf(sxip./r, e2);
-  lat = atan2dx(tau, 1 + Z);
-  gam = gam + atan2dx(sxip .* tanh(etap), c);
+  lat = atan2d(tau, 1 + Z);
+  gam = gam + atan2d(sxip .* tanh(etap), c);
   c = r ~= 0;
   k(c) = k(c) .* sqrt(e2m + e2 ./ (1 + tau.^2)) .* ...
          hypot(1, tau(c)) .* r(c);

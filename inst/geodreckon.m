@@ -262,8 +262,8 @@ function [lat2, lon2, azi2, S12, m12, M12, M21, a12_s12] = geodreckon ...
     lon12 = AngNormalize(lon12);
     lon2 = AngNormalize(AngNormalize(lon1) + lon12);
   end
-  lat2 = atan2dx(sbet2, f1 * cbet2);
-  azi2 = atan2dx(salp2, calp2);
+  lat2 = atan2d(sbet2, f1 * cbet2);
+  azi2 = atan2d(salp2, calp2);
   if arcmode
     a12_s12 = b * ((1 + A1m1) .* sig12 + AB1);
   else

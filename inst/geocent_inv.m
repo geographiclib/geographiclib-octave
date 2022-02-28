@@ -140,8 +140,8 @@ function [lat, lon, h, M] = geocent_inv(X, Y, Z, ellipsoid)
     sphi(far) = Z(far)/2 ./ H;
     cphi(far) = R(far) ./ H;
   end
-  lat = atan2dx(sphi, cphi);
-  lon = atan2dx(slam, clam);
+  lat = atan2d(sphi, cphi);
+  lon = atan2d(slam, clam);
   if nargout > 3
     M = GeoRotation(sphi, cphi, slam, clam);
   end

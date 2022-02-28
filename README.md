@@ -3,6 +3,9 @@
 The Octave/MATLAB package is available
 [here](https://www.mathworks.com/matlabcentral/fileexchange/50605).
 
+To load the toolbox for MATLAB, use the "Add-Ons" drop down menu and
+search for "geographiclib".
+
 This toolbox provides native MATLAB implementations of a subset of the
 C++ library, GeographicLib.  Key components of this toolbox are
 
@@ -34,3 +37,5 @@ Other links:
   * [documentation on the C++ library](https://geographiclib.sourceforge.io/C++/doc).
   * [information about the geoid datasets](https://geographiclib.sourceforge.io/C++/doc/geoid.html#geoidinst)
   * [change log](https://geographiclib.sourceforge.io/C++/doc/changes.html)
+  * C. F. F. Karney, [Transverse Mercator with an accuracy of a few nanometers](https://doi.org/10.1007/s00190-011-0445-3), J. Geodesy, 2011, (preprint)[https://arxiv.org/abs/1002.1417].
+  * C. F. F. Karney, [Algorithms for geodesics](https://doi.org/10.1007/s00190-012-0578-z), J. Geodesy, 2013.

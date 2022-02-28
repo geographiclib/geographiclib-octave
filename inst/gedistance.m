@@ -95,8 +95,8 @@ function [s12, azi1, azi2, S12] = gedistance(lat1, lon1, lat2, lon2, ellipsoid)
   s12 = A1 .* (atan2(ssig12, csig12) + ...
                (SinCosSeries(true, ssig2, csig2, C1a) - ...
                 SinCosSeries(true, ssig1, csig1, C1a)));
-  azi1 = atan2dx(sgam1, cgam1 .* sqrt(1 - e2 * cbet1.^2));
-  azi2 = atan2dx(sgam2, cgam2 .* sqrt(1 - e2 * cbet2.^2));
+  azi1 = atan2d(sgam1, cgam1 .* sqrt(1 - e2 * cbet1.^2));
+  azi2 = atan2d(sgam2, cgam2 .* sqrt(1 - e2 * cbet2.^2));
 
   s12 = reshape(s12, S); azi1 = reshape(azi1, S); azi2 = reshape(azi2, S);
 

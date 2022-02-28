@@ -688,7 +688,7 @@ end
 function n = Planimeter12
 % Area of arctic circle (not really -- adjunct to rhumb-area test)
   n = 0;
-  points = [66.562222222, 0; 66.562222222, 180];
+  points = [66.562222222, 0; 66.562222222, 180; 66.562222222, 360];
   [area, perimeter] = geodarea(points(:,1), points(:,2));
   n = n + assertEquals(perimeter, 10465729, 1);
   n = n + assertEquals(area, 0, 1);
@@ -828,16 +828,16 @@ function n = geodreckon1
         geodreckon(lat1e, lon1e, s12e * m, azi1e, ell, flags);
     [lat2, lon2, azi2, S12, m12, M12, M21, a12] = ...
         geodreckon(lat1, lon1, s12 * m, azi1, ell, flags);
-    e = [];
-    d = abs(lat2-lat2e); e=[e, max(d(:))];
-    d = abs(lon2-lon2e); e=[e, max(d(:))];
-    d = abs(azi2-azi2e); e=[e, max(d(:))];
-    d = abs(S12-S12e); e=[e, max(d(:))];
-    d = abs(m12-m12e); e=[e, max(d(:))];
-    d = abs(M12-M12e); e=[e, max(d(:))];
-    d = abs(M21-M21e); e=[e, max(d(:))];
-    d = abs(a12-a12e); e=[e, max(d(:))];
-    if max(e) > 0, n = n+1; end
+    err = [];
+    d = abs(lat2-lat2e); err=[err, max(d(:))];
+    d = abs(lon2-lon2e); err=[err, max(d(:))];
+    d = abs(azi2-azi2e); err=[err, max(d(:))];
+    d = abs(S12-S12e); err=[err, max(d(:))];
+    d = abs(m12-m12e); err=[err, max(d(:))];
+    d = abs(M12-M12e); err=[err, max(d(:))];
+    d = abs(M21-M21e); err=[err, max(d(:))];
+    d = abs(a12-a12e); err=[err, max(d(:))];
+    if max(err) > 0, n = n+1; end
     end
   end
 end

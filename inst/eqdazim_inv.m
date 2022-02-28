@@ -44,7 +44,7 @@ function [lat, lon, azi, rk] = eqdazim_inv(lat0, lon0, x, y, ellipsoid)
     error('lat0, lon0, x, y have incompatible sizes')
   end
 
-  azi0 = atan2dx(x, y);
+  azi0 = atan2d(x, y);
   s = hypot(x, y);
   [lat, lon, azi, ~, m, ~, ~, sig] = ...
       geodreckon(lat0, lon0, s, azi0, ellipsoid);

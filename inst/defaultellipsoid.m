@@ -13,8 +13,8 @@ function ellipsoid = defaultellipsoid
   if isempty(ell)
     a = 6378137;
     f = 1/298.257223563;
-    e = flat2ecc(f);
-    ell = [a, e];
+    ecc = flat2ecc(f);
+    ell = [a, ecc];
   end
   narginchk(0, 0)
   ellipsoid = ell;

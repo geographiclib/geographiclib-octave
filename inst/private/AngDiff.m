@@ -1,11 +1,14 @@
-function [d, e] = AngDiff(x, y)
+function [d, t] = AngDiff(x, y)
 %ANGDIFF  Compute angle difference accurately
 %
-%   [d, e] = ANGDIFF(x, y) computes z = y - x, reduced to (-180,180].  d =
-%   round(z) and e = z - round(z).  x and y can be any compatible shapes.
+%   [d, t] = ANGDIFF(x, y) computes z = y - x, reduced to (-180,180].  d =
+%   round(z) and t = z - round(z).  x and y can be any compatible shapes.
 
-  [d, t] = sumx(AngNormalize(-x), AngNormalize(y));
-  d = AngNormalize(d);
-  d(d == 180 & t > 0) = -180;
-  [d, e] = sumx(d, t);
+  [d, t] = sumx(remx(-x, 360), remx(y, 360));
+  d = remx(d, 360);
+  l = d == 0 | abs(d) == 180;
+  if any(l)
+    z = y -x;
+    d(l) = copysignx(d(l), cvmgt(z(l), -t(l), t(l) == 0));
+  end
 end

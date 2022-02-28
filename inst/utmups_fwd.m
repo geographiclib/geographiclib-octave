@@ -53,7 +53,7 @@ function [x, y, zone, isnorth, gam, k] = utmups_fwd(lat, lon, setzone)
     error('lat, lon, setzone have incompatible sizes')
   end
   lat = lat + Z; lon = lon + Z;
-  isnorth = lat >= 0;
+  isnorth = ~signbitx(lat);
   zone = StandardZone(lat, lon, setzone);
   Z = nan(size(Z));
   x = Z; y = Z; gam = Z; k = Z;
@@ -70,7 +70,7 @@ function [x, y, gam, k] = utm_fwd(zone, isnorth, lat, lon)
 %UTM_FWD  Forward UTM projection
 
   lon0 = -183 + 6 * floor(zone); lat0 = 0;
-  bad = ~(abs(mod(lon - lon0 + 180, 360) - 180) <= 60);
+  bad = ~(abs(AngDiff(lon0, lon)) <= 60);
   fe = 5e5; fn = 100e5 * (1-isnorth); k0 = 0.9996;
   [x, y, gam, k] = tranmerc_fwd(lat0, lon0, lat, lon);
   x = x * k0; y = y * k0; k = k * k0;
