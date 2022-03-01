@@ -39,7 +39,7 @@ function [x, y, z, M] = loccart_fwd(lat0, lon0, h0, lat, lon, h, ellipsoid)
     error('ellipsoid must be a vector of size 2')
   end
   num = prod(S);
-  Z = zeros(num, 1);
+  Z = -zeros(num, 1);
   lat = lat(:) + Z;
   lon = lon(:) + Z;
   h = h(:) + Z;

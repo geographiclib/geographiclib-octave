@@ -43,7 +43,7 @@ function [s12, azi1, azi2, S12] = gedistance(lat1, lon1, lat2, lon2, ellipsoid)
   if length(ellipsoid(:)) ~= 2
     error('ellipsoid must be a vector of size 2')
   end
-  Z = zeros(S);
+  Z = -zeros(S);
   lat1 = lat1 + Z; lon1 = lon1 + Z;
   lat2 = lat2 + Z; lon2 = lon2 + Z;
 

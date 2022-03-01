@@ -43,7 +43,7 @@ function mgrs = mgrs_fwd(x, y, zone, isnorth, prec)
   end
   num = prod(s);
   if num == 0, mgrs = cell(0); return, end
-  Z = zeros(num, 1);
+  Z = -zeros(num, 1);
   x = x(:) + Z; y = y(:) + Z; zone = zone(:) + Z;
   isnorth = isnorth(:) + Z; prec = prec(:) + Z;
   mgrs = repmat('INV', num, 1);
@@ -69,10 +69,10 @@ function mgrs = mgrs_fwd_p(x, y, zone, northp, prec)
   mgrs = [mgrs, repmat(' ', num, 2 + 2*prec)];
   utm = zone >= 1 & zone <= 60;
   y(utm & ~northp) = y(utm & ~northp) - 100e5;
-  northp(utm) = 1;
   utm = utm & x >= 1e5 & x <= 9e5 & y >= -90e5 & y <= 95e5;
   x(utm & x ==  9e5) =  9e5 - delta;
   y(utm & y == 95e5) = 95e5 - delta;
+  y(utm & y == 0 & ~northp) = -delta;
   upsn = zone == 0 &  northp;
   upss = zone == 0 & ~northp;
   upsn = upsn & x >= 13e5 & x <= 27e5 & y >= 13e5 & y <= 27e5;

@@ -52,7 +52,7 @@ function [lat, lon, gam, k] = tranmerc_inv(lat0, lon0, x, y, ellipsoid)
     error('ellipsoid must be a vector of size 2')
   end
 
-  Z = zeros(prod(S),1);
+  Z = -zeros(prod(S),1);
   maxpow = 6;
 
   a = ellipsoid(1);

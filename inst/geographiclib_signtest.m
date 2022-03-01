@@ -142,9 +142,8 @@ function geographiclib_signtest
   [s1,c1] = sincosdx(9);
   [s2,c2] = sincosdx(81);
   [s3,c3] = sincosdx(-123456789);
-  if ~(equiv(s1, c2) & equiv(s1, s3))
-    n=n+1; fprintf('sincosd accuracy fail\n')
-  end
+  i = equiv(s1, c2) + equiv(s1, s3);
+  if i, n=n+1; fprintf('sincosd accuracy fail\n'); end
 
   i = checkatan2d(+0.0 , -0.0 , +180 );
   if i, n=n+1; fprintf('atan2d(+0.0 , -0.0 ) fail\n'); end
@@ -288,39 +287,100 @@ function geographiclib_signtest
   i = checkAngDiff( -eps , -180.0, -180.0 );
   if i, n=n+1; fprintf('AngDiff( -eps , -180.0) fail\n'); end
 
+  % azimuth of geodesic line with points on equator determined by signs
+  % of latitude
+  % lat1 lat2 azi1/2
+  C = [ +0, -0, 180;
+        -0, +0, 0 ];
+  [~, azi1, azi2] = geoddistance(C(:,1), 0, C(:,2), 0);
+  i = equiv(azi1, C(:,3)) + equiv(azi2, C(:,3));
+  if i, n=n+1; fprintf('coincident points on equator fail\n'); end
+
+  % Does the nearly antipodal equatorial solution go north or south?
+  % lat1 lat2 azi1 azi2
+  C = [ +0, +0,  56, 124;
+        -0, -0, 124,  56];
+  [~, azi1, azi2] = geoddistance(C(:,1), 0, C(:,2), 179.5);
+  i = assertEquals(azi1, C(:,3), 1) + assertEquals(azi2, C(:,4), 1);
+  if i, n=n+1; fprintf('nearly antipodal points on equator fail\n'); end
+
+  % How does the exact antipodal equatorial path go N/S + E/W
+  % lat1 lat2 lon2 azi1 azi2
+  C = [ +0, +0, +180,   +0, +180;
+        -0, -0, +180, +180,   +0;
+        +0, +0, -180,   -0, -180;
+        -0, -0, -180, -180,   -0 ];
+  [~, azi1, azi2] = geoddistance(C(:,1), 0, C(:,2), C(:,3));
+  i = equiv(azi1, C(:,4)) + equiv(azi2, C(:,5));
+  if i, n=n+1; fprintf('antipodal points on equator fail\n'); end
+
+  % Anipodal points on the equator with prolate ellipsoid
+  % lon2 azi1/2
+  C = [+180, +90;
+       -180, -90];
+  [~, azi1, azi2] = geoddistance(0, 0, 0, C(:,1), [6.4e6, flat2ecc(-1/300)]);
+  i = equiv(azi1, C(:,2)) + equiv(azi2, C(:,2));
+  if i, n=n+1; fprintf('`antipodal points on equator, prolate, fail\n'); end
+
+  % azimuths = +/-0 and +/-180 for the direct problem
+  % azi1, lon2, azi2
+  C = [  +0, +180, +180;
+         -0, -180, -180;
+       +180, +180,   +0;
+       -180, -180,   -0 ];
+  [~, lon2, azi2] = geodreckon(0, 0, 15e6, C(:,1), 2);
+  i = equiv(lon2, C(:,2)) + equiv(azi2, C(:,3));
+  if i, n=n+1; fprintf('geodreckon, azi1 = +/-0 +/-180, fail\n'); end
+
+  % lat = +/-0 in utmups_fwd
+  % lat y northp
+  C = [ +0,  0,   1;
+        -0, 10e6, 0 ];
+  [x, y, zone, northp] = utmups_fwd(C(:,1), 3);
+  i = equiv(y, C(:,2)) + equiv(northp, C(:,3));
+  if i, n=n+1; fprintf('utmups_fwd lat = +/-0, fail\n'); end
+  mgrs = mgrs_fwd(x, y, zone, northp, 2)
+  i = ~strcmp(mgrs{1,1}, '31NEA0000') + ~strcmp(mgrs{2,1}, '31MEV0099');
+  if i, n=n+1; fprintf('mgrs_fwd lat = +/-0, fail\n'); end
   assert(n == 0);
 end
 
-function r = equiv(x, y)
-  r = (isnan(x) & isnan(y)) | (x == y & signbitx(x) == signbitx(y));
+function n = assertEquals(x, y, d)
+  n = abs(x - y) <= d;
+  n = sum(~n(:));
+end
+
+function n = equiv(x, y)
+  n = (isnan(x) & isnan(y)) | (x == y & signbitx(x) == signbitx(y));
+  n = sum(~n(:));
 end
 
 function n = checkAngRound(x, y)
   z = AngRound(x);
-  n = ~equiv(z, y);
+  n = equiv(z, y);
 end
 
 function n = checksincosd(x, s, c)
   [ss, cc] = sincosdx(x);
-  n = ~(equiv(ss, s) & equiv(cc, c));
+  n = equiv(ss, s) + equiv(cc, c);
 end
 
 function n = checkatan2d(y, x, a)
   aa = atan2d(y, x);
-  n = ~equiv(aa, a);
+  n = equiv(aa, a);
 end
 
 function n = checksum(x, y, s)
   ss = sumx(x, y);
-  n = ~equiv(ss, s);
+  n = equiv(ss, s);
 end
 
 function n = checkAngNormalize(x, y)
   z = AngNormalize(x);
-  n = ~equiv(z, y);
+  n = equiv(z, y);
 end
 
 function n = checkAngDiff(x, y, d)
   dd = AngDiff(x, y);
-  n = ~equiv(dd, d);
+  n = equiv(dd, d);
 end

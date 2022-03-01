@@ -37,7 +37,7 @@ function [lat, lon, h, M] = loccart_inv(lat0, lon0, h0, x, y, z, ellipsoid)
     error('ellipsoid must be a vector of size 2')
   end
   num = prod(S);
-  Z = zeros(num, 1);
+  Z = -zeros(num, 1);
   x = x(:) + Z;
   y = y(:) + Z;
   z = z(:) + Z;

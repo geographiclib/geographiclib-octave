@@ -23,7 +23,7 @@ function [lat, lon, h, M] = geocent_inv(X, Y, Z, ellipsoid)
   narginchk(3, 4)
   if nargin < 4, ellipsoid = defaultellipsoid; end
   try
-    z = zeros(size(X + Y + Z));
+    z = -zeros(size(X + Y + Z));
   catch
     error('X, Y, Z have incompatible sizes')
   end
@@ -118,7 +118,7 @@ function [lat, lon, h, M] = geocent_inv(X, Y, Z, ellipsoid)
       zz = sqrt(zz / e2m);
       xx = sqrt(xx);
       H = hypot(zz, xx); sphi(c) = zz ./ H; cphi(c) = xx ./ H;
-      sphi(c & Z < 0) = - sphi(c & Z < 0);
+      sphi(c & signbit(Z)) = - sphi(c & signbit(Z));
       h(c) = - a *  H / e2a;
       if e2 >= 0
         h(c) = e2m * h(c);

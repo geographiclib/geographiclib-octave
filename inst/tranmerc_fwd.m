@@ -52,7 +52,7 @@ function [x, y, gam, k] = tranmerc_fwd(lat0, lon0, lat, lon, ellipsoid)
     error('ellipsoid must be a vector of size 2')
   end
 
-  Z = zeros(prod(S),1);
+  Z = -zeros(prod(S),1);
   maxpow = 6;
 
   a = ellipsoid(1);

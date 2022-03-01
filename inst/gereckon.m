@@ -49,7 +49,7 @@ function [lat2, lon2, azi2, S12] = gereckon(lat1, lon1, s12, azi1, ellipsoid)
   end
 
   tiny = sqrt(realmin);
-  Z = zeros(prod(S),1);
+  Z = -zeros(prod(S),1);
 
   a = ellipsoid(1);
   e2 = real(ellipsoid(2)^2);

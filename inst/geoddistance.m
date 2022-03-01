@@ -60,7 +60,7 @@ function [s12, azi1, azi2, S12, m12, M12, M21, a12] = geoddistance ...
   if length(ellipsoid(:)) ~= 2
     error('ellipsoid must be a vector of size 2')
   end
-  Z = zeros(S);
+  Z = -zeros(S);
   lat1 = AngRound(LatFix(lat1)) + Z; lon1 = lon1 + Z;
   lat2 = AngRound(LatFix(lat2)) + Z; lon2 = lon2 + Z;
   Z = Z(:);
@@ -124,7 +124,7 @@ function [s12, azi1, azi2, S12, m12, M12, M21, a12] = geoddistance ...
   [sbet2, cbet2] = norm2(sbet2, cbet2); cbet2 = max(tiny, cbet2);
 
   c = cbet1 < -sbet1 & cbet2 == cbet1;
-  sbet2(c) = (2 * (sbet2(c) < 0) - 1) .* sbet1(c);
+  sbet2(c) = (2 * signbitx(sbet2(c)) - 1) .* sbet1(c);
   c = ~(cbet1 < -sbet1) & abs(sbet2) == - sbet1;
   cbet2(c) = cbet1(c);
 

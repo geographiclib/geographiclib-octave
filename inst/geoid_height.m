@@ -132,7 +132,7 @@ function N = geoid_height_int(lat, lon, geoid, cubic)
   catch
     error('lat, lon have incompatible sizes')
   end
-  num = prod(s); Z = zeros(num,1);
+  num = prod(s); Z = -zeros(num,1);
   lat = lat(:) + Z; lon = lon(:) + Z;
   h = geoid.h; w = geoid.w;
   % lat is in [0, h]
