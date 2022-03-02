@@ -6,6 +6,9 @@ The Octave/MATLAB package is available
 To load the toolbox for MATLAB, use the "Add-Ons" drop down menu and
 search for "geographiclib".
 
+pkg install https://sourceforge.net/projects/geographiclib/files/distrib-Octave/geographiclib-octave-2.0-alpha.tar.gz
+pkg load geographiclib
+
 This toolbox provides native MATLAB implementations of a subset of the
 C++ library, GeographicLib.  Key components of this toolbox are
 

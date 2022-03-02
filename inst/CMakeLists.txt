@@ -67,8 +67,10 @@ set (PRIVATE_SOURCES
   private/taupf.m)
 
 configure_file (Contents.m.in ${DISTDIR}/inst/Contents.m @ONLY)
+set (PACKAGE_DEPENDS ${PACKAGE_DEPENDS} ${DISTDIR}/inst/Contents.m)
 foreach (f ${SOURCES} ${PRIVATE_SOURCES})
   configure_file (${f} ${DISTDIR}/inst/${f} COPYONLY)
+  set (PACKAGE_DEPENDS ${PACKAGE_DEPENDS} ${DISTDIR}/inst/${f})
 endforeach ()
 
 install (FILES ${SOURCES} DESTINATION ${INSTDIR}/geographiclib)
@@ -84,17 +86,21 @@ set (TOOLBOX
 set (PACKAGE
   ${DISTDIR}/../geographiclib-octave-${PROJECT_VERSION}.tar.gz)
 
+# message (STATUS "${PACKAGE_DEPENDS}")
+
 add_custom_command (OUTPUT ${TOOLBOX}
   WORKING_DIRECTORY ${DISTDIR}/inst
   COMMAND ${CMAKE_COMMAND} -E
   tar cf ${TOOLBOX} --format=zip -- Contents.m ${SOURCES} ${PRIVATE_SOURCES}
-  COMMENT "Creating toolbox")
+  COMMENT "Creating toolbox"
+  DEPENDS ${PACKAGE_DEPENDS})
 
 add_custom_command (OUTPUT ${PACKAGE}
   WORKING_DIRECTORY ${DISTDIR}/..
   COMMAND ${CMAKE_COMMAND} -E
   tar cfz ${PACKAGE} --format=gnutar -- geographiclib-octave-${PROJECT_VERSION}
-  COMMENT "Creating package")
+  COMMENT "Creating package"
+  DEPENDS ${PACKAGE_DEPENDS})
 
 add_custom_target (package ALL DEPENDS ${TOOLBOX} ${PACKAGE})
 
@@ -107,4 +113,3 @@ if (OCTAVE)
     COMMAND ${OCTAVE} --no-gui --no-window-system --eval geographiclib_signtest
     WORKING_DIRECTORY ${DISTDIR}/inst)
 endif ()
-  

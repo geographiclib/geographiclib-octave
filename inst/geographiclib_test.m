@@ -931,3 +931,5 @@ function n = mgrs5
   n = n + assertEquals(length(mgrs{3}), 5, 0);
   n = n + assertEquals(mgrs{3}, 'BKH41', 0);
 end
+
+%!test geographiclib_test

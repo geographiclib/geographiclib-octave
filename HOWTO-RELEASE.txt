@@ -1,12 +1,24 @@
 To make toolbox and package
 
-cmake -B BUILD -S .
-make -C BUILD package
+  cmake -B BUILD -S .
+  make -C BUILD package test
 
-To install in ${INSTDIR} default share/octave/packages
-make -C BUILD install
+packages are in
 
-Guidlines for Octave packages
+ BUILD/dist/geographiclib*.{tar.gz,zip}
+
+To install code
+
+  make -C BUILD install
+
+This installs in ${CMAKE_INSTALL_PREFIX}/${INSTDIR}/geographiclib
+
+================================================================
+Fedora maintainer: Rich Mattes <richmattes@gmail.com>
+
+Random notes
+
+Guidelines for Octave packages
   https://octave.org/doc/v6.4.0/Packages.html
   https://octave.org/doc/v6.4.0/Creating-Packages.html
 

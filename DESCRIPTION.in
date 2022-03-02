@@ -1,11 +1,13 @@
 Name: GeographicLib
-Version: @PROJECT_VERSION@@PROJECT_VERSION_SUFFIX@
+Version: @PROJECT_VERSION@
 Date: @RELEASE_DATE@
 Author: Charles Karney <charles@karney.com>
 Maintainer: Charles Karney <charles@karney.com>
 Title: GeographicLib, a subset of the C++ library ported to Octave/MATLAB
-Description: This toolbox provides native MATLAB implementations of a subset of the
- C++ library, GeographicLib.  Key components of this toolbox are, geodesic, projections, 
- grid systems, geoid lookup geometric transformations.
-Licence: MIT
-url: https://github.com/geographiclib/geographiclib-octave/blob/devel/README.md
+Description: This toolbox provides native MATLAB implementations of a
+ subset of the C++ library, GeographicLib.  Key components of this
+ toolbox are, geodesic, projections, grid systems, geoid lookup
+ geometric transformations.
+License: MIT
+Url: https://github.com/geographiclib/geographiclib-octave/blob/devel/README.md
+Depends: octave (>= 4.0.0)

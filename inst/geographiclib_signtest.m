@@ -339,7 +339,7 @@ function geographiclib_signtest
   [x, y, zone, northp] = utmups_fwd(C(:,1), 3);
   i = equiv(y, C(:,2)) + equiv(northp, C(:,3));
   if i, n=n+1; fprintf('utmups_fwd lat = +/-0, fail\n'); end
-  mgrs = mgrs_fwd(x, y, zone, northp, 2)
+  mgrs = mgrs_fwd(x, y, zone, northp, 2);
   i = ~strcmp(mgrs{1,1}, '31NEA0000') + ~strcmp(mgrs{2,1}, '31MEV0099');
   if i, n=n+1; fprintf('mgrs_fwd lat = +/-0, fail\n'); end
   assert(n == 0);
@@ -384,3 +384,5 @@ function n = checkAngDiff(x, y, d)
   dd = AngDiff(x, y);
   n = equiv(dd, d);
 end
+
+%!test geographiclib_signtest

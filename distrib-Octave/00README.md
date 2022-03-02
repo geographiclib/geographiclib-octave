@@ -1,16 +1,13 @@
-Source code for Octave/MATLAB of GeographicLib
-==============================================
+Packages for Octave/MATLAB implementation of GeographicLib
+==========================================================
 
-*NOTE:* Until version 2.0 of GeographicLib is released, please visit
+Here you can download the toolbox / package for the Octave/MATLAB
+package geographiclib.
 
->  https://sourceforge.net/projects/geographiclib/files/distrib
+The zip files are the MATLAB toolboxes available on
+[MATLAB Central](https://www.mathworks.com/matlabcentral/fileexchange/50605).
 
-to download GeographicLib.
+The tar.gz files are Octave packages which can be installed with the
+Octave command
 
-Programmers should download the latest `.tar.gz` or `.zip` file.  The
-`.exe` files provide Windows installers for the utilities (and the
-library compiled with Visual Studio 14 2015).
-
-For installation instructions, see
-
-> https://geographiclib.sourceforge.io/C++/doc/install.html
+> pkg install geographiclib-octave-M.N.tar.gz
