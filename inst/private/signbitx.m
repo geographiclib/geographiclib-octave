@@ -11,6 +11,6 @@ function z = signbitx(x)
   if octavep
     z = signbit(x);
   else
-    l = x < 0 | (x == 0 & 1./x < 0);
+    z = x < 0 | (x == 0 & 1./x < 0);
   end
 end

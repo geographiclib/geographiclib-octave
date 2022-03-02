@@ -828,15 +828,15 @@ function n = geodreckon1
         geodreckon(lat1e, lon1e, s12e * m, azi1e, ell, flags);
     [lat2, lon2, azi2, S12, m12, M12, M21, a12] = ...
         geodreckon(lat1, lon1, s12 * m, azi1, ell, flags);
-    err = [];
-    d = abs(lat2-lat2e); err=[err, max(d(:))];
-    d = abs(lon2-lon2e); err=[err, max(d(:))];
-    d = abs(azi2-azi2e); err=[err, max(d(:))];
-    d = abs(S12-S12e); err=[err, max(d(:))];
-    d = abs(m12-m12e); err=[err, max(d(:))];
-    d = abs(M12-M12e); err=[err, max(d(:))];
-    d = abs(M21-M21e); err=[err, max(d(:))];
-    d = abs(a12-a12e); err=[err, max(d(:))];
+    err = zeros(8,1);
+    d = abs(lat2-lat2e); err(1) = max(d(:));
+    d = abs(lon2-lon2e); err(2) = max(d(:));
+    d = abs(azi2-azi2e); err(3) = max(d(:));
+    d = abs(S12-S12e);   err(4) = max(d(:));
+    d = abs(m12-m12e);   err(5) = max(d(:));
+    d = abs(M12-M12e);   err(6) = max(d(:));
+    d = abs(M21-M21e);   err(7) = max(d(:));
+    d = abs(a12-a12e);   err(8) = max(d(:));
     if max(err) > 0, n = n+1; end
     end
   end
