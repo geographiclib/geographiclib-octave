@@ -50,7 +50,7 @@ function [lat, lon, gam, k] = polarst_inv(isnorth, x, y, ellipsoid)
   lat = atand(tau);
   lat(rho == 0) = 90;
   lat = isnorth .* lat;
-  lon = atan2d(x, -isnorth .* y);
+  lon = atan2dx(x, -isnorth .* y);
   if nargout > 2
     gam = AngNormalize(isnorth .* lon);
     if nargout > 3

@@ -60,7 +60,7 @@ function [lat, lon, azi, rk] = gnomonic_inv(lat0, lon0, x, y, ellipsoid)
   eps1 = a * 0.01 * sqrt(eps);
 
   lat0 = lat0 + Z; lon0 = lon0 + Z; x = x + Z; y = y + Z;
-  azi0 = atan2d(x, y);
+  azi0 = atan2dx(x, y);
   rho = hypot(x, y);
   s = a * atan(rho / a);
   little = rho <= a;

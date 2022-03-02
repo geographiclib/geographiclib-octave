@@ -104,11 +104,11 @@ function [lat2, lon2, azi2, S12] = gereckon(lat1, lon1, s12, azi1, ellipsoid)
   cbet2(cbet2 == 0) = tiny;
   slam2 = sgam0 .* ssig2; clam2 = csig2;
   sgam2 = sgam0; cgam2 = cgam0 .* csig2;
-  lon12 = atan2d(slam2 .* clam1 - clam2 .* slam1, ...
+  lon12 = atan2dx(slam2 .* clam1 - clam2 .* slam1, ...
                   clam2 .* clam1 + slam2 .* slam1);
   lon2 = AngNormalize(AngNormalize(lon1) + lon12);
-  lat2 = atan2d(sbet2, f1 * cbet2);
-  azi2 = atan2d(sgam2, cgam2 .* sqrt(1 - e2 * cbet2.^2));
+  lat2 = atan2dx(sbet2, f1 * cbet2);
+  azi2 = atan2dx(sgam2, cgam2 .* sqrt(1 - e2 * cbet2.^2));
 
   lat2 = reshape(lat2 + Z, S);
   lon2 = reshape(lon2, S);

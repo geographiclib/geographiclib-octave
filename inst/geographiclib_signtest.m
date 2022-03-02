@@ -206,6 +206,9 @@ function geographiclib_signtest
   i = checkatan2d(+1.0 ,   nan,  nan );
   if i, n=n+1; fprintf('atan2d(+1.0 ,   nan) fail\n'); end
 
+  s=7e-16; i = equiv( atan2dx(s, -1), 180 - atan2dx(s, 1) );
+  if i, n=n+1; fprintf('atan2d(s, -1) fail\n'); end
+
   i = checksum(+9.0, -9.0, +0.0 );
   if i, n=n+1; fprintf('sum(+9.0, -9.0) fail\n'); end
   i = checksum(-9.0, +9.0, +0.0 );
@@ -243,32 +246,6 @@ function geographiclib_signtest
   if i, n=n+1; fprintf('AngNormalize( 720.0) fail\n'); end
   i = checkAngNormalize( 900.0, +180 );
   if i, n=n+1; fprintf('AngNormalize( 900.0) fail\n'); end
-
-
-  i = checkatan2d(+1.0 , +0.0 ,  +90 );
-  if i, n=n+1; fprintf('atan2d(+1.0 , +0.0 ) fail\n'); end
-  i = checkatan2d(+1.0 , -0.0 ,  +90 );
-  if i, n=n+1; fprintf('atan2d(+1.0 , -0.0 ) fail\n'); end
-  i = checkatan2d(+1.0 ,  -inf, +180 );
-  if i, n=n+1; fprintf('atan2d(+1.0 ,  -inf) fail\n'); end
-  i = checkatan2d(-1.0 ,  -inf, -180 );
-  if i, n=n+1; fprintf('atan2d(-1.0 ,  -inf) fail\n'); end
-  i = checkatan2d(+1.0 ,  +inf, +0.0 );
-  if i, n=n+1; fprintf('atan2d(+1.0 ,  +inf) fail\n'); end
-  i = checkatan2d(-1.0 ,  +inf, -0.0 );
-  if i, n=n+1; fprintf('atan2d(-1.0 ,  +inf) fail\n'); end
-  i = checkatan2d( +inf, +1.0 ,  +90 );
-  if i, n=n+1; fprintf('atan2d( +inf, +1.0 ) fail\n'); end
-  i = checkatan2d( +inf, -1.0 ,  +90 );
-  if i, n=n+1; fprintf('atan2d( +inf, -1.0 ) fail\n'); end
-  i = checkatan2d( -inf, +1.0 ,  -90 );
-  if i, n=n+1; fprintf('atan2d( -inf, +1.0 ) fail\n'); end
-  i = checkatan2d( -inf, -1.0 ,  -90 );
-  if i, n=n+1; fprintf('atan2d( -inf, -1.0 ) fail\n'); end
-  i = checkatan2d( +inf,  -inf, +135 );
-  if i, n=n+1; fprintf('atan2d( +inf,  -inf) fail\n'); end
-  i = checkatan2d( -inf,  -inf, -135 );
-  if i, n=n+1; fprintf('atan2d( -inf,  -inf) fail\n'); end
 
   i = checkAngDiff(+  0.0, +  0.0,   +0.0 );
   if i, n=n+1; fprintf('AngDiff(+  0.0, +  0.0) fail\n'); end
@@ -374,7 +351,7 @@ function n = checksincosd(x, s, c)
 end
 
 function n = checkatan2d(y, x, a)
-  aa = atan2d(y, x);
+  aa = atan2dx(y, x);
   n = equiv(aa, a);
 end
 

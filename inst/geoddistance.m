@@ -319,8 +319,8 @@ function [s12, azi1, azi2, S12, m12, M12, M21, a12] = geoddistance ...
   salp1 = salp1 .* swapp .* lonsign; calp1 = calp1 .* swapp .* latsign;
   salp2 = salp2 .* swapp .* lonsign; calp2 = calp2 .* swapp .* latsign;
 
-  azi1 = atan2d(salp1, calp1);
-  azi2 = atan2d(salp2, calp2);
+  azi1 = atan2dx(salp1, calp1);
+  azi2 = atan2dx(salp2, calp2);
   a12 = sig12 / degree;
 
   s12 = reshape(s12, S); azi1 = reshape(azi1, S); azi2 = reshape(azi2, S);

@@ -81,7 +81,7 @@ function [x, y, gam, k] = tranmerc_fwd(lat0, lon0, lat, lon, ellipsoid)
   taup = taupf(tau, e2);
   xip = atan2(taup, clam);
   etap = asinh(slam ./ hypot(taup, clam));
-  gam = atan2d(slam .* taup, clam .* hypot(1, taup));
+  gam = atan2dx(slam .* taup, clam .* hypot(1, taup));
   k = sqrt(e2m + e2 * cphi.^2) .* hypot(1, tau) ./ hypot(taup, clam);
   c = ~(lat ~= 90);
   if any(c)
@@ -111,7 +111,7 @@ function [x, y, gam, k] = tranmerc_fwd(lat0, lon0, lat, lon, ellipsoid)
   z1 = 1 - z1 + z0 .* a;
   a = complex(s0 .* ch0, c0 .* sh0);
   y1 = complex(xip, etap) + y0 .* a;
-  gam = gam - atan2d(imag(z1), real(z1));
+  gam = gam - atan2dx(imag(z1), real(z1));
   k = k .* (b1 * abs(z1));
   xi = real(y1); eta = imag(y1);
   xi(backside) = pi - xi(backside);

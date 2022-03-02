@@ -52,6 +52,7 @@ set (PRIVATE_SOURCES
   private/GeoRotation.m
   private/LatFix.m
   private/SinCosSeries.m
+  private/atan2dx.m
   private/cbrtx.m
   private/copysignx.m
   private/cvmgt.m
