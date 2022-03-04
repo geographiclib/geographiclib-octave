@@ -144,10 +144,10 @@ function geographiclib_signtest
   i = checksincosd(   nan,  nan,  nan);
   if i, n=n+1; fprintf('sincosd(   nan) fail\n'); end
 
-  [s1, ~] = sincosdx(9);
-  [ ~,c2] = sincosdx(81);
-  [s3, ~] = sincosdx(-123456789);
-  i = equiv(s1, c2) + equiv(s1, s3);
+  [s1, c1] = sincosdx(9);
+  [s2, c2] = sincosdx(81);
+  [s3, c3] = sincosdx(-123456789);
+  i = equiv(s1, c2) + equiv(s1, s3) + equiv(c1, s2) + equiv(c1, -c3);
   if i, n=n+1; fprintf('sincosd accuracy fail\n'); end
 
   i = checkatan2d(+0.0 , +0.0 , +0.0 );
@@ -206,8 +206,8 @@ function geographiclib_signtest
   i = checkatan2d(+1.0 ,   nan,  nan );
   if i, n=n+1; fprintf('atan2d(+1.0 ,   nan) fail\n'); end
 
-  s=7e-16; i = equiv( atan2dx(s, -1), 180 - atan2dx(s, 1) );
-  if i, n=n+1; fprintf('atan2d(s, -1) fail\n'); end
+  s = 7e-16; i = equiv( atan2dx(s, -1), 180 - atan2dx(s, 1) );
+  if i, n=n+1; fprintf('atan2d accuracy fail\n'); end
 
   i = checksum(+9.0, -9.0, +0.0 );
   if i, n=n+1; fprintf('sum(+9.0, -9.0) fail\n'); end
@@ -272,8 +272,8 @@ function geographiclib_signtest
   i = checkAngDiff( -eps , -180.0, -180.0 );
   if i, n=n+1; fprintf('AngDiff( -eps , -180.0) fail\n'); end
 
-  % azimuth of geodesic line with points on equator determined by signs
-  % of latitude
+  % azimuth of geodesic line with points on equator determined by signs of
+  % latitude
   % lat1 lat2 azi1/2
   C = [ +0, -0, 180;
         -0, +0, 0 ];
@@ -299,7 +299,7 @@ function geographiclib_signtest
   i = equiv(azi1, C(:,4)) + equiv(azi2, C(:,5));
   if i, n=n+1; fprintf('antipodal points on equator fail\n'); end
 
-  % Anipodal points on the equator with prolate ellipsoid
+  % Antipodal points on the equator with prolate ellipsoid
   % lon2 azi1/2
   C = [+180, +90;
        -180, -90];
@@ -315,7 +315,7 @@ function geographiclib_signtest
        -180, -180,   -0 ];
   [~, lon2, azi2] = geodreckon(0, 0, 15e6, C(:,1), 2);
   i = equiv(lon2, C(:,2)) + equiv(azi2, C(:,3));
-  if i, n=n+1; fprintf('geodreckon, azi1 = +/-0 +/-180, fail\n'); end
+  if i, n=n+1; fprintf('geodreckon azi1 = +/-0 +/-180, fail\n'); end
 
   % lat = +/-0 in utmups_fwd
   % lat y northp
@@ -327,6 +327,7 @@ function geographiclib_signtest
   mgrs = mgrs_fwd(x, y, zone, northp, 2);
   i = ~strcmp(mgrs{1,1}, '31NEA0000') + ~strcmp(mgrs{2,1}, '31MEV0099');
   if i, n=n+1; fprintf('mgrs_fwd lat = +/-0, fail\n'); end
+
   assert(n == 0);
 end
 
