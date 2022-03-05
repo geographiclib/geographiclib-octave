@@ -99,12 +99,10 @@ function [s12, azi1, azi2, S12, m12, M12, M21, a12] = geoddistance ...
 
   [lon12, lon12s] = AngDiff(lon1(:), lon2(:));
   lonsign = copysignx(1, lon12);
-  lon12 = lonsign .* AngRound(lon12);
-  lon12s = AngRound((180 -lon12) - lonsign .* lon12s);
-  lam12 = lon12 * degree; slam12 = Z; clam12 = Z;
-  l = lon12 > 90;
-  [slam12( l), clam12( l)] = sincosdx(lon12s(l)); clam12(l) = -clam12(l);
-  [slam12(~l), clam12(~l)] = sincosdx(lon12(~l));
+  lon12 = lonsign .* lon12; lon12s = lonsign .* lon12s;
+  lam12 = lon12 * degree;
+  [slam12, clam12] = sincosde(lon12, lon12s);
+  lon12s = (180 -lon12) - lon12s;
 
   lat1 = lat1(:);
   lat2 = lat2(:);
@@ -124,7 +122,7 @@ function [s12, azi1, azi2, S12, m12, M12, M21, a12] = geoddistance ...
   [sbet2, cbet2] = norm2(sbet2, cbet2); cbet2 = max(tiny, cbet2);
 
   c = cbet1 < -sbet1 & cbet2 == cbet1;
-  sbet2(c) = (2 * signbitx(sbet2(c)) - 1) .* sbet1(c);
+  sbet2(c) = copysignx(sbet1(c), sbet2(c));
   c = ~(cbet1 < -sbet1) & abs(sbet2) == - sbet1;
   cbet2(c) = cbet1(c);
 

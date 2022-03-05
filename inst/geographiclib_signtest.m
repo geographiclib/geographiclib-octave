@@ -272,6 +272,10 @@ function geographiclib_signtest
   i = checkAngDiff( -eps , -180.0, -180.0 );
   if i, n=n+1; fprintf('AngDiff( -eps , -180.0) fail\n'); end
 
+  x = 138 + 128 * eps; y = -164;
+  i = equiv(AngDiff(x, y), 58 - 128 * eps);
+  if i, n=n+1; fprintf('AngDiff accuracy fail\n'); end
+
   % azimuth of geodesic line with points on equator determined by signs of
   % latitude
   % lat1 lat2 azi1/2

@@ -59,7 +59,7 @@ function [s12, azi1, azi2, S12] = gedistance(lat1, lon1, lat2, lon2, ellipsoid)
 
   lat1 = AngRound(LatFix(lat1(:)));
   lat2 = AngRound(LatFix(lat2(:)));
-  lon12 = AngRound(AngDiff(lon1(:), lon2(:)));
+  [lon12, t] = AngDiff(lon1(:), lon2(:));
 
   [sbet1, cbet1] = sincosdx(lat1);
   sbet1 = f1 * sbet1; cbet1 = max(tiny, cbet1);
@@ -69,7 +69,7 @@ function [s12, azi1, azi2, S12] = gedistance(lat1, lon1, lat2, lon2, ellipsoid)
   sbet2 = f1 * sbet2; cbet2 = max(tiny, cbet2);
   [sbet2, cbet2] = norm2(sbet2, cbet2);
 
-  [slam12, clam12] = sincosdx(lon12);
+  [slam12, clam12] = sincosde(lon12, t);
 
   % Solve great circle
   sgam1 = cbet2 .* slam12; cgam1 = +cbet1 .* sbet2 - sbet1 .* cbet2 .* clam12;

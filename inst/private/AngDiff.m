@@ -5,7 +5,7 @@ function [d, t] = AngDiff(x, y)
 %   round(z) and t = z - round(z).  x and y can be any compatible shapes.
 
   [d, t] = sumx(remx(-x, 360), remx(y, 360));
-  d = remx(d, 360);
+  [d, t] = sumx(remx(d, 360), t);
   l = d == 0 | abs(d) == 180;
   if any(l)
     z = y -x;

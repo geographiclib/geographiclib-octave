@@ -35,3 +35,13 @@ https://gnu-octave.github.io/packages/
 #   mathworks has switched to an uglier URL.  Only update if there are
 #   changes.
 # use MATLAB's analyze code
+Fedora
+============= octave-GeographicLib ===============
+/usr/share/licenses/octave-GeographicLib
+/usr/share/licenses/octave-GeographicLib/LICENSE.txt
+/usr/share/octave/packages/geographiclib-1.49
+/usr/share/octave/packages/geographiclib-1.49/Contents.m
+/usr/share/octave/packages/geographiclib-1.49/cassini_fwd.m
+/usr/share/octave/packages/geographiclib-1.49/cassini_inv.m
+/usr/share/octave/packages/geographiclib-1.49/defaultellipsoid.m
+/usr/share/octave/packages/geographiclib-1.49/ecc2flat.m

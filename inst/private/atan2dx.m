@@ -21,9 +21,8 @@ function z = atan2dx(y, x)
     % Now x >= 0 and x >= abs(y), so z is in [-45, 45]
     z = atan2d(y, x);
     % t = q == 0;              z(t) =    0 + z(t);
-    t = q == 1 & ~signbitx(y); z(t) =  180 - z(t);
-    t = q == 1 &  signbitx(y); z(t) = -180 - z(t);
-    t = q == 2;                z(t) =   90 - z(t);
-    t = q == 3;                z(t) =  -90 + z(t);
+    t = q == 1; z(t) = copysignx(180, y(t)) - z(t);
+    t = q == 2; z(t) =            90        - z(t);
+    t = q == 3; z(t) =           -90        + z(t);
   end
 end

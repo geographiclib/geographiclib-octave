@@ -62,6 +62,7 @@ set (PRIVATE_SOURCES
   private/norm2.m
   private/remx.m
   private/sincosdx.m
+  private/sincosde.m
   private/signbitx.m
   private/sumx.m
   private/tauf.m
