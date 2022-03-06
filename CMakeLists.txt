@@ -41,3 +41,24 @@ set (METAFILES ${METAFILES} DESCRIPTION)
 enable_testing ()
 
 add_subdirectory (inst)
+
+if (EXISTS ${PROJECT_SOURCE_DIR}/.git AND NOT WIN32)
+  add_custom_target (checktrailingspace
+    COMMAND git ls-tree -r HEAD --name-only | xargs grep ' $$' || true
+    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+    COMMENT "Looking for trailing spaces")
+  add_custom_target (checktabs
+    COMMAND git ls-tree -r HEAD --name-only | grep -v makefile-admin |
+    xargs grep '\t' || true
+    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+    COMMENT "Looking for tabs")
+  add_custom_target (checkblanklines
+    COMMAND git ls-tree -r HEAD --name-only |
+    while read f\; do tr 'X\\n' 'YX' < $$f |
+    egrep '\(^X|XXX|XX$$|[^X]$$\)' > /dev/null && echo $$f\; done || true
+    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+    COMMENT "Looking for extra blank lines")
+
+  add_custom_target(sanitize)
+  add_dependencies(sanitize checktrailingspace checktabs checkblanklines)
+endif ()
