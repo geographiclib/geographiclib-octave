@@ -42,6 +42,7 @@ function geographiclib_test
   i = Planimeter5 ; if i, n=n+1; fprintf('Planimeter5  fail: %d\n', i); end
   i = Planimeter6 ; if i, n=n+1; fprintf('Planimeter6  fail: %d\n', i); end
   i = Planimeter12; if i, n=n+1; fprintf('Planimeter12 fail: %d\n', i); end
+  i = Planimeter12r; if i, n=n+1; fprintf('Planimeter12r fail: %d\n', i); end
   i = Planimeter13; if i, n=n+1; fprintf('Planimeter13 fail: %d\n', i); end
   i = Planimeter15; if i, n=n+1; fprintf('Planimeter15 fail: %d\n', i); end
   i = Planimeter19; if i, n=n+1; fprintf('Planimeter19 fail: %d\n', i); end
@@ -689,6 +690,15 @@ function n = Planimeter12
 % Area of arctic circle (not really -- adjunct to rhumb-area test)
   n = 0;
   points = [66.562222222, 0; 66.562222222, 180; 66.562222222, 360];
+  [area, perimeter] = geodarea(points(:,1), points(:,2));
+  n = n + assertEquals(perimeter, 10465729, 1);
+  n = n + assertEquals(area, 0, 1);
+end
+
+function n = Planimeter12r
+% Reverse area of arctic circle
+  n = 0;
+  points = [66.562222222, -0; 66.562222222, -180; 66.562222222, -360];
   [area, perimeter] = geodarea(points(:,1), points(:,2));
   n = n + assertEquals(perimeter, 10465729, 1);
   n = n + assertEquals(area, 0, 1);

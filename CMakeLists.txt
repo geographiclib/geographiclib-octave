@@ -44,7 +44,7 @@ add_subdirectory (inst)
 
 if (EXISTS ${PROJECT_SOURCE_DIR}/.git AND NOT WIN32)
   add_custom_target (checktrailingspace
-    COMMAND git ls-tree -r HEAD --name-only | xargs grep ' $$' || true
+    COMMAND git ls-tree -r HEAD --name-only | xargs grep '[ \t]$$' || true
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
     COMMENT "Looking for trailing spaces")
   add_custom_target (checktabs
