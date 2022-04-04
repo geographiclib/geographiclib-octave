@@ -8,7 +8,7 @@ function geoddoc
 %     C. F. F. Karney, Algorithms for geodesics,
 %     J. Geodesy 87, 43-55 (2013);
 %     https://doi.org/10.1007/s00190-012-0578-z
-%     Addenda: https://geographiclib.sourceforge.io/geod-addenda.html
+%     Addenda: https://geographiclib.sourceforge.io/misc/geod-addenda.html
 %
 %   which, in turn, is based on the classic solution of the geodesic
 %   problems pioneered by Legendre (1806), Bessel (1825), and Helmert
@@ -165,7 +165,7 @@ function geoddoc
 %   See also GEODDISTANCE, GEODRECKON, GEODAREA,
 %     DEFAULTELLIPSOID, ECC2FLAT, FLAT2ECC.
 
-% Copyright (c) Charles Karney (2012-2017) <charles@karney.com>.
+% Copyright (c) Charles Karney (2012-2022) <charles@karney.com>.
 
   help(mfilename)
 end

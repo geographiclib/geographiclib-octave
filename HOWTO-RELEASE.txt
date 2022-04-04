@@ -1,11 +1,14 @@
+CMake variables:
+
+INSTDIR = share/octave/packages where 
+
 To make toolbox and package
 
-  cmake -B BUILD -S .
-  make -C BUILD package test
+  cmake -B BUILD
+  cd BUILD
+  make all test
 
-packages are in
-
- BUILD/dist/geographiclib*.{tar.gz,zip}
+make all calls make package which
 
 To install code
 
@@ -13,7 +16,18 @@ To install code
 
 This installs in ${CMAKE_INSTALL_PREFIX}/${INSTDIR}/geographiclib
 
+
+make
+packages are in
+
+ BUILD/dist/geographiclib*.{tar.gz,zip}
+
 ================================================================
+conda-forege maintainers:
+https://github.com/ocefpaf
+https://github.com/QuLogic
+https://github.com/beckermr
+
 Fedora maintainer: Rich Mattes <richmattes@gmail.com>
 
 Random notes

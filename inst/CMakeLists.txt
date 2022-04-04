@@ -83,25 +83,19 @@ foreach (f ${METAFILES})
   install (FILES ${DISTDIR}/${f} DESTINATION ${INSTDIR}/geographiclib/packinfo)
 endforeach ()
 
-set (TOOLBOX
-  ${DISTDIR}/../geographiclib-toolbox-${PROJECT_VERSION}.zip)
-set (PACKAGE
-  ${DISTDIR}/../geographiclib-octave-${PROJECT_VERSION}.tar.gz)
-
-# message (STATUS "${PACKAGE_DEPENDS}")
-
 add_custom_command (OUTPUT ${TOOLBOX}
   WORKING_DIRECTORY ${DISTDIR}/inst
   COMMAND ${CMAKE_COMMAND} -E
   tar cf ${TOOLBOX} --format=zip -- Contents.m ${SOURCES} ${PRIVATE_SOURCES}
-  COMMENT "Creating toolbox"
+  COMMENT "Creating MATLAB toolbox dist/${TOOLBOX_NAME}"
   DEPENDS ${PACKAGE_DEPENDS})
 
 add_custom_command (OUTPUT ${PACKAGE}
   WORKING_DIRECTORY ${DISTDIR}/..
   COMMAND ${CMAKE_COMMAND} -E
-  tar cfz ${PACKAGE} --format=gnutar -- geographiclib-octave-${PROJECT_VERSION}
-  COMMENT "Creating package"
+  tar cfz ${PACKAGE} --format=gnutar --
+  geographiclib-octave-${PROJECT_VERSION}
+  COMMENT "Creating Octave package dist/${PACKAGE_NAME}"
   DEPENDS ${PACKAGE_DEPENDS})
 
 add_custom_target (package ALL DEPENDS ${TOOLBOX} ${PACKAGE})

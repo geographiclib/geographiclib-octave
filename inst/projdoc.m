@@ -27,7 +27,7 @@ function projdoc
 %     C. F. F. Karney, Algorithms for geodesics,
 %     J. Geodesy 87, 43-55 (2013);
 %     https://doi.org/10.1007/s00190-012-0578-z
-%     Addenda: https://geographiclib.sourceforge.io/geod-addenda.html
+%     Addenda: https://geographiclib.sourceforge.io/misc/geod-addenda.html
 %
 %   The parameters of the ellipsoid are specified by the optional ellipsoid
 %   argument to the routines.  This is a two-element vector of the form
@@ -66,7 +66,7 @@ function projdoc
 %     EQDAZIM_FWD, EQDAZIM_INV, CASSINI_FWD, CASSINI_INV, GNOMONIC_FWD,
 %     GNOMONIC_INV, DEFAULTELLIPSOID, ECC2FLAT, FLAT2ECC.
 
-% Copyright (c) Charles Karney (2012-2015) <charles@karney.com>.
+% Copyright (c) Charles Karney (2012-2022) <charles@karney.com>.
 
   help(mfilename)
 end

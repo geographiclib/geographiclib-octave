@@ -38,6 +38,7 @@ function geographiclib_test
   i = GeodSolve84; if i, n=n+1; fprintf('GeodSolve84 fail: %d\n', i); end
   i = GeodSolve92; if i, n=n+1; fprintf('GeodSolve92 fail: %d\n', i); end
   i = GeodSolve94; if i, n=n+1; fprintf('GeodSolve94 fail: %d\n', i); end
+  i = GeodSolve96; if i, n=n+1; fprintf('GeodSolve96 fail: %d\n', i); end
   i = Planimeter0 ; if i, n=n+1; fprintf('Planimeter0  fail: %d\n', i); end
   i = Planimeter5 ; if i, n=n+1; fprintf('Planimeter5  fail: %d\n', i); end
   i = Planimeter6 ; if i, n=n+1; fprintf('Planimeter6  fail: %d\n', i); end
@@ -627,6 +628,17 @@ function n = GeodSolve94
   n = n + assertNaN(azi1);
   n = n + assertNaN(azi2);
   n = n + assertNaN(s12);
+end
+
+function n = GeodSolve96
+% Failure with long doubles found with test case from Nowak + Nowak Da
+% Costa (2022).  Problem was using somg12 > 1 as a test that it needed
+% to be set when roundoff could result in somg12 slightly bigger that 1.
+% Found + fixed 2022-03-30.
+  n = 0;
+  ell = ellipsoid(6378137, 1/298.257222101);
+  [~, ~, ~, S12] = geoddistance(0, 0, 60.0832522871723, 89.8492185074635, ell);
+  n = n + assertEquals(S12, 42426932221845, 0.5);
 end
 
 function n = Planimeter0

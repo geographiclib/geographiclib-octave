@@ -27,7 +27,7 @@ function [s12, azi1, azi2, S12, m12, M12, M21, a12] = geoddistance ...
 %     C. F. F. Karney, Algorithms for geodesics,
 %     J. Geodesy 87, 43-55 (2013);
 %     https://doi.org/10.1007/s00190-012-0578-z
-%     Addenda: https://geographiclib.sourceforge.io/geod-addenda.html
+%     Addenda: https://geographiclib.sourceforge.io/misc/geod-addenda.html
 %
 %   This function duplicates some of the functionality of the distance
 %   function in the MATLAB mapping toolbox.  Differences are
@@ -41,7 +41,7 @@ function [s12, azi1, azi2, S12, m12, M12, M21, a12] = geoddistance ...
 %
 %   See also GEODDOC, GEODRECKON, GEODAREA, DEFAULTELLIPSOID, FLAT2ECC.
 
-% Copyright (c) Charles Karney (2012-2021) <charles@karney.com>.
+% Copyright (c) Charles Karney (2012-2022) <charles@karney.com>.
 %
 % This is a straightforward transcription of the C++ implementation in
 % GeographicLib and the C++ source should be consulted for additional
@@ -283,7 +283,7 @@ function [s12, azi1, azi2, S12, m12, M12, M21, a12] = geoddistance ...
     S12 = A4 .* (B42 - B41);
     S12(calp0 == 0 | salp0 == 0) = 0;
 
-    l = ~m & somg12 > 1;
+    l = ~m & somg12 == 2;
     somg12(l) = sin(omg12(l)); comg12(l) = cos(omg12(l));
 
     l = ~m & comg12 > -0.7071 & sbet2 - sbet1 < 1.75;

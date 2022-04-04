@@ -53,7 +53,7 @@ function [lat2, lon2, azi2, S12, m12, M12, M21, a12_s12] = geodreckon ...
 %     C. F. F. Karney, Algorithms for geodesics,
 %     J. Geodesy 87, 43-55 (2013);
 %     https://doi.org/10.1007/s00190-012-0578-z
-%     Addenda: https://geographiclib.sourceforge.io/geod-addenda.html
+%     Addenda: https://geographiclib.sourceforge.io/misc/geod-addenda.html
 %
 %   This function duplicates some of the functionality of the RECKON
 %   function in the MATLAB mapping toolbox.  Differences are
@@ -68,7 +68,7 @@ function [lat2, lon2, azi2, S12, m12, M12, M21, a12_s12] = geodreckon ...
 %
 %   See also GEODDOC, GEODDISTANCE, GEODAREA, DEFAULTELLIPSOID, FLAT2ECC.
 
-% Copyright (c) Charles Karney (2012-2018) <charles@karney.com>.
+% Copyright (c) Charles Karney (2012-2022) <charles@karney.com>.
 %
 % This is a straightforward transcription of the C++ implementation in
 % GeographicLib and the C++ source should be consulted for additional

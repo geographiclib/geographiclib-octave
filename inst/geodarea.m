@@ -30,12 +30,12 @@ function [A, P, N] = geodarea(lats, lons, ellipsoid)
 %     C. F. F. Karney, Algorithms for geodesics,
 %     J. Geodesy 87, 43-55 (2013);
 %     https://doi.org/10.1007/s00190-012-0578-z
-%     Addenda: https://geographiclib.sourceforge.io/geod-addenda.html
+%     Addenda: https://geographiclib.sourceforge.io/misc/geod-addenda.html
 %
 %   See also GEODDOC, GEODDISTANCE, GEODRECKON, POLYGONAREA,
 %     DEFAULTELLIPSOID, FLAT2ECC.
 
-% Copyright (c) Charles Karney (2012-2019) <charles@karney.com>.
+% Copyright (c) Charles Karney (2012-2022) <charles@karney.com>.
 
   narginchk(2, 3)
   if nargin < 3, ellipsoid = defaultellipsoid; end

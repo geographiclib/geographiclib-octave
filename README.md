@@ -1,13 +1,24 @@
 # Octave/MATLAB implementation of some routines in GeographicLib
 
-The Octave/MATLAB package is available
-[here](https://www.mathworks.com/matlabcentral/fileexchange/50605).
+The Octave/MATLAB packages are available on
+[SourceForge](
+https://sourceforge.net/projects/geographiclib/files/distrib-Octave)
+and
+[MATLAB Central](https://www.mathworks.com/matlabcentral/fileexchange/50605).
 
-To load the toolbox for MATLAB, use the "Add-Ons" drop down menu and
-search for "geographiclib".
+## Installation
 
-pkg install https://sourceforge.net/projects/geographiclib/files/distrib-Octave/geographiclib-octave-2.0-alpha.tar.gz
+Tha Octave package can be installed with the command
+```octave
+pkg install geographiclib-octave-M.N.tar.gz
 pkg load geographiclib
+```
+The MATLAB toolbox can be installed with the command
+```octave
+matlab.addons.install geographiclib_toolbox-M.N.mltbx
+```
+
+## Summary
 
 This toolbox provides native MATLAB implementations of a subset of the
 C++ library, GeographicLib.  Key components of this toolbox are
@@ -35,7 +46,7 @@ Subsets of this package were previously released as:
   * Geodesic projections for an ellipsoid (withdrawn)
   * Great ellipses (withdrawn)
 
-Other links:
+## Other links:
 
   * [documentation on the C++ library](https://geographiclib.sourceforge.io/C++/doc).
   * [information about the geoid datasets](https://geographiclib.sourceforge.io/C++/doc/geoid.html#geoidinst)
