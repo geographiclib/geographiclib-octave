@@ -36,7 +36,7 @@ function [lat, lon, gam, k] = utmups_inv(x, y, zone, isnorth)
 %
 %   See also UTMUPS_FWD, TRANMERC_INV, POLARST_INV, MGRS_INV.
 
-% Copyright (c) Charles Karney (2015-2016) <charles@karney.com>.
+% Copyright (c) Charles Karney (2015-2022) <charles@karney.com>.
 
   narginchk(4, 4)
   try

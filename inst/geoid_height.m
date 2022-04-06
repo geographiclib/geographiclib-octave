@@ -59,7 +59,7 @@ function N = geoid_height(lat, lon, geoidname, geoiddir)
 %
 %   See also GEOID_LOAD.
 
-% Copyright (c) Charles Karney (2015) <charles@karney.com>.
+% Copyright (c) Charles Karney (2015-2022) <charles@karney.com>.
 
   persistent saved_geoid
   if nargin == 1 && isempty(lat)

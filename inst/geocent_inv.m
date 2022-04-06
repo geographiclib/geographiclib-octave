@@ -18,7 +18,7 @@ function [lat, lon, h, M] = geocent_inv(X, Y, Z, ellipsoid)
 %
 %   See also GEOCENT_FWD, DEFAULTELLIPSOID, FLAT2ECC.
 
-% Copyright (c) Charles Karney (2015) <charles@karney.com>.
+% Copyright (c) Charles Karney (2015-2022) <charles@karney.com>.
 
   narginchk(3, 4)
   if nargin < 4, ellipsoid = defaultellipsoid; end
