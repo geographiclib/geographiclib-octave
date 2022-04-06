@@ -1,13 +1,16 @@
 Changes in geographiclib-octave
 
 Version 2.0 (release 2022-mm-dd)
-  * Reorganized code base.
+  * Reorganized code base; there's now a stand-alone git repository at
+    https://github.com/geographiclib/geographiclib-octave
+  * Created an Octave package.
   * Fix bug where a geodesic with lat1 = 0 and lat2 = nan was treated
     as equatorial.
+  * Upgrade the vectorization in geodreckon so that it handles
+    computations in which lat1, lon1, azi1 are column vectors and s12
+    is a row vector efficiently.
   * Better treatment of latitude = +/-0, longitude differences =
     +/-180, azimuths = +/-0 or +/-180.
-  * Expand arguments to consistent shape by add a -0 matrix.  This
-    preserves -0 in the original arguments.
 
 Version 1.52 (released 2021-06-22)
   * Be more aggressive in preventing negative s12 and m12 for short
