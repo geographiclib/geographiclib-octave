@@ -56,7 +56,7 @@ matlab.addons.install geographiclib_toolbox-M.N.mltbx
 ## Function summary
 
 ### Geodesics
-  * [`geoddistance`](blob/main/inst/gedistance.m) - Distance between points on an ellipsoid
+  * [`geoddistance`](inst/gedistance.m) - Distance between points on an ellipsoid
   * `geodreckon`       - Point at specified azimuth, range on an ellipsoid
   * `geodarea`         - Surface area of polygon on an ellipsoid
 
