@@ -163,7 +163,7 @@ matlab.addons.uninstall(t.Identifier(n)) % uninstall
 ## Changes
 
 See the [change log](NEWS).  Releases are tagged in git as, e.g.,
-[`v1.52`](tree/v1.52), [`v2.0`](tree/v2.0), etc.
+[`v1.52`](../../tree/v1.52), [`v2.0`](../../tree/v2.0), etc.
 
 ## Other links
   * [GeographicLib](https://geographiclib.sourceforge.io).
