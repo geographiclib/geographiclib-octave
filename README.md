@@ -1,5 +1,12 @@
 # Octave/MATLAB implementation of GeographicLib
 
+Contents:
+* [Introduction](#introduction)
+* [Installation](#installation)
+* [Function summary](#function-summary)
+* [Changes](#changes)
+* [Other links](#other-links)
+
 ## Introduction
 
 This toolbox provides native MATLAB implementations of a subset of the
@@ -56,53 +63,90 @@ matlab.addons.install geographiclib_toolbox-M.N.mltbx
 ## Function summary
 
 ### Geodesics
-  * [`geoddistance`](inst/gedistance.m) - Distance between points on an ellipsoid
-  * `geodreckon`       - Point at specified azimuth, range on an ellipsoid
-  * `geodarea`         - Surface area of polygon on an ellipsoid
+  * [`geoddistance`](inst/gedistance.m) -
+    Distance between points on an ellipsoid
+  * [`geodreckon`](inst/geodreckon.m) -
+    Point at specified azimuth, range on an ellipsoid
+  * [`geodarea`](inst/geodarea.m) -
+    Surface area of polygon on an ellipsoid
 
 ### Projections
-  * `tranmerc_fwd`     - Forward transverse Mercator projection
-  * `tranmerc_inv`     - Inverse transverse Mercator projection
-  * `polarst_fwd`      - Forward polar stereographic projection
-  * `polarst_inv`      - Inverse polar stereographic projection
-  * `eqdazim_fwd`      - Forward azimuthal equidistant projection
-  * `eqdazim_inv`      - Inverse azimuthal equidistant projection
-  * `cassini_fwd`      - Forward Cassini-Soldner projection
-  * `cassini_inv`      - Inverse Cassini-Soldner projection
-  * `gnomonic_fwd`     - Forward ellipsoidal gnomonic projection
-  * `gnomonic_inv`     - Inverse ellipsoidal gnomonic projection
+  * [`tranmerc_fwd`](inst/tranmerc_fwd.m) -
+    Forward transverse Mercator projection
+  * [`tranmerc_inv`](inst/tranmerc_inv.m) -
+    Inverse transverse Mercator projection
+  * [`polarst_fwd`](inst/polarst_fwd.m) -
+    Forward polar stereographic projection
+  * [`polarst_inv`](inst/polarst_inv.m) -
+    Inverse polar stereographic projection
+  * [`eqdazim_fwd`](inst/eqdazim_fwd.m) -
+    Forward azimuthal equidistant projection
+  * [`eqdazim_inv`](inst/eqdazim_inv.m) -
+    Inverse azimuthal equidistant projection
+  * [`cassini_fwd`](inst/cassini_fwd.m) -
+    Forward Cassini-Soldner projection
+  * [`cassini_inv`](inst/cassini_inv.m) -
+    Inverse Cassini-Soldner projection
+  * [`gnomonic_fwd`](inst/gnomonic_fwd.m) -
+    Forward ellipsoidal gnomonic projection
+  * [`gnomonic_inv`](inst/gnomonic_inv.m) -
+    Inverse ellipsoidal gnomonic projection
 
 ### Grid systems
-  * `utmups_fwd`       - Convert to UTM/UPS system
-  * `utmups_inv`       - Convert from UTM/UPS system
-  * `mgrs_fwd`         - Convert UTM/UPS coordinates to MGRS
-  * `mgrs_inv`         - Convert MGRS to UTM/UPS coordinates
+  * [`utmups_fwd`](inst/utmups_fwd.m) -
+    Convert to UTM/UPS system
+  * [`utmups_inv`](inst/utmups_inv.m) -
+    Convert from UTM/UPS system
+  * [`mgrs_fwd`](inst/mgrs_fwd.m) -
+    Convert UTM/UPS coordinates to MGRS
+  * [`mgrs_inv`](inst/mgrs_inv.m) -
+    Convert MGRS to UTM/UPS coordinates
 
 ### Geoid lookup
-  * `geoid_height`     - Compute the height of the geoid above the ellipsoid
-  * `geoid_load`       - Load a geoid model
+  * [`geoid_height`](inst/geoid_height.m) -
+    Compute the height of the geoid above the ellipsoid
+  * [`geoid_load`](inst/geoid_load.m) -
+    Load a geoid model
 
 ### Geometric transformations
-  * `geocent_fwd`      - Conversion from geographic to geocentric coordinates
-  * `geocent_inv`      - Conversion from geocentric to geographic coordinates
-  * `loccart_fwd`      - Convert geographic to local cartesian coordinates
-  * `loccart_inv`      - Convert local cartesian to geographic coordinates
+  * [`geocent_fwd`](inst/geocent_fwd.m) -
+    Conversion from geographic to geocentric coordinates
+  * [`geocent_inv`](inst/geocent_inv.m) -
+    Conversion from geocentric to geographic coordinates
+  * [`loccart_fwd`](inst/loccart_fwd.m) -
+    Convert geographic to local cartesian coordinates
+  * [`loccart_inv`](inst/loccart_inv.m) -
+    Convert local cartesian to geographic coordinates
 
 ### Great ellipses
-  * `gedistance`       - Great ellipse distance on an ellipsoid
-  * `gereckon`         - Point along great ellipse at given azimuth and range
+  * [`gedistance`](inst/gedistance.m) -
+    Great ellipse distance on an ellipsoid
+  * [`gereckon`](inst/gereckon.m) -
+    Point along great ellipse at given azimuth and range
 
 ### Utility
-  * `defaultellipsoid` - Return the WGS84 ellipsoid
-  * `ecc2flat`         - Convert eccentricity to flattening
-  * `flat2ecc`         - Convert flattening to eccentricity
-  * `geographiclib_test` - The test suite for the geographiclib package
-  * `geographiclib_signtest` - Another test suite
+  * [`defaultellipsoid`](inst/defaultellipsoid.m) -
+    Return the WGS84 ellipsoid
+  * [`ecc2flat`](inst/ecc2flat.m) -
+    Convert eccentricity to flattening
+  * [`flat2ecc`](inst/flat2ecc.m) -
+    Convert flattening to eccentricity
+  * [`geographiclib_test`](inst/geographiclib_test.m) -
+    The test suite for the geographiclib package
+  * [`geographiclib_signtest`](inst/geographiclib_signtest.m) -
+    Another test suite
 
 ### Documentation
-  * `geoddoc`          - Geodesics on an ellipsoid of revolution
-  * `projdoc`          - Projections for an ellipsoid
-  * `gedoc`            - Great ellipses on an ellipsoid of revolution
+  * [`geoddoc`](inst/geoddoc.m) -
+    Geodesics on an ellipsoid of revolution
+  * [`projdoc`](inst/projdoc.m) -
+    Projections for an ellipsoid
+  * [`gedoc`](inst/gedoc.m) -
+    Great ellipses on an ellipsoid of revolution
+
+## Changes
+
+See the [change log](NEWS).
 
 ## Other links
   * [GeographicLib](https://geographiclib.sourceforge.io).
