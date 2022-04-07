@@ -32,5 +32,6 @@ Before release:
       RELEASE_DATE
   NEWS fix date
 
-After release, notify
-  Fedora maintainer: Rich Mattes <richmattes@gmail.com>
+After release
+  notify Fedora maintainer: Rich Mattes <richmattes@gmail.com>
+  tag git vM.N
