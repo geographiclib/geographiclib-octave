@@ -22,8 +22,8 @@ if (NOT CMAKE_CONFIGURATION_TYPES AND NOT CMAKE_BUILD_TYPE)
 endif ()
 
 set (INSTDIR "share/octave/packages"
-  CACHE PATH "Installation directory GeographicLib-Octave")
-
+  CACHE STRING "Installation directory GeographicLib-Octave")
+message (STATUS "INSTDIR ${INSTDIR}")
 # directory for bundling up toolbox and packate
 set (DISTDIR_PARENT ${PROJECT_BINARY_DIR}/dist)
 set (DISTDIR ${DISTDIR_PARENT}/geographiclib-octave-${PROJECT_VERSION})
@@ -78,7 +78,7 @@ if (IS_DIRECTORY ${PROJECT_SOURCE_DIR}/.git AND NOT WIN32)
     add_custom_target (stage-dist
       COMMAND ${CMAKE_COMMAND} -E copy_if_different
       ${TOOLBOX} ${PACKAGE} ${PROJECT_SOURCE_DIR}/distrib-Octave/
-      COMMAND ${RSYNC} --delete -a --exclude '*~'
+      COMMAND ${RSYNC} --delete -av --exclude '*~'
       ${PROJECT_SOURCE_DIR}/distrib-Octave/ ${DATAROOT}/)
     add_dependencies (stage-dist package)
 

@@ -55,9 +55,25 @@ Tha Octave package can be installed with the command
 pkg install geographiclib-octave-M.N.tar.gz
 pkg load geographiclib
 ```
+Other useful Octave package commands
+```octave
+pkg list                            % list all packages
+ver geographiclib                   % list version
+pkg describe -verbose geographiclib % list functions
+news geographiclib                  % change log
+pkg unload geographiclib            % remove from path
+pkg uninstall geographiclib         % uninstall
+```
+
 The MATLAB toolbox can be installed with the command
 ```octave
 matlab.addons.install geographiclib_toolbox-M.N.mltbx
+```
+Other useful MATLAB toolboxes commands
+```octave
+t = matlab.addons.installedAddons        % list all toolboxes
+n = 1;                                   % the row with geographiclib
+matlab.addons.uninstall(t.Identifier(n)) % uninstall
 ```
 
 ## Function summary
