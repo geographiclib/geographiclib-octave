@@ -9,8 +9,19 @@ Version 2.0 (release 2022-mm-dd)
   * Upgrade the vectorization in geodreckon so that it handles
     computations in which lat1, lon1, azi1 are column vectors and s12
     is a row vector efficiently.
-  * Better treatment of latitude = +/-0, longitude differences =
-    +/-180, azimuths = +/-0 or +/-180.
+  * More careful treatment of angles +/-0 and +/-180.
+    - These behave consistently with taking the limits
+        +/-0 means +/-eps as eps -> 0+
+        +/-180 means +/-(180 - eps) as eps -> 0+
+    - As a consequence, azimuths of +0 and +180 are reckoned to be
+      east-going, as far as tracking the longitude with long_unroll
+      and the area goes, while azimuths -0 and -180 are reckoned to be
+      west-going.
+    - When computing longitude differences, if lon2 - lon1 = +/-180
+      (mod 360), then the sign is picked depending on the sign of the
+      difference.
+    - A separate test suite geographiclib_signtest has been added to
+      check this treatment.
 
 Version 1.52 (released 2021-06-22)
   * Be more aggressive in preventing negative s12 and m12 for short

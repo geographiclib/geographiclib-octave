@@ -78,7 +78,8 @@ if (IS_DIRECTORY ${PROJECT_SOURCE_DIR}/.git AND NOT WIN32)
     add_custom_target (stage-dist
       COMMAND ${CMAKE_COMMAND} -E copy_if_different
       ${TOOLBOX} ${PACKAGE} ${PROJECT_SOURCE_DIR}/distrib-Octave/
-      COMMAND ${RSYNC} --delete -av --exclude '*~'
+      COMMAND ${RSYNC} --delete -av
+      --exclude '*~' --exclude '*.log' --delete-excluded
       ${PROJECT_SOURCE_DIR}/distrib-Octave/ ${DATAROOT}/)
     add_dependencies (stage-dist package)
 

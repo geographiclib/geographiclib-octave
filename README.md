@@ -61,6 +61,7 @@ pkg list                            % list all packages
 ver geographiclib                   % list version
 pkg describe -verbose geographiclib % list functions
 news geographiclib                  % change log
+pkg test geographiclib              % run the tests
 pkg unload geographiclib            % remove from path
 pkg uninstall geographiclib         % uninstall
 ```
@@ -174,8 +175,10 @@ See the [change log](NEWS).  Releases are tagged in git as, e.g.,
   * C. F. F. Karney,
     [Transverse Mercator with an accuracy of a few nanometers](
     https://doi.org/10.1007/s00190-011-0445-3),
-    J. Geodesy **85**(8), 475–485 (2011),
-    [preprint](https://arxiv.org/abs/1002.1417).
+    J. Geodesy **85**(8), 475–485 (2011);
+    [preprint](https://arxiv.org/abs/1002.1417);
+    [addenda](https://geographiclib.sourceforge.io/tm-addenda.html).
   * C. F. F. Karney,
     [Algorithms for geodesics](https://doi.org/10.1007/s00190-012-0578-z),
-    J. Geodesy **87**(1), 43–55 (2013).
+    J. Geodesy **87**(1), 43–55 (2013);
+    [addenda](https://geographiclib.sourceforge.io/geod-addenda.html).
