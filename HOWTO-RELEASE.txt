@@ -31,7 +31,12 @@ Before release:
       PROJECT_VERSION_SUFFIX to ""
       RELEASE_DATE
   NEWS fix date
+  Remove alpha versions of the distribution from distrib-Octave
 
 After release
+  upload to MATLAB Central
+    https://www.mathworks.com/matlabcentral/fileexchange/50605
+    update blurb to refer to
+      https://github.com/geographiclib/geographiclib-octave#readme
   notify Fedora maintainer: Rich Mattes <richmattes@gmail.com>
   tag git vM.N

@@ -66,7 +66,13 @@ pkg unload geographiclib            % remove from path
 pkg uninstall geographiclib         % uninstall
 ```
 
-The MATLAB toolbox can be installed with the command
+The MATLAB toolbox is available at [MATLAB
+Central](https://www.mathworks.com/matlabcentral/fileexchange/50605)
+and can be installed via the "Add-Ons" menu item with MATLAB.
+Alternatively, it can be installed by downloading the package from
+[SourceForge](
+https://sourceforge.net/projects/geographiclib/files/distrib-Octave)
+and using the command
 ```octave
 matlab.addons.install geographiclib_toolbox-M.N.mltbx
 ```

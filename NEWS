@@ -1,6 +1,6 @@
 Changes in geographiclib-octave
 
-Version 2.0 (release 2022-mm-dd)
+Version 2.0 (release 2022-04-21)
   * Reorganized code base; there's now a stand-alone git repository at
     https://github.com/geographiclib/geographiclib-octave
   * Created an Octave package.
