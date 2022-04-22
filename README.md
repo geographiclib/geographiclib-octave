@@ -42,6 +42,9 @@ Toolbox.  However, this toolbox offers:
   * ellipsoidal versions of the equidistant azimuthal and gnomonic
     projections.
 
+Licensed under the MIT/X11 License; see
+[LICENSE.txt](https://geographiclib.sourceforge.io/LICENSE.txt).
+
 ## Installation
 
 The Octave/MATLAB packages are available on

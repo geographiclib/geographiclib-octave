@@ -38,5 +38,6 @@ After release
     https://www.mathworks.com/matlabcentral/fileexchange/50605
     update blurb to refer to
       https://github.com/geographiclib/geographiclib-octave#readme
+    download toolbox package (after an hour or so)
   notify Fedora maintainer: Rich Mattes <richmattes@gmail.com>
   tag git vM.N
