@@ -1,7 +1,7 @@
 function y = AngNormalize(x)
-%ANGNORMALIZE  Reduce angle to range (-180, 180]
+%ANGNORMALIZE  Reduce angle to range [-180, 180]
 %
-%   x = ANGNORMALIZE(x) reduces angles to the range (-180, 180].  x can be
+%   x = ANGNORMALIZE(x) reduces angles to the range [-180, 180].  x can be
 %   any shape.
 
   y = remx(x, 360);
