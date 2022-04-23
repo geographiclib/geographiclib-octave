@@ -1,7 +1,7 @@
 function [d, t] = AngDiff(x, y)
 %ANGDIFF  Compute angle difference accurately
 %
-%   [d, t] = ANGDIFF(x, y) computes z = y - x, reduced to (-180,180].  d =
+%   [d, t] = ANGDIFF(x, y) computes z = y - x, reduced to [-180,180].  d =
 %   round(z) and t = z - round(z).  x and y can be any compatible shapes.
 
   [d, t] = sumx(remx(-x, 360), remx(y, 360));
