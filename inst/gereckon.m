@@ -30,7 +30,7 @@ function [lat2, lon2, azi2, S12] = gereckon(lat1, lon1, s12, azi1, ellipsoid)
 %
 %   For more information, see
 %
-%     https://geographiclib.sourceforge.io/html/greatellipse.html
+%     https://geographiclib.sourceforge.io/C++/doc/greatellipse.html
 %
 %   See also GEDOC, GEDISTANCE, DEFAULTELLIPSOID, FLAT2ECC, GEODDISTANCE,
 %     GEODRECKON.
