@@ -41,3 +41,6 @@ After release
     download toolbox package (after an hour or so)
   notify Fedora maintainer: Rich Mattes <richmattes@gmail.com>
   tag git vM.N
+
+Registered with Octave package site
+https://gnu-octave.github.io/packages/geographiclib

@@ -48,7 +48,7 @@ function geoid = geoid_load(name, dir)
 %   Information on downloading and installing the data for the supported
 %   geoid models is available at
 %
-%     https://geographiclib.sourceforge.io/html/geoid.html#geoidinst
+%     https://geographiclib.sourceforge.io/C++/doc/geoid.html#geoidinst
 %
 %   See also GEOID_HEIGHT.
 

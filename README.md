@@ -9,8 +9,8 @@ Contents:
 
 ## Introduction
 
-This toolbox provides native MATLAB implementations of a subset of the
-C++ library, GeographicLib.  Key components of this toolbox are
+This toolbox provides native Octave/MATLAB implementations of a subset
+of the C++ library, GeographicLib.  Key components of this toolbox are
   * Geodesics, direct, inverse, area calculations.
   * Projections, transverse Mercator, polar stereographic, etc.
   * Grid systems, UTM, UPS, MGRS.
@@ -48,8 +48,8 @@ Licensed under the MIT/X11 License; see
 ## Installation
 
 The Octave/MATLAB packages are available on
-[SourceForge](
-https://sourceforge.net/projects/geographiclib/files/distrib-Octave)
+[Octave Packages](
+https://gnu-octave.github.io/packages/geographiclib)
 and
 [MATLAB Central](https://www.mathworks.com/matlabcentral/fileexchange/50605).
 
@@ -145,6 +145,9 @@ matlab.addons.uninstall(t.Identifier(n)) % uninstall
     Convert local cartesian to geographic coordinates
 
 ### Great ellipses
+  **NOTE:** The links to the documentation for great ellipses in these
+  routines are out of date.  Here is the [relevant documentation](
+  https://geographiclib.sourceforge.io/C++/doc/greatellipse.html).
   * [`gedistance`](inst/gedistance.m) -
     Great ellipse distance on an ellipsoid
   * [`gereckon`](inst/gereckon.m) -

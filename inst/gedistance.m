@@ -26,7 +26,7 @@ function [s12, azi1, azi2, S12] = gedistance(lat1, lon1, lat2, lon2, ellipsoid)
 %
 %   For more information, see
 %
-%     https://geographiclib.sourceforge.io/html/greatellipse.html
+%     https://geographiclib.sourceforge.io/C++/doc/greatellipse.html
 %
 %   See also GEDOC, GERECKON, DEFAULTELLIPSOID, FLAT2ECC, GEODDISTANCE,
 %     GEODRECKON.
