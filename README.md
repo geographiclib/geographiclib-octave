@@ -3,7 +3,17 @@
 Contents:
 * [Introduction](#introduction)
 * [Installation](#installation)
+  * [Octave installation](#octave-installation)
+  * [MATLAB installation](#matlab-installation)
 * [Function summary](#function-summary)
+  * [Geodesics](#geodesics)
+  * [Projections](#projections)
+  * [Grid systems](#grid-systems)
+  * [Geoid lookup](#geoid-lookup)
+  * [Geometric transformations](#geometric-transformations)
+  * [Great ellipses](#great ellipses)
+  * [Utility](#utility)
+  * [Documentation](#documentation)
 * [Changes](#changes)
 * [Other links](#other-links)
 
@@ -52,19 +62,19 @@ The toolbox is available from
   * [SourceForge](
     https://sourceforge.net/projects/geographiclib/files/distrib-Octave)
     This includes packages for Octave,
-    geographiclib-octave-M.N.tar.gz, and MATLAB,
-    geographiclib_toolbox-M.N.mltbx.  Here M.N stands for the version
-    number, e.g., 2.0.  The Octave and MATLAB packages contain exactly
+    `geographiclib-octave-M.N.tar.gz`, and MATLAB,
+    `geographiclib_toolbox-M.N.mltbx`.  Here `M.N` stands for the version
+    number, e.g., `2.0`.  The Octave and MATLAB packages contain exactly
     the same code; it's just the packaging that is different.
 
   * [Octave Packages](
-    https://gnu-octave.github.io/packages/geographiclib).  This just
+    https://gnu-octave.github.io/packages/geographiclib).  This
     links to the SourceForge download site.
 
   * [MATLAB Central](
     https://www.mathworks.com/matlabcentral/fileexchange/50605).  You
-    need to log in to download packages from here.  Just use
-    SourceForge if you don't have an account.
+    need to log in to download packages from here.  Use SourceForge
+    (see above) if you don't have an account.
 
 ### Octave installation
 
@@ -80,7 +90,7 @@ commands
 pkg install "https://sourceforge.net/projects/geographiclib/files/distrib-Octave/geographiclib-octave-M.N.tar.gz"
 pkg load geographiclib
 ```
-*NOTE*: in both cases replace M.N by the version number.
+*NOTE*: in both cases replace `M.N` by the version number.
 
 Other useful Octave package commands
 ```octave
@@ -102,7 +112,7 @@ from SourceForge (see above) and using the command
 ```octave
 matlab.addons.install geographiclib_toolbox-M.N.mltbx
 ```
-*NOTE*: replace M.N by the version number.
+*NOTE*: replace `M.N` by the version number.
 
 Other useful MATLAB toolboxes commands
 ```octave
