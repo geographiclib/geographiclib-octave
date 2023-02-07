@@ -11,7 +11,7 @@ Contents:
   * [Grid systems](#grid-systems)
   * [Geoid lookup](#geoid-lookup)
   * [Geometric transformations](#geometric-transformations)
-  * [Great ellipses](#great ellipses)
+  * [Great ellipses](#great-ellipses)
   * [Utility](#utility)
   * [Documentation](#documentation)
 * [Changes](#changes)
