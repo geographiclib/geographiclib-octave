@@ -47,17 +47,41 @@ Licensed under the MIT/X11 License; see
 
 ## Installation
 
-The Octave/MATLAB packages are available on
-[Octave Packages](
-https://gnu-octave.github.io/packages/geographiclib)
-and
-[MATLAB Central](https://www.mathworks.com/matlabcentral/fileexchange/50605).
+The toolbox is available from
 
-Tha Octave package can be installed with the command
+  * [SourceForge](
+    https://sourceforge.net/projects/geographiclib/files/distrib-Octave)
+    This includes packages for Octave,
+    geographiclib-octave-M.N.tar.gz, and MATLAB,
+    geographiclib_toolbox-M.N.mltbx.  Here M.N stands for the version
+    number, e.g., 2.0.  The Octave and MATLAB packages contain exactly
+    the same code; it's just the packaging that is different.
+
+  * [Octave Packages](
+    https://gnu-octave.github.io/packages/geographiclib).  This just
+    links to the SourceForge download site.
+
+  * [MATLAB Central](
+    https://www.mathworks.com/matlabcentral/fileexchange/50605).  You
+    need to log in to download packages from here.  Just use
+    SourceForge if you don't have an account.
+
+### Octave installation
+
+Either download the package to your computer and install it in Octave
+with the commands
 ```octave
 pkg install geographiclib-octave-M.N.tar.gz
 pkg load geographiclib
 ```
+Or you can have Octave download and install the package with the
+commands
+```octave
+pkg install "https://sourceforge.net/projects/geographiclib/files/distrib-Octave/geographiclib-octave-M.N.tar.gz"
+pkg load geographiclib
+```
+*NOTE*: in both cases replace M.N by the version number.
+
 Other useful Octave package commands
 ```octave
 pkg list                            % list all packages
@@ -69,16 +93,17 @@ pkg unload geographiclib            % remove from path
 pkg uninstall geographiclib         % uninstall
 ```
 
-The MATLAB toolbox is available at [MATLAB
-Central](https://www.mathworks.com/matlabcentral/fileexchange/50605)
-and can be installed via the "Add-Ons" menu item with MATLAB.
-Alternatively, it can be installed by downloading the package from
-[SourceForge](
-https://sourceforge.net/projects/geographiclib/files/distrib-Octave)
-and using the command
+### MATLAB installation
+
+The MATLAB toolbox can be installed via the "Add-Ons" menu item with
+MATLAB.  Alternatively, it can be installed by downloading the package
+from SourceForge (see above) and using the command
+
 ```octave
 matlab.addons.install geographiclib_toolbox-M.N.mltbx
 ```
+*NOTE*: replace M.N by the version number.
+
 Other useful MATLAB toolboxes commands
 ```octave
 t = matlab.addons.installedAddons        % list all toolboxes
