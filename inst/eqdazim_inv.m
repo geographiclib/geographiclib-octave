@@ -34,7 +34,7 @@ function [lat, lon, azi, rk] = eqdazim_inv(lat0, lon0, x, y, ellipsoid)
 %
 %   See also PROJDOC, EQDAZIM_FWD, GEODRECKON, DEFAULTELLIPSOID, FLAT2ECC.
 
-% Copyright (c) Charles Karney (2012-2022) <charles@karney.com>.
+% Copyright (c) Charles Karney (2012-2022) <karney@alum.mit.edu>.
 
   narginchk(4, 5)
   if nargin < 5, ellipsoid = defaultellipsoid; end

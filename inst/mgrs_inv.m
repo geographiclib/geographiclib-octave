@@ -22,7 +22,7 @@ function [x, y, zone, isnorth, prec] = mgrs_inv(mgrs, center)
 %
 %   See also MGRS_FWD, UTMUPS_INV.
 
-% Copyright (c) Charles Karney (2015) <charles@karney.com>.
+% Copyright (c) Charles Karney (2015) <karney@alum.mit.edu>.
 
   narginchk(1, 2)
   if nargin < 2
