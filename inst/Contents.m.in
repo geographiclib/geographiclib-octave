@@ -80,7 +80,7 @@
 %   gereckon         - Point along great ellipse at given azimuth and range
 %
 % Utility
-%   defaultellipsoid - Return the WGS84 ellipsoid
+%   defaultellipsoid - Set/return the default ellipsoid
 %   ecc2flat         - Convert eccentricity to flattening
 %   flat2ecc         - Convert flattening to eccentricity
 %   geographiclib_test     - The test suite for the geographiclib package
@@ -91,6 +91,6 @@
 %   projdoc          - Projections for an ellipsoid
 %   gedoc            - Great ellipses on an ellipsoid of revolution
 
-% Copyright (c) Charles Karney (2015-2022) <charles@karney.com>.
+% Copyright (c) Charles Karney (2015-2024) <karney@alum.mit.edu>.
 
 help(mfilename)

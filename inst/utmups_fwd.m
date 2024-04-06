@@ -43,12 +43,12 @@ function [x, y, zone, isnorth, gam, k] = utmups_fwd(lat, lon, setzone)
 %
 %   See also UTMUPS_INV, TRANMERC_FWD, POLARST_FWD, MGRS_FWD.
 
-% Copyright (c) Charles Karney (2015-2022) <charles@karney.com>.
+% Copyright (c) Charles Karney (2015-2022) <karney@alum.mit.edu>.
 
   narginchk(2, 3)
   if nargin < 3, setzone = -1; end
   try
-    Z = -zeros(size(lat + lon + setzone));
+    Z = -zeros(size(lat + lon + setzone)); %#ok<SZARLOG>
   catch
     error('lat, lon, setzone have incompatible sizes')
   end

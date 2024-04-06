@@ -1,6 +1,10 @@
 Changes in geographiclib-octave
 
-Version 2.0 (release 2022-04-21)
+Version 2.1 (released 2024-04-06)
+  * The ellipsoid returned by defaultellipsoid can now be set.
+  * Relax overly strict convergence test in geoddistance.
+
+Version 2.0 (released 2022-04-21)
   * Reorganized code base; there's now a stand-alone git repository at
     https://github.com/geographiclib/geographiclib-octave
   * Created an Octave package.

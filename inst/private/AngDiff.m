@@ -8,7 +8,7 @@ function [d, t] = AngDiff(x, y)
   [d, t] = sumx(remx(d, 360), t);
   l = d == 0 | abs(d) == 180;
   if any(l)
-    z = y -x;
+    z = y - x;
     d(l) = copysignx(d(l), cvmgt(z(l), -t(l), t(l) == 0));
   end
 end

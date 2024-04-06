@@ -1,8 +1,8 @@
 Name: geographiclib
 Version: @PROJECT_VERSION@
 Date: @RELEASE_DATE@
-Author: Charles Karney <charles@karney.com>
-Maintainer: Charles Karney <charles@karney.com>
+Author: Charles Karney <karney@alum.mit.edu>
+Maintainer: Charles Karney <karney@alum.mit.edu>
 Title: GeographicLib, a subset of the C++ library ported to Octave/MATLAB
 Description: This toolbox provides native MATLAB implementations of a
  subset of the C++ library, GeographicLib.  Key components of this

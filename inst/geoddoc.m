@@ -165,7 +165,7 @@ function geoddoc
 %   See also GEODDISTANCE, GEODRECKON, GEODAREA,
 %     DEFAULTELLIPSOID, ECC2FLAT, FLAT2ECC.
 
-% Copyright (c) Charles Karney (2012-2022) <charles@karney.com>.
+% Copyright (c) Charles Karney (2012-2022) <karney@alum.mit.edu>.
 
   help(mfilename)
 end

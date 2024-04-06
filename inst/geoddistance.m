@@ -41,7 +41,7 @@ function [s12, azi1, azi2, S12, m12, M12, M21, a12] = geoddistance ...
 %
 %   See also GEODDOC, GEODRECKON, GEODAREA, DEFAULTELLIPSOID, FLAT2ECC.
 
-% Copyright (c) Charles Karney (2012-2022) <charles@karney.com>.
+% Copyright (c) Charles Karney (2012-2024) <karney@alum.mit.edu>.
 %
 % This is a straightforward transcription of the C++ implementation in
 % GeographicLib and the C++ source should be consulted for additional
@@ -53,7 +53,7 @@ function [s12, azi1, azi2, S12, m12, M12, M21, a12] = geoddistance ...
   narginchk(4, 5)
   if nargin < 5, ellipsoid = defaultellipsoid; end
   try
-    S = size(lat1 + lon1 + lat2 + lon2);
+    S = size(lat1 + lon1 + lat2 + lon2); %#ok<SZARLOG>
   catch
     error('lat1, lon1, s12, azi1 have incompatible sizes')
   end
@@ -68,7 +68,7 @@ function [s12, azi1, azi2, S12, m12, M12, M21, a12] = geoddistance ...
   degree = pi/180;
   tiny = sqrt(realmin);
   tol0 = eps;
-  tolb = eps * sqrt(eps);
+  tolb = tol0;
   maxit1 = 20;
   maxit2 = maxit1 + (-log2(eps) + 1) + 10;
 
@@ -195,7 +195,7 @@ function [s12, azi1, azi2, S12, m12, M12, M21, a12] = geoddistance ...
     tripb = tripn;
     if any(g)
       gsave = g;
-      for k = 0 : maxit2 - 1
+      for k = 0 : maxit2
         if k == 0 && ~any(g), break, end
         numit(g) = k;
         [v(g), dv(g), ...
@@ -204,7 +204,8 @@ function [s12, azi1, azi2, S12, m12, M12, M21, a12] = geoddistance ...
             Lambda12(sbet1(g), cbet1(g), dn1(g), ...
                      sbet2(g), cbet2(g), dn2(g), ...
                      salp1(g), calp1(g), slam12(g), clam12(g), f, A3x, C3x);
-        g = g & ~(tripb | ~(abs(v) >= ((tripn * 7) + 1) * tol0));
+        g = g & ~(tripb | ...
+                  ~(abs(v) >= ((tripn * 7) + 1) * tol0) | numit == maxit2);
         if ~any(g), break, end
 
         c = g & v > 0;
@@ -222,6 +223,10 @@ function [s12, azi1, azi2, S12, m12, M12, M21, a12] = geoddistance ...
         if k == maxit1, tripn(g) = false; end
         if k < maxit1
           dalp1 = -v ./ dv;
+          % In the C++ implementation the abs(dalph1) < pi test is put
+          % here. But this is just to avoid a bit slowdown with
+          % GEOGRAPHICLIB_PRECISION = 5 evaluating sin/cos(dalp1) when
+          % dalp1 is huge.  No need to worry about this here.
           sdalp1 = sin(dalp1); cdalp1 = cos(dalp1);
           nsalp1 = salp1 .* cdalp1 + calp1 .* sdalp1;
           calp1(g) = calp1(g) .* cdalp1(g) - salp1(g) .* sdalp1(g);
@@ -345,7 +350,7 @@ function [sig12, salp1, calp1, salp2, calp2, dnm] = ...
   n = f / (2 - f);
   tol0 = eps;
   tol1 = 200 * tol0;
-  tol2 = sqrt(eps);
+  tol2 = sqrt(tol0);
   etol2 = 0.1 * tol2 / sqrt( max(0.001, abs(f)) * min(1, 1 - f/2) / 2 );
   xthresh = 1000 * tol2;
 

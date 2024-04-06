@@ -22,13 +22,13 @@ function [x, y, z, M] = loccart_fwd(lat0, lon0, h0, lat, lon, h, ellipsoid)
 %
 %   See also LOCCART_INV, DEFAULTELLIPSOID, FLAT2ECC.
 
-% Copyright (c) Charles Karney (2015-2022) <charles@karney.com>.
+% Copyright (c) Charles Karney (2015-2022) <karney@alum.mit.edu>.
 
   narginchk(5, 7)
   if nargin < 6, h = 0; end
   if nargin < 7, ellipsoid = defaultellipsoid; end
   try
-    S = size(lat + lon + h);
+    S = size(lat + lon + h); %#ok<SZARLOG>
   catch
     error('lat, lon, h have incompatible sizes')
   end

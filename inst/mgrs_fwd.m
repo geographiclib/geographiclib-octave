@@ -30,14 +30,14 @@ function mgrs = mgrs_fwd(x, y, zone, isnorth, prec)
 %
 %   See also MGRS_INV, UTMUPS_FWD.
 
-% Copyright (c) Charles Karney (2015-2022) <charles@karney.com>.
+% Copyright (c) Charles Karney (2015-2022) <karney@alum.mit.edu>.
 
   narginchk(4, 5)
   if nargin < 5, prec = 5; end
   zone = floor(zone);
   prec = min(11, max(-2, floor(prec))); % this converts NaNs to -2.
   try
-    s = size(x + y + zone + isnorth + prec);
+    s = size(x + y + zone + isnorth + prec); %#ok<SZARLOG>
   catch
     error('x, y, zone, isnorth, prec have incompatible sizes')
   end

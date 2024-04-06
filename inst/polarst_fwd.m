@@ -24,12 +24,12 @@ function [x, y, gam, k] = polarst_fwd(isnorth, lat, lon, ellipsoid)
 %   See also PROJDOC, POLARST_INV, UTMUPS_FWD, UTMUPS_INV,
 %     DEFAULTELLIPSOID, FLAT2ECC.
 
-% Copyright (c) Charles Karney (2015-2022) <charles@karney.com>.
+% Copyright (c) Charles Karney (2015-2022) <karney@alum.mit.edu>.
 
   narginchk(3, 4)
   if nargin < 4, ellipsoid = defaultellipsoid; end
   try
-    Z = -zeros(size(isnorth + lat + lon));
+    Z = -zeros(size(isnorth + lat + lon)); %#ok<SZARLOG>
   catch
     error('isnorth, lat, lon have incompatible sizes')
   end

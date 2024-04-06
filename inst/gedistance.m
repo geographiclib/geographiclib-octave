@@ -31,12 +31,12 @@ function [s12, azi1, azi2, S12] = gedistance(lat1, lon1, lat2, lon2, ellipsoid)
 %   See also GEDOC, GERECKON, DEFAULTELLIPSOID, FLAT2ECC, GEODDISTANCE,
 %     GEODRECKON.
 
-% Copyright (c) Charles Karney (2014-2022) <charles@karney.com>.
+% Copyright (c) Charles Karney (2014-2022) <karney@alum.mit.edu>.
 
   narginchk(4, 5)
   if nargin < 5, ellipsoid = defaultellipsoid; end
   try
-    S = size(lat1 + lon1 + lat2 + lon2);
+    S = size(lat1 + lon1 + lat2 + lon2); %#ok<SZARLOG>
   catch
     error('lat1, lon1, s12, azi1 have incompatible sizes')
   end

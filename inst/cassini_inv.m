@@ -23,7 +23,7 @@ function [lat, lon, azi, rk] = cassini_inv(lat0, lon0, x, y, ellipsoid)
 %
 %   See also PROJDOC, CASSINI_FWD, GEODRECKON, DEFAULTELLIPSOID, FLAT2ECC.
 
-% Copyright (c) Charles Karney (2012-2015) <charles@karney.com>.
+% Copyright (c) Charles Karney (2012-2015) <karney@alum.mit.edu>.
 
   narginchk(4, 5)
   if nargin < 5, ellipsoid = defaultellipsoid; end

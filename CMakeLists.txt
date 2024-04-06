@@ -3,8 +3,8 @@ project (GeographicLib-Octave NONE)
 
 # Version information
 set (PROJECT_VERSION_MAJOR 2)
-set (PROJECT_VERSION_MINOR 0)
-set (PROJECT_VERSION_PATCH 1)
+set (PROJECT_VERSION_MINOR 1)
+set (PROJECT_VERSION_PATCH 0)
 set (PROJECT_VERSION "${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}")
 if (PROJECT_VERSION_PATCH GREATER 0)
   set (PROJECT_VERSION "${PROJECT_VERSION}.${PROJECT_VERSION_PATCH}")
@@ -12,7 +12,7 @@ endif ()
 set (PROJECT_VERSION_SUFFIX "-devel")
 set (PROJECT_FULLVERSION "${PROJECT_VERSION}${PROJECT_VERSION_SUFFIX}")
 
-set (RELEASE_DATE "2022-mm-dd")
+set (RELEASE_DATE "2022-04-06")
 
 # Set a default build type for single-configuration cmake generators if
 # no build type is set.
@@ -59,7 +59,7 @@ if (IS_DIRECTORY ${PROJECT_SOURCE_DIR}/.git AND NOT WIN32)
   add_custom_target (checkblanklines
     COMMAND git ls-files |
     while read f\; do tr 'X\\n' 'YX' < $$f |
-    egrep '\(^X|XXX|XX$$|[^X]$$\)' > /dev/null && echo $$f\; done || true
+    grep -E '\(^X|XXX|XX$$|[^X]$$\)' > /dev/null && echo $$f\; done || true
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
     COMMENT "Looking for extra blank lines")
 

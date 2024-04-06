@@ -36,11 +36,11 @@ function [lat, lon, gam, k] = utmups_inv(x, y, zone, isnorth)
 %
 %   See also UTMUPS_FWD, TRANMERC_INV, POLARST_INV, MGRS_INV.
 
-% Copyright (c) Charles Karney (2015-2022) <charles@karney.com>.
+% Copyright (c) Charles Karney (2015-2022) <karney@alum.mit.edu>.
 
   narginchk(4, 4)
   try
-    Z = -zeros(size(x + y + zone + isnorth));
+    Z = -zeros(size(x + y + zone + isnorth)); %#ok<SZARLOG>
   catch
     error('x, y, zone, isnorth have incompatible sizes')
   end

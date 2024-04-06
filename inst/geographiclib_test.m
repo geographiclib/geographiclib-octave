@@ -753,11 +753,10 @@ function n = Planimeter21
 % Some test to add code coverage: multiple circlings of pole (includes
 % Planimeter21 - Planimeter28).
   n = 0;
-  points = [45 60;45 180;45 -60;...
-            45 60;45 180;45 -60;...
-            45 60;45 180;45 -60;...
-            45 60;45 180;45 -60;...
-           ];
+  points = [45 60;45 180;45 -60;
+            45 60;45 180;45 -60;
+            45 60;45 180;45 -60;
+            45 60;45 180;45 -60];
   r = 39433884866571.4277;              % Area for one circuit
   for i = 3 : 4
     area = geodarea(points(1:3*i,1), points(1:3*i,2));

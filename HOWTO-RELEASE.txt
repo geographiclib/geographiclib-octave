@@ -23,7 +23,7 @@ Other CMake targets
 
 Documentation is primarily in README.md (accessed via github)
 + the .m files (esp Contents, geoddoc, projdoc, gedoc)
-+ NEWS + DESCRIPTION
++ NEWS + DESCRIPTION.in
 + distrib-Octave/00README.md abbreviated README for package distribution
 
 Before release:
@@ -31,6 +31,7 @@ Before release:
       PROJECT_VERSION_SUFFIX to ""
       RELEASE_DATE
   NEWS fix date
+  check COPYING DESCRIPTION.in INDEX
   Remove alpha versions of the distribution from distrib-Octave
 
 After release
@@ -44,3 +45,13 @@ After release
 
 Registered with Octave package site
 https://gnu-octave.github.io/packages/geographiclib
+
+Blurb:
+
+Native Octave/MATLAB implementations of a subset of the C++ library,
+GeographicLib. Key components of this toolbox are: (a) Geodesics,
+direct, inverse, area calculations; (b) Projections, transverse
+Mercator, polar stereographic, etc; (c) Grid systems, UTM, UPS, MGRS;
+(d) Geoid lookup, egm84, egm96, egm2008 geoids supported; (e) Geometric
+transformations, geocentric, local cartesian; (f) Great ellipse, direct,
+inverse, area calculations.

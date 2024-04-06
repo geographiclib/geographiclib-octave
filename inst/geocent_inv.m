@@ -18,12 +18,12 @@ function [lat, lon, h, M] = geocent_inv(X, Y, Z, ellipsoid)
 %
 %   See also GEOCENT_FWD, DEFAULTELLIPSOID, FLAT2ECC.
 
-% Copyright (c) Charles Karney (2015-2022) <charles@karney.com>.
+% Copyright (c) Charles Karney (2015-2022) <karney@alum.mit.edu>.
 
   narginchk(3, 4)
   if nargin < 4, ellipsoid = defaultellipsoid; end
   try
-    z = -zeros(size(X + Y + Z));
+    z = -zeros(size(X + Y + Z)); %#ok<SZARLOG>
   catch
     error('X, Y, Z have incompatible sizes')
   end
