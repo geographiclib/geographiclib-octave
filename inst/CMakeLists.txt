@@ -31,7 +31,8 @@ set (SOURCES
   geographiclib_signtest.m
   geoddoc.m
   projdoc.m
-  gedoc.m)
+  gedoc.m
+  linesimp.m)
 
 set (PRIVATE_SOURCES
   private/A1m1f.m
@@ -68,15 +69,68 @@ set (PRIVATE_SOURCES
   private/tauf.m
   private/taupf.m)
 
+set (TRIAXIAL_SOURCES
+  @triaxial/accel.m
+  @triaxial/cart2norm.m
+  @triaxial/cart2rand.m
+  @triaxial/cart2tocart.m
+  @triaxial/cart2toellip.m
+  @triaxial/cart2togeod.m
+  @triaxial/cart2toparam.m
+  @triaxial/cartproj.m
+  @triaxial/carttocart2.m
+  @triaxial/carttoellip.m
+  @triaxial/carttogeod.m
+  @triaxial/carttoparam.m
+  @triaxial/demo.m
+  @triaxial/distance.m
+  @triaxial/doc.m
+  @triaxial/ellipnorm.m
+  @triaxial/elliptocart.m
+  @triaxial/elliptocart2.m
+  @triaxial/elliptogeod.m
+  @triaxial/elliptoparam.m
+  @triaxial/geodtocart.m
+  @triaxial/geodtoellip.m
+  @triaxial/geodtoparam.m
+  @triaxial/horizon.m
+  @triaxial/hybrid.m
+  @triaxial/hybridint.m
+  @triaxial/paramtocart.m
+  @triaxial/paramtoellip.m
+  @triaxial/paramtogeod.m
+  @triaxial/reckon.m
+  @triaxial/scaled.m
+  @triaxial/tests.m
+  @triaxial/triaxial.m)
+
+set (TRIAXIAL_PRIVATE_SOURCES
+  @triaxial/private/ell3check.m
+  @triaxial/private/fracx.m
+  @triaxial/private/is_octave.m
+  @triaxial/private/newtonx.m
+  @triaxial/private/remx.m
+  @triaxial/private/rotm.m
+  @triaxial/private/signx.m
+  @triaxial/private/vecabs.m
+  @triaxial/private/veccross.m
+  @triaxial/private/vecdot.m
+  @triaxial/private/vecunit.m)
+
 configure_file (Contents.m.in ${DISTDIR}/inst/Contents.m @ONLY)
 set (PACKAGE_DEPENDS ${PACKAGE_DEPENDS} ${DISTDIR}/inst/Contents.m)
-foreach (f ${SOURCES} ${PRIVATE_SOURCES})
+foreach (f ${SOURCES} ${PRIVATE_SOURCES}
+    ${TRIAXIAL_SOURCES} ${TRIAXIAL_PRIVATE_SOURCES})
   configure_file (${f} ${DISTDIR}/inst/${f} COPYONLY)
   set (PACKAGE_DEPENDS ${PACKAGE_DEPENDS} ${DISTDIR}/inst/${f})
 endforeach ()
 
 install (FILES ${SOURCES} DESTINATION ${INSTDIR}/geographiclib)
 install (FILES ${PRIVATE_SOURCES} DESTINATION ${INSTDIR}/geographiclib/private)
+install (FILES ${TRIAXIAL_SOURCES}
+  DESTINATION ${INSTDIR}/geographiclib/@triaxial)
+install (FILES ${TRIAXIAL_PRIVATE_SOURCES}
+  DESTINATION ${INSTDIR}/geographiclib/@triaxial/private)
 install (FILES ${DISTDIR}/inst/Contents.m DESTINATION ${INSTDIR}/geographiclib)
 
 foreach (f ${METAFILES})
@@ -107,5 +161,8 @@ if (OCTAVE)
     WORKING_DIRECTORY ${DISTDIR}/inst)
   add_test (NAME signtest
     COMMAND ${OCTAVE} --no-gui --no-window-system --eval geographiclib_signtest
+    WORKING_DIRECTORY ${DISTDIR}/inst)
+  add_test (NAME triaxialtest
+    COMMAND ${OCTAVE} --no-gui --no-window-system --eval triaxial.tests
     WORKING_DIRECTORY ${DISTDIR}/inst)
 endif ()

@@ -192,6 +192,8 @@ matlab.addons.uninstall(t.Identifier(n)) % uninstall
     Convert eccentricity to flattening
   * [`flat2ecc`](inst/flat2ecc.m) -
     Convert flattening to eccentricity
+ *  [`linesimp`](inst/linesimp.m) -
+    Simplify 2d or 3d polyline
   * [`geographiclib_test`](inst/geographiclib_test.m) -
     The test suite for the geographiclib package
   * [`geographiclib_signtest`](inst/geographiclib_signtest.m) -
@@ -204,6 +206,39 @@ matlab.addons.uninstall(t.Identifier(n)) % uninstall
     Projections for an ellipsoid
   * [`gedoc`](inst/gedoc.m) -
     Great ellipses on an ellipsoid of revolution
+
+### Triaxial routines
+  * [`triaxial.cart2norm`](inst/@triaxial/cart2norm.m)
+  * [`triaxial.cart2rand`](inst/@triaxial/cart2rand.m)
+  * [`triaxial.cart2tocart`](inst/@triaxial/cart2tocart.m)
+  * [`triaxial.cart2toellip`](inst/@triaxial/cart2toellip.m)
+  * [`triaxial.cart2togeod`](inst/@triaxial/cart2togeod.m)
+  * [`triaxial.cart2toparam`](inst/@triaxial/cart2toparam.m)
+  * [`triaxial.cartproj`](inst/@triaxial/cartproj.m)
+  * [`triaxial.carttocart2`](inst/@triaxial/carttocart2.m)
+  * [`triaxial.carttoellip`](inst/@triaxial/carttoellip.m)
+  * [`triaxial.carttogeod`](inst/@triaxial/carttogeod.m)
+  * [`triaxial.carttoparam`](inst/@triaxial/carttoparam.m)
+  * [`triaxial.demo`](inst/@triaxial/demo.m)
+  * [`triaxial.distance`](inst/@triaxial/distance.m)
+  * [`triaxial.doc`](inst/@triaxial/doc.m)
+  * [`triaxial.ellipnorm`](inst/@triaxial/ellipnorm.m)
+  * [`triaxial.elliptocart`](inst/@triaxial/elliptocart.m)
+  * [`triaxial.elliptocart2`](inst/@triaxial/elliptocart2.m)
+  * [`triaxial.elliptogeod`](inst/@triaxial/elliptogeod.m)
+  * [`triaxial.elliptoparam`](inst/@triaxial/elliptoparam.m)
+  * [`triaxial.geodtocart`](inst/@triaxial/geodtocart.m)
+  * [`triaxial.geodtoellip`](inst/@triaxial/geodtoellip.m)
+  * [`triaxial.geodtoparam`](inst/@triaxial/geodtoparam.m)
+  * [`triaxial.horizon`](inst/@triaxial/horizon.m)
+  * [`triaxial.hybrid`](inst/@triaxial/hybrid.m)
+  * [`triaxial.paramtocart`](inst/@triaxial/paramtocart.m)
+  * [`triaxial.paramtoellip`](inst/@triaxial/paramtoellip.m)
+  * [`triaxial.paramtogeod`](inst/@triaxial/paramtogeod.m)
+  * [`triaxial.reckon`](inst/@triaxial/reckon.m)
+  * [`triaxial.scaled`](inst/@triaxial/scaled.m)
+  * [`triaxial.tests`](inst/@triaxial/tests.m)
+  * [`triaxial.triaxial`](inst/@triaxial/triaxial.m)
 
 ## Changes
 

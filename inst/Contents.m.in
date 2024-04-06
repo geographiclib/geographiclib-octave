@@ -83,6 +83,7 @@
 %   defaultellipsoid - Set/return the default ellipsoid
 %   ecc2flat         - Convert eccentricity to flattening
 %   flat2ecc         - Convert flattening to eccentricity
+%   linesimp         - Simplify 2d or 3d polyline
 %   geographiclib_test     - The test suite for the geographiclib package
 %   geographiclib_signtest - Another test suite
 %
@@ -90,6 +91,39 @@
 %   geoddoc          - Geodesics on an ellipsoid of revolution
 %   projdoc          - Projections for an ellipsoid
 %   gedoc            - Great ellipses on an ellipsoid of revolution
+%
+% Triaxial functions
+%   triaxial.cart2norm
+%   triaxial.cart2rand
+%   triaxial.cart2tocart
+%   triaxial.cart2toellip
+%   triaxial.cart2togeod
+%   triaxial.cart2toparam
+%   triaxial.cartproj
+%   triaxial.carttocart2
+%   triaxial.carttoellip
+%   triaxial.carttogeod
+%   triaxial.carttoparam
+%   triaxial.demo
+%   triaxial.distance
+%   triaxial.doc
+%   triaxial.ellipnorm
+%   triaxial.elliptocart
+%   triaxial.elliptocart2
+%   triaxial.elliptogeod
+%   triaxial.elliptoparam
+%   triaxial.geodtocart
+%   triaxial.geodtoellip
+%   triaxial.geodtoparam
+%   triaxial.horizon
+%   triaxial.hybrid
+%   triaxial.paramtocart
+%   triaxial.paramtoellip
+%   triaxial.paramtogeod
+%   triaxial.reckon
+%   triaxial.scaled
+%   triaxial.tests
+%   triaxial.triaxial
 
 % Copyright (c) Charles Karney (2015-2024) <karney@alum.mit.edu>.
 
