@@ -61,7 +61,7 @@ function ptsout = linesimp(ptsin, tol, scal)
   ptsout = zeros(0, dim);
   for j = 1:length(inds)/2
     if j > 1
-      ptsout = [ptsout; nanpt]; %#ok<*AGROW>
+      ptsout = [ptsout; nanpt];         %#ok<*AGROW>
     end
     ptsout = [ptsout; simp1(ptsin(inds(2*j-1):inds(2*j)-1,:), tol)];
   end

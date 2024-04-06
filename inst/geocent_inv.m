@@ -23,7 +23,7 @@ function [lat, lon, h, M] = geocent_inv(X, Y, Z, ellipsoid)
   narginchk(3, 4)
   if nargin < 4, ellipsoid = defaultellipsoid; end
   try
-    z = -zeros(size(X + Y + Z)); %#ok<SZARLOG>
+    z = -zeros(size(X + Y + Z));        %#ok<SZARLOG>
   catch
     error('X, Y, Z have incompatible sizes')
   end

@@ -44,7 +44,7 @@ function [x, y, gam, k] = tranmerc_fwd(lat0, lon0, lat, lon, ellipsoid)
   narginchk(4, 5)
   if nargin < 5, ellipsoid = defaultellipsoid; end
   try
-    S = size(lat0 + lon0 + lat + lon); %#ok<SZARLOG>
+    S = size(lat0 + lon0 + lat + lon);  %#ok<SZARLOG>
   catch
     error('lat0, lon0, lat, lon have incompatible sizes')
   end

@@ -128,7 +128,7 @@ function N = geoid_height_int(lat, lon, geoid, cubic)
             18,  -36,    2,   0,  -66,  -51, 0,   0,  102,  31];
   end
   try
-    s = size(lat + lon); %#ok<SZARLOG>
+    s = size(lat + lon);                %#ok<SZARLOG>
   catch
     error('lat, lon have incompatible sizes')
   end
