@@ -81,7 +81,8 @@ function [lat2, lon2, azi2, S12, m12, M12, M21, a12_s12] = geodreckon ...
     % Use -0.0 for Z1 and Z to preserve the sign of 0.0.  geodreckon is one of
     % the few functions where this matters (to distinguish between
     % east-going and west-going meridional geodesics).
-    S1 = size(lat1 + azi1); Z1 = -zeros(S1); % The size of geodesic line prob
+    S1 = size(lat1 + azi1); %#ok<*SZARLOG>
+    Z1 = -zeros(S1);	    % The size of geodesic line prob
     S = size(Z1 + lon1 + s12_a12); Z = -zeros(S); % The size of the full prob
   catch
     error('lat1, lon1, s12, azi1 have incompatible sizes')

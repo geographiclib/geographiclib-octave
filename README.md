@@ -180,9 +180,6 @@ matlab.addons.uninstall(t.Identifier(n)) % uninstall
     Convert local cartesian to geographic coordinates
 
 ### Great ellipses
-  **NOTE:** The links to the documentation for great ellipses in these
-  routines are out of date.  Here is the [relevant documentation](
-  https://geographiclib.sourceforge.io/C++/doc/greatellipse.html).
   * [`gedistance`](inst/gedistance.m) -
     Great ellipse distance on an ellipsoid
   * [`gereckon`](inst/gereckon.m) -
@@ -190,7 +187,7 @@ matlab.addons.uninstall(t.Identifier(n)) % uninstall
 
 ### Utility
   * [`defaultellipsoid`](inst/defaultellipsoid.m) -
-    Return the WGS84 ellipsoid
+    Set/return the default ellipsoid
   * [`ecc2flat`](inst/ecc2flat.m) -
     Convert eccentricity to flattening
   * [`flat2ecc`](inst/flat2ecc.m) -

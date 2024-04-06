@@ -40,7 +40,7 @@ function [lat2, lon2, azi2, S12] = gereckon(lat1, lon1, s12, azi1, ellipsoid)
   narginchk(4, 5)
   if nargin < 5, ellipsoid = defaultellipsoid; end
   try
-    S = size(lat1 + lon1 + s12 + azi1);
+    S = size(lat1 + lon1 + s12 + azi1); %#ok<SZARLOG>
   catch
     error('lat1, lon1, s12, azi1 have incompatible sizes')
   end

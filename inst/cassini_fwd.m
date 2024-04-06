@@ -29,7 +29,7 @@ function [x, y, azi, rk] = cassini_fwd(lat0, lon0, lat, lon, ellipsoid)
   narginchk(4, 5)
   if nargin < 5, ellipsoid = defaultellipsoid; end
   try
-    Z = -zeros(size(lat0 + lon0 + lat + lon));
+    Z = -zeros(size(lat0 + lon0 + lat + lon)); %#ok<SZARLOG>
   catch
     error('lat0, lon0, lat, lon have incompatible sizes')
   end

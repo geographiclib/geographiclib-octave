@@ -5,12 +5,11 @@ function ellipsoid = defaultellipsoid(newdefault)
 %   DEFAULTELLIPSOID(newdefault)
 %   DEFAULTELLIPSOID([])
 %
-%   The first form returns a vector of the equatorial radius and
-%   eccentricity for the "default ellipsoid".  Initially the WGS84
-%   ellispoid is the default.  The second form allows a new default
-%   ellipsoid to be specified.  The third form restores the WGS84 ellipsoid
-%   as the default.  Use ecc2flat and flat2ecc to convert between the
-%   eccentricity and the flattening.
+%   The first form returns a vector of the equatorial radius and eccentricity
+%   for the "default ellipsoid".  Initially the WGS84 ellispoid is the
+%   default.  The second form allows a new default ellipsoid to be specified.
+%   The third form restores the WGS84 ellipsoid as the default.  Use ecc2flat
+%   and flat2ecc to convert between the eccentricity and the flattening.
 %
 %   See also ECC2FLAT, FLAT2ECC.
 

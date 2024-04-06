@@ -48,7 +48,7 @@ function [lat, lon, azi, rk] = gnomonic_inv(lat0, lon0, x, y, ellipsoid)
   narginchk(4, 5)
   if nargin < 5, ellipsoid = defaultellipsoid; end
   try
-    Z = -zeros(size(lat0 + lon0 + x + y));
+    Z = -zeros(size(lat0 + lon0 + x + y)); %#ok<SZARLOG>
   catch
     error('lat0, lon0, x, y have incompatible sizes')
   end

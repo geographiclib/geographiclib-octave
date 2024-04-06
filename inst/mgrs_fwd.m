@@ -37,7 +37,7 @@ function mgrs = mgrs_fwd(x, y, zone, isnorth, prec)
   zone = floor(zone);
   prec = min(11, max(-2, floor(prec))); % this converts NaNs to -2.
   try
-    s = size(x + y + zone + isnorth + prec);
+    s = size(x + y + zone + isnorth + prec); %#ok<SZARLOG>
   catch
     error('x, y, zone, isnorth, prec have incompatible sizes')
   end
