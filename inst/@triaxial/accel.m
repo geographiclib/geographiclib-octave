@@ -13,10 +13,11 @@ function [v, acc, K] = accel(t, r, v)
 %     K the Gaussian curvature
 %
 %   This routine is used for the integration of the geodesic equations.  r
-%   should lie on the surface and v should be tangent to the surface.  However
-%   this function enforces this by an initial call to CART2NORM in order to
-%   make the solution of geodesic ODEs better behaved.  K is returned in order
-%   to allow the ODEs for the reduced length and geodesic scaled to be solved.
+%   should lie on the surface and v should be a unit vector tangent to the
+%   surface.  However this function enforces this by an initial call to
+%   CART2NORM in order to make the solution of geodesic ODEs better behaved.
+%   K is returned in order to allow the ODEs for the reduced length and
+%   geodesic scaled to be solved.
 %
 %   See also CART2NORM, HYBRID, RECKON, DISTANCE
 

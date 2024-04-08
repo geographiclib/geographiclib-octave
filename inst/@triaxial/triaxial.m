@@ -9,7 +9,6 @@ classdef triaxial
 %   Output:
 %     t the trixial ellipsoid object
 %
-
 %   The axes can be in any units but must be ordered so that
 %
 %     inf > a >= b >= c > 0

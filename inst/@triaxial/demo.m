@@ -22,8 +22,8 @@ function demo(n)
 %        8    3.1  129.3
 %        9    0.1    0.6
 %
-%    N.B. Octave is about 40 times slower than MATLAB.  This is due to the
-%    different implementations of the ODE solver.
+%   N.B. Octave is about 40 times slower than MATLAB.  This is due to the
+%   different implementations of the ODE solver.
 
 % Copyright (c) Charles Karney (2024) <karney@alum.mit.edu>.
 

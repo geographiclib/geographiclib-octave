@@ -18,9 +18,9 @@ function r = geodtocart(t, geod)
 
 % Copyright (c) Charles Karney (2024) <karney@alum.mit.edu>.
 
-  cp = cosd(geod(:,1));
   r = t.axes.^2 .* ...
-      [cp .* cosd(geod(:,2)), cp .* sind(geod(:,2)), sind(geod(:, 1))];
+      [cosd(geod(:,1)) .* [cosd(geod(:,2)), sind(geod(:,2))], ...
+       sind(geod(:, 1))];
   r = r ./ vecabs(r./t.axes);
   if size(geod, 2) == 3
     r = cart2tocart(t, r, geod(:,3));

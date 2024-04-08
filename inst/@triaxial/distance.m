@@ -30,6 +30,11 @@ function [s12, dir1, dir2, m12, M12, M21] = distance(t, pos1, pos2)
 %   This routine is NOT vectorized.  The distance calculation for the n pairs
 %   of point1 and point2 are handled independently.
 %
+%   For random pairs of points on a triaxial model for the Earth, the mean
+%   running time for this routine is 4 s for Octave and 0.1 s for MATLAB.
+%   (Octave is about 40 times slower than MATLAB.  This is due to the
+%   different implementations of the ODE solver.)
+%
 %   See also CART2NORM, RECKON, HYBRID, GEODDISTANCE, GEODRECKON
 
 % Copyright (c) Charles Karney (2024) <karney@alum.mit.edu>.

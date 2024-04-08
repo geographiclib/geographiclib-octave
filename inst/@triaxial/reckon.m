@@ -28,10 +28,11 @@ function [pos2, dir2, m12, M12, M21] = reckon(t, pos1, dir1, s12)
 %   bet, omg, alp are measured in degrees.  The starting point and direction
 %   can be specified as either ellipsoidal coordinates or cartesian
 %   coordinates.  In the latter case, r1 must lie on the ellipsoid and v1 must
-%   be tangent to the ellipsoid at r1; if necessary use CART2NORM to ensure
-%   this condition.  The distances can be given in any order.  Internally the
-%   positive and negative distances are handled by two separated calls to the
-%   ODE solver.  You can "punctuate" the results by inserting nans into s12.
+%   be a unit vector tangent to the ellipsoid at r1; if necessary use
+%   CART2NORM to ensure this condition.  The distances can be given in any
+%   order.  Internally the positive and negative distances are handled by two
+%   separated calls to the ODE solver.  You can "punctuate" the results by
+%   inserting nans into s12.
 %
 %   This routine uses the function t.odesolver to solve the ODEs.  By default
 %   this is @ode45 for Octave and @ode89 for MATLAB.  The default error

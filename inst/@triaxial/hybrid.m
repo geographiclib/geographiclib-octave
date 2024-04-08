@@ -24,9 +24,13 @@ function [pos2, dir2, s12, m12, M12, M21] = ...
 %     s12 the distance from ellip1 to ellip2 or r1 to r2
 %     m12, M12, M21 the reduced length and geodesic scales
 %
-%   Solve the hybrid geodesic problem, namely given a point ellip1 on the
-%   ellipsoid and an azimuth alp1, find the point ellip2 along the geodesic
-%   satisfying one of the conditions cond.
+%   Solve the hybrid geodesic problem, namely given the position and direction
+%   of a geodesic at point 1 on the ellipsoid find the position and director
+%   at point 2 along the geodesic satisfying one of the conditions cond.  The
+%   starting point and direction can be specified as either ellipsoidal
+%   coordinates or cartesian coordinates.  In the latter case, r1 must lie on
+%   the ellipsoid and v1 must be a unit vector tangent to the ellipsoid at r1;
+%   if necessary use CART2NORM to ensure this condition.
 %
 %   cond is kx3 vector specifying k exit conditions
 %     cond(:,1) = quantity tested

@@ -18,9 +18,9 @@ function r = paramtocart(t, param)
 
 % Copyright (c) Charles Karney (2024) <karney@alum.mit.edu>.
 
-  cp = cosd(param(:,1));
   r = t.axes .* ...
-      [cp .* cosd(param(:,2)), cp .* sind(param(:,2)), sind(param(:, 1))];
+      [cosd(param(:,1)) .* [cosd(param(:,2)), sind(param(:,2))], ...
+       sind(param(:, 1))];
   if size(param, 2) == 3
     r = cart2tocart(t, r, param(:,3));
   end

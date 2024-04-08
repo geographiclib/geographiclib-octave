@@ -28,7 +28,7 @@ function [r, v] = cart2rand(t, n)
   g = t.c * vecabs(up);
   rej = rand(n, 1) > g;
   if any(rej)
-    r(rej,:) = cart2rand(t.axes, sum(rej));
+    r(rej,:) = cart2rand(t, sum(rej));
   end
   if nargout > 1
     v = randn(n, 3);
