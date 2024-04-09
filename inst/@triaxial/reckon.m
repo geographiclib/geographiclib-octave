@@ -96,7 +96,7 @@ function [r2, v2, m12, M12, M21] = reckonint(t, r1, v1, s12)
   if ~isfinite(sum([r1, v1])) || n == 0
     r2 = nan(n, 3); v2 = nan(n, 3);
     m12 = nan(n, 1); M12 = nan(n, 1); M21 = nan(n, 1);
-    return
+    return;
   end
   s12(~isfinite(s12)) = nan;            % Convert +/-inf to nan
   redlen = nargout > 2;                 % Compute reduced length

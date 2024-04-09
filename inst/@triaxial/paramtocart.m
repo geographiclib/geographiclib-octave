@@ -21,6 +21,7 @@ function r = paramtocart(t, param)
   r = t.axes .* ...
       [cosd(param(:,1)) .* [cosd(param(:,2)), sind(param(:,2))], ...
        sind(param(:, 1))];
+  % r = r ./ vecabs(r./t.axes)   ...  a no-op
   if size(param, 2) == 3
     r = cart2tocart(t, r, param(:,3));
   end

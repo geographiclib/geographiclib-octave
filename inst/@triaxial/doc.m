@@ -13,15 +13,17 @@ function doc
 %   * geod specifies a point in geodetic coordinates [phi, lam];
 %   * geod3 specifies a point in geodetic coordinates [phi, lam, h];
 %   * param specifices a point in parametric coordinates [phip, lamp];
-%   * param specifices a point in parametric coordinates [phip, lamp, h];
+%   * param3 specifices a point in parametric coordinates [phip, lamp, h];
+%   * geocen specifices a point in geocentric coordinates [phic, lamc];
+%   * geocen3 specifices a point in geocentric coordinates [phic, lamc, h];
 %   * ellip specifies a point in ellipsoidal coordinates [het, omg],
-%   * ellip specifies a point in ellipsoidal coordinates [het, omg, u],
+%   * ellip3 specifies a point in ellipsoidal coordinates [het, omg, u],
 %       where u is the minor semiaxis of the confocal ellipsoid.
 %
-%   If the third element, h = height, of geod3 or param3 is omitted, it is
-%   taken as 0.  If the third element, u = minor semiaxis of the confocal
-%   ellipsoid, of ellip3 is omitted, it is taken as the minor semiaxis of the
-%   ellipsoid.
+%   If the third element, h = height, of geod3, param3, or geocen3 is omitted,
+%   it is taken as 0.  If the third element, u = minor semiaxis of the
+%   confocal ellipsoid, of ellip3 is omitted, it is taken as the minor
+%   semiaxis of the ellipsoid.
 %
 %   On the surface of an ellpsoid, specify a direction as a unit velocity v
 %   in cartesian coordinates, or as an azimuth, alp, clockwise from a line
@@ -42,18 +44,17 @@ function doc
 %
 %     geod = t.CART2TOGEOD(r)
 %     geod3 = t.CARTTOGEOD(r)
-%     r = t.GEODTOCART(geod)
+%     r = t.GEODTOCART(geod3)
 %
 %     param = t.CART2TOPARAM(r)
 %     param3 = t.CARTTOPARAM(r)
-%     r = t.PARAMTOCART(param)
+%     r = t.PARAMTOCART(param3)
 %
-%     geod = t.ELLIPTOGEOD(ellip)
-%     ellip = t.GEODTOELLIP(geod)
-%     param = t.ELLIPTOPARAM(ellip)
-%     ellip = t.PARAMTOELLIP(param)
-%     param = t.GEODTOPARAM(geod)
-%     geod = t.PARAMTOGEOD(param)
+%     geocen = t.CART2TOGEOCEN(r)
+%     geocen3 = t.CARTTOGEOCEN(r)
+%     r = t.GEOCENTOCART(geocen3)
+%
+%     out = t.CONVERT(in, from, to)
 %
 %   Random points on the ellipsoid (and directions)
 %     [r, v] = t.CART2RAND(n)
