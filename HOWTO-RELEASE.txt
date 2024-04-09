@@ -54,4 +54,6 @@ direct, inverse, area calculations; (b) Projections, transverse
 Mercator, polar stereographic, etc; (c) Grid systems, UTM, UPS, MGRS;
 (d) Geoid lookup, egm84, egm96, egm2008 geoids supported; (e) Geometric
 transformations, geocentric, local cartesian; (f) Great ellipse, direct,
-inverse, area calculations.
+inverse, area calculations; (g) Various problem for the triaxial
+ellipsoid including the solution of the direct and inverse geodesic
+prolems.  Note (f) and (g) are not part of the C++ library.

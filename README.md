@@ -28,9 +28,11 @@ of the C++ library, GeographicLib.  Key components of this toolbox are
   * Geoid lookup, egm84, egm96, egm2008 geoids supported.
   * Geometric transformations, geocentric, local cartesian.
   * Great ellipse, direct, inverse, area calculations.
+  * A class to solve problems on a triaxial ellipsoid.
 
-All the functions are vectorized and so offer speeds comparable to
-compiled C++ code when operating on arrays.
+(The last two items are not present in the C++ library.)  All the
+functions are vectorized and so offer speeds comparable to compiled
+C++ code when operating on arrays.
 
 Some common features of these functions:
   * Angles (latitude, longitude, azimuth, meridian convergence) are
@@ -210,8 +212,9 @@ matlab.addons.uninstall(t.Identifier(n)) % uninstall
 
 ### The class for triaxial ellipsoids
 
-See also [Implementation details]
-(https://geographiclib.sourceforge.io/doc/triaxial.html).
+See also [Implementation details](
+https://geographiclib.sourceforge.io/doc/triaxial.html) for details of
+some of the algorithms used here.
   * [`triaxial.triaxial`](inst/@triaxial/triaxial.m) -
     The constructor
   * [`triaxial.carttocart2`](inst/@triaxial/carttocart2.m) -

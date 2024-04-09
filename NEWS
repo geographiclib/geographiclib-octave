@@ -1,5 +1,16 @@
 Changes in geographiclib-octave
 
+Version 2.2 (released 2024-04.dd)
+
+  * Add a class, triaxial, to solve problems on a triaxial ellipsoid.
+    This involves a lot of new code so...  Expect there to be errors
+    in the documentation (please report).  Also be prepared for the
+    interface to change.  The class includes
+    - the solution of the direct and inverse geodesic problem,
+    - conversions between various coordinate systems,
+    - random sampling on the ellipsoid,
+    - functions to aid plotting curves on the ellipsoid.
+
 Version 2.1 (released 2024-04-06)
   * The ellipsoid returned by defaultellipsoid can now be set.
   * Relax overly strict convergence test in geoddistance.

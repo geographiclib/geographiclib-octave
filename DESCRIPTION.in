@@ -7,7 +7,8 @@ Title: GeographicLib, a subset of the C++ library ported to Octave/MATLAB
 Description: This toolbox provides native MATLAB implementations of a
  subset of the C++ library, GeographicLib.  Key components of this
  toolbox are, geodesic, projections, grid systems, geoid lookup
- geometric transformations.
+ geometric transformations.  New in version 2.2 are routines to deal
+ with triaxial ellipsoids.
 License: MIT
 Url: https://github.com/geographiclib/geographiclib-octave#readme
 Depends: octave (>= 4.0.0)
