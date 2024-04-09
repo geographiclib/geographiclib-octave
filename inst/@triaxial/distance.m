@@ -28,8 +28,8 @@ function [s12, dir1, dir2, m12, M12, M21, count] = distance(t, pos1, pos2)
 %   must use the same representation.  point1 and point2 must be compatible
 %   arrays (i.e., either of them can consist of a single row.
 %
-%   This routine is NOT vectorized.  The distance calculation for the n pairs
-%   of point1 and point2 are handled independently.
+%   This routine is lamely vectorized.  The distance calculation for the n
+%   pairs of point1 and point2 are handled independently.
 %
 %   For random pairs of points on a triaxial model for the Earth, the mean
 %   running time for this routine is 4 s for Octave and 0.1 s for MATLAB.

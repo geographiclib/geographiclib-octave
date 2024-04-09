@@ -38,7 +38,7 @@ function [pos2, dir2, m12, M12, M21] = reckon(t, pos1, dir1, s12)
 %   this is @ode45 for Octave and @ode89 for MATLAB.  The default error
 %   tolerances are multiplied by t.odemult which is set to 1e-10 by default.
 %
-%   This routine is NOT vectorized.  The positions along each geodesic are
+%   This routine is lamely vectorized.  The positions along each geodesic are
 %   calculated handled independently.  For each geodesic, the positions at all
 %   the values of s12 are computed.  Thus ellip2(1:m, :) and alp2(1:m) are the
 %   positions and azimuths at distances s12(1:m) along the geodesic starting
