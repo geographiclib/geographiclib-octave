@@ -1,13 +1,13 @@
-function [s12, dir1, dir2, m12, M12, M21] = distance(t, pos1, pos2)
+function [s12, dir1, dir2, m12, M12, M21, count] = distance(t, pos1, pos2)
 %DISTANCE  the inverse geodesic problem on a triaxial ellipsoid
 %
 %   [s12, alp1, alp2] = DISTANCE(t, ellip1, ellip2)
 %   [s12, v1, v2] = DISTANCE(t, r1, r2)
-%   [s12, alp1, alp2, m12, M12, M21] = DISTANCE(t, ellip1, ellip2)
-%   [s12, v1, v2, m12, M12, M21] = DISTANCE(t, r1, r2)
+%   [s12, alp1, alp2, m12, M12, M21, count] = DISTANCE(t, ellip1, ellip2)
+%   [s12, v1, v2, m12, M12, M21, count] = DISTANCE(t, r1, r2)
 %
 %   Input:
-%     t the trixial ellipsoid object
+%     t the triaxial ellipsoid object
 %     ellip1, ellip2 n x 2 arrays of ellipsoidal coordinates [bet, omg]
 %     r1, r2 n x 3 arrays of 3d cartesian coordinates
 %   Output:
@@ -15,6 +15,7 @@ function [s12, dir1, dir2, m12, M12, M21] = distance(t, pos1, pos2)
 %     alp1, alp2 n x 1 arrays of azimuths at ellip1 and ellip2
 %     v1, v2 n x 3 arrays of cartesian directions at r1 and r2
 %     m12, M12, M21 n x 1 arrays of the reduced length and geodesic scales
+%     count n x 1 array of the number of iterations to find the solution
 %
 %   Solve the inverse geodesic problem, namely given two points ellip1, ellip2
 %   on the ellipsoid, find the shortest path s12 between them and the forward
@@ -51,10 +52,10 @@ function [s12, dir1, dir2, m12, M12, M21] = distance(t, pos1, pos2)
     [r1, r2] = deal(pos1, pos2);
   end
   r10 = r1 / t.b; r20 = r2 / t.b; t0 = scaled(t);
-  s12 = zeros(n, 1); m12 = s12; M12 = s12; M21 = s12;
+  s12 = zeros(n, 1); m12 = s12; M12 = s12; M21 = s12; count = s12;
   v1 = zeros(n, 3); v2 = v1;
   for k = 1:n
-    [s12(k), v1(k,:), v2(k,:), m12(k), M12(k), M21(k)] = ...
+    [s12(k), v1(k,:), v2(k,:), m12(k), M12(k), M21(k), count(k)] = ...
         distanceint(t0, r10(k,:), r20(k,:));
   end
   s12 = s12 * t.b; m12 = m12 * t.b;
@@ -66,10 +67,10 @@ function [s12, dir1, dir2, m12, M12, M21] = distance(t, pos1, pos2)
   end
 end
 
-function [s12, v1, v2, m12, M12, M21] = distanceint(t, r1, r2)
+function [s12, v1, v2, m12, M12, M21, count] = distanceint(t, r1, r2)
   check = false;
   M = eye(3);
-  v1 = r2 - r1; s12 = vecabs(v1); m12 = s12; M12 = 1; M21 = 1;
+  v1 = r2 - r1; s12 = vecabs(v1); m12 = s12; M12 = 1; M21 = 1; count = 0;
 
   % Deal with coincident, nearly coincident points, and nans
   if ~(s12 > sqrt(eps))
@@ -218,7 +219,7 @@ function [s12, v1, v2, m12, M12, M21] = distanceint(t, r1, r2)
     assert(done || (bet1 == -90 && bet2 == 90));
   end
   if ~done
-    [s12, v1, v2, m12, M12, M21] = distanceint2(t, r1, r2);
+    [s12, v1, v2, m12, M12, M21, count] = distanceint2(t, r1, r2);
   end
   [~, v1] = cart2norm(t, r1, v1);
   [~, v2] = cart2norm(t, r2, v2);
@@ -468,4 +469,56 @@ function [domg, domgp] = domgf(alp1t, t, cond, r1, bet1, omg1, omg2, omgp)
   if omgp && omg2t < 0, omg2t = omg2t + 360; end
   domg = omg2t - omg2;
   domgp = m12 / ( cosd(alp2) * rad2 );
+end
+
+function [x, count] = newtonx(f, x0, scale)
+% [y, yp] = f(x) returns a function and its derivative
+% Find x, s.t. f(x) = 0.
+% f must be monotonic increasing with f(x0(1)) < 0 and f(x0(2)) > 0.
+% This is not vectorized.
+  if nargin < 3, scale = 1; end
+  maxcount = 100;
+  xm = x0(1); xp = x0(2);
+  xa = (xm + xp) / 2;
+  count = 0;
+  while count < maxcount
+    count = count+1;
+    [y, yp] = f(xa);
+    if ~(abs(y) > eps * scale)
+      x = xa;
+      % 'zeroval'
+      break
+    end
+    if y < 0
+      xma = max(xm, xa);
+      xpa = xp;
+    else
+      xpa = min(xp, xa);
+      xma = xm;
+    end
+    dx = - y / yp;
+    xb = xa + dx;
+    if xb <= xm || xb >= xp || yp <= 0 || ~isfinite(yp)
+      % 'bisect'
+      xb = (xma + xpa) / 2;
+      if xb == xma || xb == xpa
+        x = xb;
+        % 'zerorange'
+        break;
+      end
+      dx = xb - xa;
+    else
+      % 'newtonx'
+    end
+    % range = xpa-xma
+    if ~(abs(dx) > eps^0.75 * scale)
+      x = xb;
+      % 'zerodiff'
+      break
+    end
+    % abs(dx)
+    % diff = [xma, xb, xpa] - [xm, xa, xp]
+    xa = xb;
+    xm = xma; xp = xpa;
+  end
 end

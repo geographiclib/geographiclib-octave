@@ -4,7 +4,7 @@ function param = cart2toparam(t, r)
 %   param = CART2TOPARAM(t, r)
 %
 %   Input:
-%     t the trixial ellipsoid object
+%     t the triaxial ellipsoid object
 %     r an n x 3 array of cartesian points on the ellipsoid
 %   Output:
 %     param an n x 2 array of paramraphic coordinates [phip, lamp]
@@ -14,7 +14,7 @@ function param = cart2toparam(t, r)
 %   ellipsoid at r.  To ensure that this is the case, call CARTNORM.  To
 %   convert arbitrary points use CARTTOPARAM.
 %
-%   See also CARTNORM, CARTTOPARAM, PARAMTOCART2, PARAMTOCART
+%   See also CARTNORM, PARAMTOCART2
 
 % Copyright (c) Charles Karney (2024) <karney@alum.mit.edu>.
 

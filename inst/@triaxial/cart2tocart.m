@@ -4,14 +4,13 @@ function r = cart2tocart(t, r2, h)
 %   r = CART2TOCART(t, r2, h)
 %
 %   Input:
-%     t the trixial ellipsoid object
+%     t the triaxial ellipsoid object
 %     r2 an n x 3 array of cartesian points on the ellipsoid
 %     h an n x 1 array of heights
 %   Output:
 %     r an n x 3 array of cartesian points a height h above r2
 %
-%   See also CARTTOCART2, CART2TOELLIP, CART2TOGEOD, CART2TOPARAM,
-%     CARTTOGEOD, CARTTOPARAM
+%   See also CARTTOCART2, CART2TOGEOD, CARTTOGEOD
 
 % Copyright (c) Charles Karney (2024) <karney@alum.mit.edu>.
 

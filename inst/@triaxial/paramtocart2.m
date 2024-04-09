@@ -4,7 +4,7 @@ function r = paramtocart2(t, param)
 %   r = PARAMTOCART(t, param)
 %
 %   Input:
-%     t the trixial ellipsoid object
+%     t the triaxial ellipsoid object
 %     param an n x 2 array of the parametric coordinates [phip, lamp]
 %   Output:
 %     r an n x 3 array of cartesian points lying on the ellipsoid

@@ -92,39 +92,35 @@
 %   projdoc          - Projections for an ellipsoid
 %   gedoc            - Great ellipses on an ellipsoid of revolution
 %
-% Triaxial functions
-%   triaxial.triaxial
-%   triaxial.carttocart2
-%   triaxial.cart2tocart
-%   triaxial.cart2toellip
-%   triaxial.elliptocart2
-%   triaxial.carttoellip
-%   triaxial.elliptocart
-%   triaxial.cart2togeod
-%   triaxial.carttogeod
-%   triaxial.geodtocart
-%   triaxial.cart2toparam
-%   triaxial.paramtocart2
-%   triaxial.cart2togeocen
-%   triaxial.geocentocart2
-%   triaxial.convert
-%   triaxial.cart2rand
-%   triaxial.reckon
-%   triaxial.distance
-%   triaxial.hybrid
-%   triaxial.cart2norm
-%   triaxial.scaled
-%   triaxial.cartproj
-%   triaxial.horizon
-%   triaxial.accel
-%   triaxial.hybridint
-%   triaxial.ellipnorm
-%   triaxial.demo
-%   triaxial.doc
-%   triaxial.tests
+% The class for triaxial ellipsoids
+%   triaxial.triaxial      - The constructor
+%   triaxial.carttocart2   - Find the closest point on the ellipsoid
+%   triaxial.cart2tocart   - Find the point above a point on the ellipsoid
+%   triaxial.cart2toellip  - Convert a surface point to ellipsoidal coords
+%   triaxial.elliptocart2  - Convert ellipsoid coordinates to a surface point
+%   triaxial.carttoellip   - Convert cartesian coordinates to ellipsoid
+%   triaxial.elliptocart   - Convert ellipsoidal coordinates to cartesian
+%   triaxial.cart2togeod   - Convert a surface point to geodetic coordinates
+%   triaxial.carttogeod    - Convert a cartesian point to geodetic
+%   triaxial.geodtocart    - Convert geodetic coordinates to cartesian
+%   triaxial.cart2toparam  - Convert a surface point to parametric coordinates
+%   triaxial.paramtocart2  - Convert parametric coordinates to a surface point
+%   triaxial.cart2togeocen - Convert a surface point to geocentric coordinates
+%   triaxial.geocentocart2 - Convert geocentric coordinates to a surface point
+%   triaxial.convert       - General coordinate conversion
+%   triaxial.cart2rand     - Random points on the ellipsoid
+%   triaxial.reckon        - Solve the direct geodesic problem
+%   triaxial.distance      - Solve the inverse geodesic problem
+%   triaxial.hybrid        - Solve the hybrid geodesic problem
+%   triaxial.cart2norm     - Force a point to lie on the ellipsoid
+%   triaxial.scaled        - Return a scaled ellipsoid
+%   triaxial.cartproj      - Plot a curve on the ellipsoid
+%   triaxial.horizon       - Point on the horizon of the ellipsoid
+%   triaxial.ellipnorm     - Reduce ellipsoidal coordinates to standard ranges
+%   triaxial.demo          - Demonstrate geodesics
+%   triaxial.doc           - Summary documentation of triaxial class
+%   triaxial.tests         - Self test
 
 % Copyright (c) Charles Karney (2015-2024) <karney@alum.mit.edu>.
 
 help(mfilename)
-
-

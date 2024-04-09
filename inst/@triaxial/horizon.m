@@ -4,7 +4,7 @@ function r = horizon(t, ang, viewpt)
 %   r = HORIZON(t, ang, viewpt)
 %
 %   Input:
-%     t the trixial ellipsoid object
+%     t the triaxial ellipsoid object
 %     ang a vector of length n of angles defining the positions on the horizon
 %     viewpt the geodetic coordinates defining the viewing direction
 %   Output:

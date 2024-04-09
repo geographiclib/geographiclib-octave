@@ -241,7 +241,7 @@ function plotend(~, viewpt)
 end
 
 function demodoc(titles)
-  disp('call trixial.demo(n) with n in [0:19];');
+  disp('call triaxial.demo(n) with n in [0:19];');
   disp('for n = 0:9, 2d plots:');
   for i = 0:9
     disp(['  ', int2str(i), ' display ', titles{i+1}]);

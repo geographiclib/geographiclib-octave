@@ -8,7 +8,7 @@ function [pos2, dir2, s12, m12, M12, M21] = ...
 %   [r2, v2, s12, m12, M12, M21] = HYBRID(t, r1, v1, cond, omgp,r2)
 %
 %   Input:
-%     t the trixial ellipsoid object
+%     t the triaxial ellipsoid object
 %     ellip1 1 x 2 vector of ellipsoidal starting coordinates [bet, omg]
 %     alp1 the initial azimuths at ellip1
 %     r1 1 x 3 vector for cartesian the starting point

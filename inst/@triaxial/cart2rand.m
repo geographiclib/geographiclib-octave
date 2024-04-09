@@ -5,7 +5,7 @@ function [r, v] = cart2rand(t, n)
 %   [r, v] = CART2RAND(t, n)
 %
 %   Input:
-%     t the trixial ellipsoid object
+%     t the triaxial ellipsoid object
 %     n the number of points needed
 %   Output:
 %     r an n x 3 array of cartesian points

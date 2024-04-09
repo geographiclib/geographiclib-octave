@@ -6,7 +6,7 @@ function [ellip, alp, gam, latrad] = cart2toellip(t, r, v)
 %   [ellip, alp, gam, latrad] = CART2TOELLIP(t, r, v)
 %
 %   Input:
-%     t the trixial ellipsoid object
+%     t the triaxial ellipsoid object
 %     r an n x 3 array of cartesian points on the ellipsoid
 %     v an n x 3 array of cartesian directions on the ellipsoid
 %   Output:

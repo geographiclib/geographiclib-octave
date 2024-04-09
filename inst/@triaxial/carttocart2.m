@@ -5,7 +5,7 @@ function [r2, h, count, err] = carttocart2(t, r)
 %   [r2, h, count, err] = CARTTOCART2(t, r)
 %
 %   Input:
-%     t the trixial ellipsoid object
+%     t the triaxial ellipsoid object
 %     r an n x 3 array of cartesian points
 %   Output:
 %     r2 an n x 3 array of the closest cartesian points lying on t
@@ -13,8 +13,7 @@ function [r2, h, count, err] = carttocart2(t, r)
 %     count an n x 1 array of the number of Newton's iterations
 %     err an n x 1 array of the error in the function
 %
-%   See also CART2TOCART, CART2TOELLIP, CART2TOGEOD, CART2TOPARAM,
-%     CARTTOGEOD, CARTTOPARAM
+%   See also CART2TOCART, CART2TOGEOD, CARTTOGEOD
 
 % Copyright (c) Charles Karney (2024) <karney@alum.mit.edu>.
 

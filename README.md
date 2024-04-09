@@ -208,36 +208,64 @@ matlab.addons.uninstall(t.Identifier(n)) % uninstall
   * [`gedoc`](inst/gedoc.m) -
     Great ellipses on an ellipsoid of revolution
 
-### Triaxial routines
-  * [`triaxial.triaxial`](inst/@triaxial/triaxial.m)
-  * [`triaxial.carttocart2`](inst/@triaxial/carttocart2.m)
-  * [`triaxial.cart2tocart`](inst/@triaxial/cart2tocart.m)
-  * [`triaxial.cart2toellip`](inst/@triaxial/cart2toellip.m)
-  * [`triaxial.elliptocart2`](inst/@triaxial/elliptocart2.m)
-  * [`triaxial.carttoellip`](inst/@triaxial/carttoellip.m)
-  * [`triaxial.elliptocart`](inst/@triaxial/elliptocart.m)
-  * [`triaxial.cart2togeod`](inst/@triaxial/cart2togeod.m)
-  * [`triaxial.carttogeod`](inst/@triaxial/carttogeod.m)
-  * [`triaxial.geodtocart`](inst/@triaxial/geodtocart.m)
-  * [`triaxial.cart2toparam`](inst/@triaxial/cart2toparam.m)
-  * [`triaxial.paramtocart2`](inst/@triaxial/paramtocart2.m)
-  * [`triaxial.cart2togeocen`](inst/@triaxial/cart2togeocen.m)
-  * [`triaxial.geocentocart2`](inst/@triaxial/geocentocart2.m)
-  * [`triaxial.convert`](inst/@triaxial/convert.m)
-  * [`triaxial.cart2rand`](inst/@triaxial/cart2rand.m)
-  * [`triaxial.reckon`](inst/@triaxial/reckon.m)
-  * [`triaxial.distance`](inst/@triaxial/distance.m)
-  * [`triaxial.hybrid`](inst/@triaxial/hybrid.m)
-  * [`triaxial.cart2norm`](inst/@triaxial/cart2norm.m)
-  * [`triaxial.scaled`](inst/@triaxial/scaled.m)
-  * [`triaxial.cartproj`](inst/@triaxial/cartproj.m)
-  * [`triaxial.horizon`](inst/@triaxial/horizon.m)
-  * [`triaxial.accel`](inst/@triaxial/accel.m)
-  * [`triaxial.hybridint`](inst/@triaxial/hybridint.m)
-  * [`triaxial.ellipnorm`](inst/@triaxial/ellipnorm.m)
-  * [`triaxial.demo`](inst/@triaxial/demo.m)
-  * [`triaxial.doc`](inst/@triaxial/doc.m)
-  * [`triaxial.tests`](inst/@triaxial/tests.m)
+### The class for triaxial ellipsoids
+
+See also [Implementation details]
+(https://geographiclib.sourceforge.io/doc/triaxial.html).
+  * [`triaxial.triaxial`](inst/@triaxial/triaxial.m) -
+    The constructor
+  * [`triaxial.carttocart2`](inst/@triaxial/carttocart2.m) -
+    Find the closest point on the ellipsoid
+  * [`triaxial.cart2tocart`](inst/@triaxial/cart2tocart.m) -
+    Find the point above a point on the ellipsoid
+  * [`triaxial.cart2toellip`](inst/@triaxial/cart2toellip.m) -
+    Convert a surface point to ellipsoidal coordinates
+  * [`triaxial.elliptocart2`](inst/@triaxial/elliptocart2.m) -
+    Convert ellipsoid coordinates to a surface point
+  * [`triaxial.carttoellip`](inst/@triaxial/carttoellip.m) -
+    Convert cartesian coordinates to ellipsoid
+  * [`triaxial.elliptocart`](inst/@triaxial/elliptocart.m) -
+    Convert ellipsoidal coordinates to cartesian
+  * [`triaxial.cart2togeod`](inst/@triaxial/cart2togeod.m) -
+    Convert a surface point to geodetic coordinates
+  * [`triaxial.carttogeod`](inst/@triaxial/carttogeod.m) -
+    Convert a cartesian point to geodetic
+  * [`triaxial.geodtocart`](inst/@triaxial/geodtocart.m) -
+    Convert geodetic coordinates to cartesian
+  * [`triaxial.cart2toparam`](inst/@triaxial/cart2toparam.m) -
+    Convert a surface point to parametric coordinates
+  * [`triaxial.paramtocart2`](inst/@triaxial/paramtocart2.m) -
+    Convert parametric coordinates to a surface point
+  * [`triaxial.cart2togeocen`](inst/@triaxial/cart2togeocen.m) -
+    Convert a surface point to geocentric coordinates
+  * [`triaxial.geocentocart2`](inst/@triaxial/geocentocart2.m) -
+    Convert geocentric coordinates to a surface point
+  * [`triaxial.convert`](inst/@triaxial/convert.m) -
+    General coordinate conversion
+  * [`triaxial.cart2rand`](inst/@triaxial/cart2rand.m) -
+    Random points on the ellipsoid
+  * [`triaxial.reckon`](inst/@triaxial/reckon.m) -
+    Solve the direct geodesic problem
+  * [`triaxial.distance`](inst/@triaxial/distance.m) -
+    Solve the inverse geodesic problem
+  * [`triaxial.hybrid`](inst/@triaxial/hybrid.m) -
+    Solve the hybrid geodesic problem
+  * [`triaxial.cart2norm`](inst/@triaxial/cart2norm.m) -
+    Force a point to lie on the ellipsoid
+  * [`triaxial.scaled`](inst/@triaxial/scaled.m) -
+    Return a scaled ellipsoid
+  * [`triaxial.cartproj`](inst/@triaxial/cartproj.m) -
+    Plot a curve on the ellipsoid
+  * [`triaxial.horizon`](inst/@triaxial/horizon.m) -
+    Point on the horizon of the ellipsoid
+  * [`triaxial.ellipnorm`](inst/@triaxial/ellipnorm.m) -
+    Reduce ellipsoidal coordinates to standard ranges
+  * [`triaxial.demo`](inst/@triaxial/demo.m) -
+    Demonstrate geodesics
+  * [`triaxial.doc`](inst/@triaxial/doc.m) -
+    Summary documentation of triaxial class
+  * [`triaxial.tests`](inst/@triaxial/tests.m) -
+    Self test
 
 ## Changes
 

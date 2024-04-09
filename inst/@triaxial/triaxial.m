@@ -5,15 +5,15 @@ classdef triaxial
 %   t = TRIAXIAL(axes)
 %
 %   Input:
-%     axes a length 3 vector of semiaxes [a, b, c]
+%     axes = [a, b, c] a length 3 vector of semiaxes
 %   Output:
-%     t the trixial ellipsoid object
+%     t the triaxial ellipsoid object
 %
-%   The axes can be in any units but must be ordered so that
+%   The semiaxes can be in any units but must be ordered so that
 %
 %     inf > a >= b >= c > 0
 %
-%   If axes is omitted, the parameters of the trixial reference ellipsoid for
+%   If axes is omitted, the parameters of the triaxial reference ellipsoid for
 %   the Earth are used; see Hu, Shum, Bevis, J. Geod. 97, 29 (2023)
 %   https://doi.org/10.1007/s00190-023-01717-1
 %
@@ -23,9 +23,8 @@ classdef triaxial
 %     odesolver the name of the ODE solver
 %     odemult the multiplier for the error tolerances for the ODE solver
 %
-%   The case a == b == c. the sphere, is a nonuniform limit.  How ellipsoid
-%   coordinates are defined on a sphere, a == b == c, depends on the
-%   properties
+%   The case a == b == c. the sphere, is a nonuniform limit.  How
+%   ellipsoidal coordinates in this case depends on the properties
 %
 %     k2 = (b^2 - c^2) / (a^2 - c^2)
 %     kp2 = (a^2 - b^2) / (a^2 -  c^2)
@@ -62,13 +61,13 @@ classdef triaxial
     %   Input:
     %     axes a length 3 vector of semiaxes [a, b, c]
     %   Output:
-    %     t the trixial ellipsoid object
+    %     t the triaxial ellipsoid object
     %
     %   The axes can be in any units but must be ordered so that
     %
     %     inf > a >= b >= c > 0
     %
-    %   If axes is omitted, the parameters of the trixial reference ellipsoid
+    %   If axes is omitted, the parameters of the triaxial reference ellipsoid
     %   for the Earth are used; see Hu, Shum, Bevis, J. Geod. 97, 29 (2023)
     %   https://doi.org/10.1007/s00190-023-01717-1
       if nargin < 1
@@ -129,7 +128,7 @@ classdef triaxial
     [r, v]                           = cart2rand(t, n)
 
     [pos2, dir2, m12, M12, M21]      = reckon(t, pos1, dir1, s12)
-    [s12, dir1, dir2, m12, M12, M21] = distance(t, pos1, pos2)
+    [s12, dir1, dir2, m12, M12, M21, count] = distance(t, pos1, pos2)
     [pos2, dir2, s12, m12, M12, M21] = hybrid(t, pos1, dir1, cond, omgp, r2)
 
     [r, v]                           = cart2norm(t, r, v)

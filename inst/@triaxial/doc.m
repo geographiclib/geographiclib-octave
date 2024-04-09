@@ -5,7 +5,7 @@ function doc
 %
 %   prints summary documentation on the TRIAXIAL class
 %
-%   t = TRIXIAL(axes) -- set up ellipsoid in terms of the semiaxes.
+%   t = TRIAXIAL([a, b, c]) -- set up ellipsoid in terms of the semiaxes.
 %
 %   In function names amd function parameters
 %   * cart or r refers to arbitary points in space expressed as [x, y, z];

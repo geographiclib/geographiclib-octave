@@ -4,7 +4,7 @@ function r = geocentocart2(t, geocen)
 %   r = GEOCENTOCART(t, geocen)
 %
 %   Input:
-%     t the trixial ellipsoid object
+%     t the triaxial ellipsoid object
 %     geocen an n x 2 array of the geocentric coordinates [phic, lamc]
 %   Output:
 %     r an n x 3 array of cartesian points lying on the ellipsoid

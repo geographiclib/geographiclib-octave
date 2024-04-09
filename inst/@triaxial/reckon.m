@@ -7,7 +7,7 @@ function [pos2, dir2, m12, M12, M21] = reckon(t, pos1, dir1, s12)
 %   [r2, v2, m12, M12, M21] = RECKON(t, r1, v1, s12)
 %
 %   Input:
-%     t the trixial ellipsoid object
+%     t the triaxial ellipsoid object
 %     ellip1 n x 2 array of ellipsoidal coordinates [bet, omg]
 %     alp1 n x 1 array of azimuths at ellip1
 %     r1 n x 3 array of cartesian starting points

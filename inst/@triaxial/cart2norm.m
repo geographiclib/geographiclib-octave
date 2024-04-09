@@ -5,7 +5,7 @@ function [r, v] = cart2norm(t, r, v)
 %   [r, v] = CART2NORM(t, r, v)
 %
 %   Input:
-%     t the trixial ellipsoid object
+%     t the triaxial ellipsoid object
 %     r an n x 3 array of cartesian points on the ellipsoid
 %     v an n x 3 array of cartesian velocities
 %   Output:

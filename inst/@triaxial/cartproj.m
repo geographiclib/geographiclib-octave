@@ -8,7 +8,7 @@ function [r2f, r2b] = cartproj(t, r, viewpt, varargin)
 %   CARTPROJ(t, r, [], ...)
 %
 %   Input:
-%     t the trixial ellipsoid object
+%     t the triaxial ellipsoid object
 %     r an n x 3 array of 3d cartesian points defining the curve
 %     viewpt the geodetic coordinates defining the viewing direction
 %     ... additional arguments for plotting the curve

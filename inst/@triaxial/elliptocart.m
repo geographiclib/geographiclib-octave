@@ -5,7 +5,7 @@ function r = elliptocart(t, ellip)
 %   r = ELLIPTOCART(t, ellip3)
 %
 %   Input:
-%     t the trixial ellipsoid object
+%     t the triaxial ellipsoid object
 %     ellip an n x 2 array of the ellipsoidal coordinates [bet, omg]
 %     ellip3 an n x 3 array of the ellipsoidal coordinates [bet, omg, u]
 %   Output:

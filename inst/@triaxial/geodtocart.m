@@ -5,7 +5,7 @@ function r = geodtocart(t, geod)
 %   r = GEODTOCART(t, geod3)
 %
 %   Input:
-%     t the trixial ellipsoid object
+%     t the triaxial ellipsoid object
 %     geod an n x 2 array of the geodetic coordinates [phi, lam]
 %     geod3 an n x 3 array of the geodetic coordinates [phi, lam, h]
 %   Output:
@@ -14,7 +14,7 @@ function r = geodtocart(t, geod)
 %   phi and lam are measured in degrees.  With geod (an n x 2 array), the h
 %   is assumed to be 0 so that r lies on the ellipsoid.
 %
-%   See also CARTTOELLIP, CART2TOELLIP, ELLIPTOCART2
+%   See also CARTTOGEOD, CART2TOGEOD, GEODTOCART2
 
 % Copyright (c) Charles Karney (2024) <karney@alum.mit.edu>.
 

@@ -5,7 +5,7 @@ function [ellip3, count, err] = carttoellip(t, r)
 %   [ellip3, count, err] = CARTTOELLIP(t, r)
 %
 %   Input:
-%     t the trixial ellipsoid object
+%     t the triaxial ellipsoid object
 %     r an n x 3 array of cartesian points
 %   Output:
 %     ellip3 an n x 3 array of the ellipsoidal coordinates [bet, omg, u]

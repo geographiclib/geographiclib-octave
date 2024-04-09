@@ -75,45 +75,37 @@ set (TRIAXIAL_SOURCES
   @triaxial/cart2rand.m
   @triaxial/cart2tocart.m
   @triaxial/cart2toellip.m
+  @triaxial/cart2togeocen.m
   @triaxial/cart2togeod.m
   @triaxial/cart2toparam.m
   @triaxial/cartproj.m
   @triaxial/carttocart2.m
   @triaxial/carttoellip.m
   @triaxial/carttogeod.m
-  @triaxial/carttoparam.m
+  @triaxial/convert.m
   @triaxial/demo.m
   @triaxial/distance.m
   @triaxial/doc.m
   @triaxial/ellipnorm.m
-  @triaxial/elliptocart.m
   @triaxial/elliptocart2.m
-  @triaxial/elliptogeod.m
-  @triaxial/elliptoparam.m
+  @triaxial/elliptocart.m
+  @triaxial/geocentocart2.m
   @triaxial/geodtocart.m
-  @triaxial/geodtoellip.m
-  @triaxial/geodtoparam.m
   @triaxial/horizon.m
-  @triaxial/hybrid.m
   @triaxial/hybridint.m
-  @triaxial/paramtocart.m
-  @triaxial/paramtoellip.m
-  @triaxial/paramtogeod.m
+  @triaxial/hybrid.m
+  @triaxial/paramtocart2.m
   @triaxial/reckon.m
   @triaxial/scaled.m
   @triaxial/tests.m
   @triaxial/triaxial.m)
 
 set (TRIAXIAL_PRIVATE_SOURCES
-  @triaxial/private/ell3check.m
-  @triaxial/private/fracx.m
   @triaxial/private/is_octave.m
-  @triaxial/private/newtonx.m
   @triaxial/private/remx.m
   @triaxial/private/rotm.m
   @triaxial/private/signx.m
   @triaxial/private/vecabs.m
-  @triaxial/private/veccross.m
   @triaxial/private/vecdot.m
   @triaxial/private/vecunit.m)
 

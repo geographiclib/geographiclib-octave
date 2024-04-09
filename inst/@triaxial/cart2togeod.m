@@ -4,7 +4,7 @@ function geod = cart2togeod(t, r)
 %   geod = CART2TOGEOD(t, r)
 %
 %   Input:
-%     t the trixial ellipsoid object
+%     t the triaxial ellipsoid object
 %     r an n x 3 array of cartesian points on the ellipsoid
 %   Output:
 %     geod an n x 2 array of geodetic coordinates [phi, lam]

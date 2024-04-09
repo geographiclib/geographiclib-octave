@@ -5,7 +5,7 @@ function [r, v] = elliptocart2(t, ellip, alp)
 %   [r, v] = ELLIPTOCART2(t, ellip, alp)
 %
 %   Input:
-%     t the trixial ellipsoid object
+%     t the triaxial ellipsoid object
 %     ellip an n x 2 array of ellipsoid coordinates [bet, omg]
 %     alp an n x 1 array of directions alpha
 %   Output:
