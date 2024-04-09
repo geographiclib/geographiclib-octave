@@ -1,4 +1,4 @@
-function geocen = cart2togeocen(t, r)
+function geocen = cart2togeocen(~, r)
 %CART2TOGEOCEN  Convert a surface point from cartesion to geocentric
 %
 %   geocen = CART2TOGEOCEN(t, r)

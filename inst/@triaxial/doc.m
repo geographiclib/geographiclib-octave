@@ -11,19 +11,16 @@ function doc
 %   * cart or r refers to arbitary points in space expressed as [x, y, z];
 %   * cart2 or r2 refers to points on the surface of the ellipsoid;
 %   * geod specifies a point in geodetic coordinates [phi, lam];
-%   * geod3 specifies a point in geodetic coordinates [phi, lam, h];
 %   * param specifices a point in parametric coordinates [phip, lamp];
-%   * param3 specifices a point in parametric coordinates [phip, lamp, h];
 %   * geocen specifices a point in geocentric coordinates [phic, lamc];
-%   * geocen3 specifices a point in geocentric coordinates [phic, lamc, h];
 %   * ellip specifies a point in ellipsoidal coordinates [het, omg],
+%   * geod3 specifies a point in geodetic coordinates [phi, lam, h];
 %   * ellip3 specifies a point in ellipsoidal coordinates [het, omg, u],
 %       where u is the minor semiaxis of the confocal ellipsoid.
 %
-%   If the third element, h = height, of geod3, param3, or geocen3 is omitted,
-%   it is taken as 0.  If the third element, u = minor semiaxis of the
-%   confocal ellipsoid, of ellip3 is omitted, it is taken as the minor
-%   semiaxis of the ellipsoid.
+%   If the third element, h = height, of geod3 is omitted, it is taken as 0.
+%   If the third element, u = minor semiaxis of the confocal ellipsoid, of
+%   ellip3 is omitted, it is taken as the minor semiaxis of the ellipsoid.
 %
 %   On the surface of an ellpsoid, specify a direction as a unit velocity v
 %   in cartesian coordinates, or as an azimuth, alp, clockwise from a line
@@ -47,12 +44,10 @@ function doc
 %     r = t.GEODTOCART(geod3)
 %
 %     param = t.CART2TOPARAM(r)
-%     param3 = t.CARTTOPARAM(r)
-%     r = t.PARAMTOCART(param3)
+%     r = t.PARAMTOCART2(param)
 %
 %     geocen = t.CART2TOGEOCEN(r)
-%     geocen3 = t.CARTTOGEOCEN(r)
-%     r = t.GEOCENTOCART(geocen3)
+%     r = t.GEOCENTOCART2(geocen)
 %
 %     out = t.CONVERT(in, from, to)
 %

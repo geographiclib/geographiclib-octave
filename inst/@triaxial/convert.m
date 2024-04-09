@@ -10,22 +10,26 @@ function out = convert(t, in, from, to)
 %   Output
 %     out the output coordinates as n x 2 or n x 2 arrays
 %
-%   from and to can be
+%   For arbitrary points, from and to can be
 %     'cartesian'   [x, y, z] as general points
+%     'geodetic'    [phi, lam, h]
+%     'ellipsoidal' [bet, omg, u]
+%
+%   For points restricted to the surface of the ellipsoid, from and to can be
 %     'cartesian2'  [x, y, z] confined to the surface of the ellipsoid
-%     'geodetic'    [phi, lam] or [phi, lam, h]
-%     'parametric'  [phip, lamp] or [phip, lamp, h]
-%     'geocentric'  [phic, lamc] or [phic, lamc, h]
-%     'ellipsoidal' [bet, omg] or [bet, omg, u]
+%     'geodetic'    [phi, lam]
+%     'parametric'  [phip, lamp]
+%     'geocentric'  [phic, lamc]
+%     'ellipsoidal' [bet, omg]
 %
 %   If from = 'cartesian2', the input points are assumed to lie on the
-%   ellipsoid.  If necessary, use CART2NORM to enforce this constrainst.  An
-%   error is thrown if to = 'cartesian2' and yet the input data are general 3d
-%   points.
+%   ellipsoid.  If necessary, use CART2NORM to enforce this constraint.  An
+%   error is thrown if to = 'cartesian2' or 'parametric' or 'geocentric' and
+%   yet the input data are general 3d points.
 %
-%   See also CART2NORM, CARTTOCART2, CART2TOCART, CART2TOELLIP,
-%     CARTTOELLIP, ELLIPTOCART, CART2TOGEOCEN, GEOCENTOCART, CART2TOGEOD,
-%     GEODTOCART, CART2TOPARAM, PARAMTOCART
+%   See also CART2NORM, CART2TOELLIP, CARTTOELLIP, ELLIPTOCART, CART2TOGEOD,
+%     CARTTOGEOD, GEODTOCART, CART2TOPARAM, PARAMTOCART2, CART2TOGEOCEN,
+%     GEOCENTOCART2
 
 % Copyright (c) Charles Karney (2024) <karney@alum.mit.edu>.
 
@@ -33,74 +37,63 @@ function out = convert(t, in, from, to)
     out = in;
     return;
   end
-  threed = size(in, 2) == 3;
-  if threed, h = in(:, 3); end
   switch from
     case 'cartesian'
-      switch to
-        case 'ellipsoidal'
-          out = carttoellip(t, in);
-          return;
-        otherwise
-          [r, h] = carttocart2(t, in);
-      end
-    case 'cartesian2'
+      threed = true;
       r = in;
+    case 'cartesian2'
       threed = false;
-      h = nan;
+      r = in;
     case 'geodetic'
-      r = geodtocart(t, in(:, 1:2));
+      threed = size(in, 2) == 3;
+      r = geodtocart(t, in);
     case 'parametric'
-      r = paramtocart(t, in(:, 1:2));
+      threed = false;
+      r = paramtocart2(t, in);
     case 'geocentric'
-      r = geocentocart(t, in(:, 1:2));
+      threed = false;
+      r = geocentocart2(t, in);
     case 'ellipsoidal'
+      threed = size(in, 2) == 3;
       r = elliptocart(t, in);
-      switch to
-        case 'cartesian'
-          out = r;
-          return;
-        otherwise
-          if threed
-            [r, h] = carttocart2(t, r);
-          end
-      end
     otherwise
       error(['unknown input type ', from])
   end
-  % At this point the position is represented by r or, if threed, [r, h]
+  % At this point the position is represented by r
   switch to
     case 'cartesian'
-      if threed
-        out = cart2tocart(t, r, h);
-      else
-        out = r;
-      end
-      return;
+      out = r;
     case 'cartesian2'
       if threed
-        error('convert: cannot convert 3d points to cartesian2');
+        error(['convert: cannot convert 3d points to ', to]);
       else
         out = r;
       end
-      return;
     case 'geodetic'
-      out = cart2togeod(t, r);
+      if threed
+        out = carttogeod(t, r);
+      else
+        out = cart2togeod(t, r);
+      end
     case 'parametric'
-      out = cart2toparam(t, r);
+      if threed
+        error(['convert: cannot convert 3d points to ', to]);
+      else
+        out = cart2toparam(t, r);
+      end
     case 'geocentric'
-      out = cart2togeocen(t, r);
+      if threed
+        error(['convert: cannot convert 3d points to ', to]);
+      else
+        out = cart2togeocen(t, r);
+      end
     case 'ellipsoidal'
       if threed
-        out = carttoellip(t, cart2tocart(t, r, h));
+        out = carttoellip(t, r);
       else
         out = cart2toellip(t, r);
       end
-      return;
     otherwise
       error(['unknown output type ', to])
-  end
-  if threed
-    out = [out, h];
   end
 end

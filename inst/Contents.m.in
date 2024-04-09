@@ -93,38 +93,38 @@
 %   gedoc            - Great ellipses on an ellipsoid of revolution
 %
 % Triaxial functions
-%   triaxial.cart2norm
-%   triaxial.cart2rand
+%   triaxial.triaxial
+%   triaxial.carttocart2
 %   triaxial.cart2tocart
 %   triaxial.cart2toellip
-%   triaxial.cart2togeod
-%   triaxial.cart2toparam
-%   triaxial.cartproj
-%   triaxial.carttocart2
-%   triaxial.carttoellip
-%   triaxial.carttogeod
-%   triaxial.carttoparam
-%   triaxial.demo
-%   triaxial.distance
-%   triaxial.doc
-%   triaxial.ellipnorm
-%   triaxial.elliptocart
 %   triaxial.elliptocart2
-%   triaxial.elliptogeod
-%   triaxial.elliptoparam
+%   triaxial.carttoellip
+%   triaxial.elliptocart
+%   triaxial.cart2togeod
+%   triaxial.carttogeod
 %   triaxial.geodtocart
-%   triaxial.geodtoellip
-%   triaxial.geodtoparam
-%   triaxial.horizon
-%   triaxial.hybrid
-%   triaxial.paramtocart
-%   triaxial.paramtoellip
-%   triaxial.paramtogeod
+%   triaxial.cart2toparam
+%   triaxial.paramtocart2
+%   triaxial.cart2togeocen
+%   triaxial.geocentocart2
+%   triaxial.convert
+%   triaxial.cart2rand
 %   triaxial.reckon
+%   triaxial.distance
+%   triaxial.hybrid
+%   triaxial.cart2norm
 %   triaxial.scaled
+%   triaxial.cartproj
+%   triaxial.horizon
+%   triaxial.accel
+%   triaxial.hybridint
+%   triaxial.ellipnorm
+%   triaxial.demo
+%   triaxial.doc
 %   triaxial.tests
-%   triaxial.triaxial
 
 % Copyright (c) Charles Karney (2015-2024) <karney@alum.mit.edu>.
 
 help(mfilename)
+
+

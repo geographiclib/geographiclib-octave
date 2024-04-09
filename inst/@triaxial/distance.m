@@ -210,7 +210,7 @@ function [s12, v1, v2, m12, M12, M21] = distanceint(t, r1, r2)
     cond = [14, 0, -1];
     [~, v2, s12, m12, M12, M21] = hybridint(t, r1, v1, cond, 0, r2);
     if check
-      [~, ~, s12a] = hybridint(t, r1, -v1, cond, 0, r2);
+      [~, ~, s12a] = hybridint(t, r1, -v1, cond, 0, r2); %#ok<*UNRCH>
       assert(~(s12 - s12a > 128*slop));
     end
     done = m12 >= 0 | bet1 ~= -90 | bet2 ~= 90;
@@ -404,7 +404,7 @@ function [s12, v1, v2, m12, M12, M21, count] = distanceint2(t, r1, r2)
           [~, v1] = elliptocart2(t, [bet1, omg1], alp1);
           r2t = hybridint(t, r1, v1, condu, 0, umb(q,:));
           ellip2t = cart2toellip(t, r2t);
-          [bet2t, omgu(q)] = deal(ellip2t(1), ellip2t(2));
+          [bet2t, omgu(q)] = deal(ellip2t(1), ellip2t(2)); %#ok<ASGLU>
           if check
             assert(abs(bet2t - bet2) < 512 * slopa);
           end

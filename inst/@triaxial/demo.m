@@ -66,7 +66,7 @@ function demo(n)
       [omg, bet] = meshgrid(omglist, ang);
       t.cartproj(t.elliptocart2([bet(:), omg(:)]), viewpt, 'Color', green);
       princell = [0*ang, ang; ang, 0*ang; ang, 0*ang+90];
-      t.cartproj(t.paramtocart(princell), viewpt, 'Color', red);
+      t.cartproj(t.paramtocart2(princell), viewpt, 'Color', red);
       plotend(t, viewpt);
       title(titles{m+1});
     case {1, 2, 3, 4, 5}
@@ -82,7 +82,7 @@ function demo(n)
       plotstart(t, viewpt);
       t.cartproj(t.elliptocart2(pos2), viewpt, 'Color', blue);
       princell = [0*ang, ang; ang, 0*ang; ang, 0*ang+90];
-      t.cartproj(t.paramtocart(princell), viewpt, 'Color', red);
+      t.cartproj(t.paramtocart2(princell), viewpt, 'Color', red);
       plotend(t, viewpt);
       title(titles{m+1});
     case 6
@@ -127,7 +127,7 @@ function demo(n)
       t.cartproj(t.elliptocart2(cut), viewpt, 'Color', green, 'LineWidth', 2);
       princell = [0*ang, ang; ang, 0*ang; ang, 0*ang+90];
       t.cartproj(r, viewpt, 'Color', blue);
-      t.cartproj(t.paramtocart(princell), viewpt, 'Color', red);
+      t.cartproj(t.paramtocart2(princell), viewpt, 'Color', red);
       plotend(t, viewpt);
       title(titles{m+1});
     case 7
@@ -173,7 +173,7 @@ function demo(n)
       t.cartproj(t.elliptocart2(cut), viewpt, 'Color', green, 'LineWidth', 2);
       princell = [0*ang, ang; ang, 0*ang; ang, 0*ang+90];
       t.cartproj(r, viewpt, 'Color', blue);
-      t.cartproj(t.paramtocart(princell), viewpt, 'Color', red);
+      t.cartproj(t.paramtocart2(princell), viewpt, 'Color', red);
       plotend(t, viewpt);
       title(titles{m+1});
     case 8
@@ -204,14 +204,14 @@ function demo(n)
       philist = [-5:-1,1:5]* 15;
       [phi, lam] = meshgrid(philist, ang);
       tc.cartproj(tc.geodtocart([phi(:), lam(:)]), viewpt, 'Color', blue);
-      tc.cartproj(tc.paramtocart([phi(:), lam(:)]), viewpt, 'Color', green);
+      tc.cartproj(tc.paramtocart2([phi(:), lam(:)]), viewpt, 'Color', green);
       lamlist = [-11:-7,-5:-1,1:5,7:11]*15;
       anga = [-75:2:75,nan]';
       [lam, phi] = meshgrid(lamlist, anga);
       tc.cartproj(tc.geodtocart([phi(:), lam(:)]), viewpt, 'Color', blue);
-      tc.cartproj(tc.paramtocart([phi(:), lam(:)]), viewpt, 'Color', blue);
+      tc.cartproj(tc.paramtocart2([phi(:), lam(:)]), viewpt, 'Color', blue);
       princell = [0*ang, ang; ang, 0*ang; ang, 0*ang+90];
-      tc.cartproj(tc.paramtocart(princell), viewpt, 'Color', red);
+      tc.cartproj(tc.paramtocart2(princell), viewpt, 'Color', red);
       plotend(tc, viewpt);
       title(titles{m+1});
     otherwise

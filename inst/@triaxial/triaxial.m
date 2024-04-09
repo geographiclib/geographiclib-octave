@@ -106,38 +106,45 @@ classdef triaxial
         % obj.odesolver = @ode113;
       end
     end
-    [r, v]                           = cart2norm(t, r, v)
-    [r, v]                           = cart2rand(t, n)
-    r                                = cart2tocart(t, r2, h)
-    [ellip, alp, gam, latrad]        = cart2toellip(t, r, v)
-    geod                             = cart2togeod(t, r)
-    param                            = cart2toparam(t, r)
-    [r2f, r2b]                       = cartproj(t, r, viewpt, varargin)
     [r2, h, count, err]              = carttocart2(t, r)
-    [ellip3, count, err]             = carttoellip(t, r)
-    geod3                            = carttogeod(t, r)
-    param3                           = carttoparam(t, r)
-    geocen3                          = carttogeocen(t, r)
-    out                              = convert(t, in, from, to)
-    [s12, dir1, dir2, m12, M12, M21] = distance(t, pos1, pos2)
+    r                                = cart2tocart(t, r2, h)
+
+    [ellip, alp, gam, latrad]        = cart2toellip(t, r, v)
     [r, v]                           = elliptocart2(t, ellip, alp)
+    [ellip3, count, err]             = carttoellip(t, r)
     r                                = elliptocart(t, ellip)
+
+    geod                             = cart2togeod(t, r)
+    geod3                            = carttogeod(t, r)
     r                                = geodtocart(t, geod)
-    r                                = geogtocart(t, geog)
-    r                                = horizon(t, ang, viewpt)
-    [pos2, dir2, s12, m12, M12, M21] = hybrid(t, pos1, dir1, cond, omgp, r2)
-    r                                = paramtocart(t, param)
+
+    param                            = cart2toparam(t, r)
+    r                                = paramtocart2(t, param)
+
+    geocen                           = cart2togeocen(t, r)
+    r                                = geocentocart2(t, geocen)
+
+    out                              = convert(t, in, from, to)
+
+    [r, v]                           = cart2rand(t, n)
+
     [pos2, dir2, m12, M12, M21]      = reckon(t, pos1, dir1, s12)
+    [s12, dir1, dir2, m12, M12, M21] = distance(t, pos1, pos2)
+    [pos2, dir2, s12, m12, M12, M21] = hybrid(t, pos1, dir1, cond, omgp, r2)
+
+    [r, v]                           = cart2norm(t, r, v)
     t0                               = scaled(t)
+    [r2f, r2b]                       = cartproj(t, r, viewpt, varargin)
+    r                                = horizon(t, ang, viewpt)
   end
   methods (Access = private)
     [v, acc, K]                      = accel(t, r, v)
     [r2, v2, s12, m12, M12, M21]     = hybridint(t, r1, v1, cond, omgp, r2)
   end
   methods (Static = true)
-    demo(n)
-    doc
     [ellipn, alpn]                   = ellipnorm(ellip, alp, alt)
-    tests
+                                       demo(n)
+                                       doc
+                                       tests
   end
 end

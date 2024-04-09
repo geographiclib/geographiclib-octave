@@ -1,20 +1,17 @@
-function r = paramtocart(t, param)
-%PARAMTOCART  Convert a general point from parametric to cartesian
+function r = paramtocart2(t, param)
+%PARAMTOCART  Convert a point from parametric to cartesian
 %
 %   r = PARAMTOCART(t, param)
-%   r = PARAMTOCART(t, param3)
 %
 %   Input:
 %     t the trixial ellipsoid object
 %     param an n x 2 array of the parametric coordinates [phip, lamp]
-%     param3 an n x 3 array of the parametric coordinates [phip, lamp, h]
 %   Output:
-%     r an n x 3 array of cartesian points
+%     r an n x 3 array of cartesian points lying on the ellipsoid
 %
-%   phip and lamp are measured in degrees.  With param (an n x 2 array), h is
-%   assumed to be 0 so that r lies on the ellipsoid.
+%   phip and lamp are measured in degrees.
 %
-%   See also CARTTOPARAM, CART2TOCART
+%   See also CART2TOPARAM
 
 % Copyright (c) Charles Karney (2024) <karney@alum.mit.edu>.
 
@@ -22,9 +19,6 @@ function r = paramtocart(t, param)
       [cosd(param(:,1)) .* [cosd(param(:,2)), sind(param(:,2))], ...
        sind(param(:, 1))];
   % r = r ./ vecabs(r./t.axes)   ...  a no-op
-  if size(param, 2) == 3
-    r = cart2tocart(t, r, param(:,3));
-  end
   % North and east vectors proportional to dx/dphi and dx/dlam
   % N:[a,b,c]*[-sin(phip)*cos(lamp),-sin(phip)*sin(lamp),cos(phip)];
   % E:[a,b,c]*[-cos(phip)*sin(lamp), cos(phip)*cos(lamp), 0];
