@@ -291,5 +291,5 @@ See the [change log](NEWS).  Releases are tagged in git as, e.g.,
     [Algorithms for geodesics](https://doi.org/10.1007/s00190-012-0578-z),
     J. Geodesy **87**(1), 43–55 (2013);
     [addenda](https://geographiclib.sourceforge.io/geod-addenda.html).
-  * [Implementation details for the triaxial class(
+  * [Implementation details for the triaxial class](
     https://geographiclib.sourceforge.io/doc/triaxial.html).
