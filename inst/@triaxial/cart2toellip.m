@@ -30,7 +30,7 @@ function [ellip, alp, gam, latrad] = cart2toellip(t, r, v)
   rn = r ./ t.axes;
   xi = rn(:,1); eta = rn(:,2); zeta = rn(:,3);
   g = vecdot([t.k2, t.k2 - t.kp2, -t.kp2], rn.^2);
-  % Force umbilic point to be returned regardless of rounding errors in
+  % Force umbilical point to be returned regardless of rounding errors in
   % multiplying and dividing by t.axes.
   g(vecabs(abs(r) - t.axes .* sqrt([t.kp2, 0, t.k2])) == 0) = 0;
   h = sqrt(g.^2 + (4*t.k2*t.kp2) * eta.^2);
@@ -87,7 +87,7 @@ function [ellip, alp, gam, latrad] = cart2toellip(t, r, v)
                        (t.k2 + tt) );
 
   % recompute cos(bet) and sin(omg) to see if r effectively corresponds to
-  % an umbilic point.
+  % an umbilical point.
   umb = cosd(bet) == 0 & sind(omg) == 0;
   if any(umb) && t.k2 ~= 0 && t.kp2 ~= 0
     w = sb .* co;

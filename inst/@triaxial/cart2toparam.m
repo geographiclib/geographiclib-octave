@@ -7,7 +7,7 @@ function param = cart2toparam(t, r)
 %     t the triaxial ellipsoid object
 %     r an n x 3 array of cartesian points on the ellipsoid
 %   Output:
-%     param an n x 2 array of paramraphic coordinates [phip, lamp]
+%     param an n x 2 array of parametric coordinates [phip, lamp]
 %
 %   phip and lamp are measured in degrees.  This routine assumes that r lie on
 %   the surface of the ellipsoid and that v is a unit vector tangent to the

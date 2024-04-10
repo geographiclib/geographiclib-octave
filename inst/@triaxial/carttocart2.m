@@ -25,7 +25,7 @@ function [r2, h, count, err] = carttocart2(t, r)
 %
 % * the method used here is simpler that PK (2022), in that there's no need
 %   to treat special cases separately (indeed the method could easily be
-%   generatlized to deal with ellipsoids in higher dimensions);
+%   generalized to deal with ellipsoids in higher dimensions);
 %
 % * a couple of tricks are used to improve the numerical accuracy of Newton's
 %   method: (a) the function is evaluated with extended precision to avoid

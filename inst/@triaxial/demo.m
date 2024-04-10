@@ -4,8 +4,8 @@ function demo(n)
 %   TRIAXIAL.DEMO
 %   TRIAXIAL.DEMO(n)
 %
-%   with 0 <= n < 20 runs one of several of demonsrations of the TRIAIAL
-%   class.  If n is not specified, a list of possible demonstaions is
+%   with 0 <= n < 20 runs one of several of demonsrations of the TRIAXIAL
+%   class.  If n is not specified, a list of possible demonstrations is
 %   displayed.  Each demo creates a plot using the current figure.  Here is
 %   the approximate time to run each demo.
 %

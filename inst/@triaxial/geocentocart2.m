@@ -1,7 +1,7 @@
 function r = geocentocart2(t, geocen)
-%GEOCENTOCART  Convert a  point from geocentric to cartesian
+%GEOCENTOCART2  Convert a  point from geocentric to cartesian
 %
-%   r = GEOCENTOCART(t, geocen)
+%   r = GEOCENTOCART2(t, geocen)
 %
 %   Input:
 %     t the triaxial ellipsoid object

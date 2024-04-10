@@ -1,7 +1,7 @@
 function r = paramtocart2(t, param)
-%PARAMTOCART  Convert a point from parametric to cartesian
+%PARAMTOCART2  Convert a point from parametric to cartesian
 %
-%   r = PARAMTOCART(t, param)
+%   r = PARAMTOCART2(t, param)
 %
 %   Input:
 %     t the triaxial ellipsoid object

@@ -34,7 +34,7 @@ function [pos2, dir2, s12, m12, M12, M21] = ...
 %
 %   cond is kx3 vector specifying k exit conditions
 %     cond(:,1) = quantity tested
-%        0 = s12 (but you should use cartdirect instead)
+%        0 = s12 (but you should use RECKON instead)
 %        [1-10] any of the components of the ode state [r, v, m, mp, M, Mp]
 %        [11-13] bet, omg, alp -- see also omgp flag
 %        14 the directed distance to r2
@@ -43,8 +43,8 @@ function [pos2, dir2, s12, m12, M12, M21] = ...
 %   Typical examples:
 %     cond = [ 0, s12,  1] the direct problem
 %     cond = [ 7, 0,   -1] find conjugate point
-%     cond = [ 2, 0,   -1] find opposite umbilic point
-%     cond = [ 2, 0,   -1] tracing a geodesic back to an umbilic point
+%     cond = [ 2, 0,   -1] find opposite umbilical point
+%     cond = [ 2, 0,   -1] tracing a geodesic back to an umbilical point
 %     cond = [11, bet2, 1;
 %             13, 90,   1; % or [13, -90, -1]
 %              7, 0,   -1] hybrid problem (2nd+3rd conds for bet2 = -bet1)
@@ -58,7 +58,7 @@ function [pos2, dir2, s12, m12, M12, M21] = ...
 %   tolerances are multiplied by t.odemult which is set to 1e-10 by default.
 %
 %   Because this method is mainly for internal use by DISTANCE, this routine
-%   is NOT vectorized.  Only a single starting point and directiom can be
+%   is NOT vectorized.  Only a single starting point and direction can be
 %   specified.
 %
 %   See also CART2NORM, DISTANCE, RECKON, GEODDISTANCE, GEODRECKON

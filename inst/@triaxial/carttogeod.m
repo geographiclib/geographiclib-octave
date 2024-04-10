@@ -10,7 +10,7 @@ function geod3 = carttogeod(t, r)
 %     geod3 an n x 3 array of geodetic coordinates [phi, lam, h]
 %
 %   phi and lam are measured in degrees.  This routine calls CARTTOCART2
-%   follwoed by CART2TOGEOD.
+%   followed by CART2TOGEOD.
 %
 %   See also CARTTOCART2, CART2TOGEOD, GEODTOCART2, GEODTOCART
 

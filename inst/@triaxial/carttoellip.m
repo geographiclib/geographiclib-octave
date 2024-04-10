@@ -34,7 +34,7 @@ function [ellip3, count, err] = carttoellip(t, r)
   rn = r ./ axes;
   xi = rn(:,1); eta = rn(:,2); zeta = rn(:,3);
   g = vecdot([t.k2, t.k2 - t.kp2, -t.kp2], rn.^2);
-  % Force umbilic point to be returned regardless of rounding errors in
+  % Force umbilical point to be returned regardless of rounding errors in
   % multiplying and dividing by axes.
   g(vecabs(abs(r) - axes .* sqrt([t.kp2, 0, t.k2])) == 0) = 0;
   h = sqrt(g.^2 + (4*t.k2*t.kp2) * eta.^2);

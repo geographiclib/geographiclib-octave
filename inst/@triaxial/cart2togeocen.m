@@ -7,7 +7,7 @@ function geocen = cart2togeocen(~, r)
 %     t the triaxial ellipsoid object
 %     r an n x 3 array of cartesian points on the ellipsoid
 %   Output:
-%     geocen an n x 2 array of geocenraphic coordinates [phic, lamc]
+%     geocen an n x 2 array of geocentric coordinates [phic, lamc]
 %
 %   phic and lamc are measured in degrees.  This routine assumes that r lie on
 %   the surface of the ellipsoid and that v is a unit vector tangent to the

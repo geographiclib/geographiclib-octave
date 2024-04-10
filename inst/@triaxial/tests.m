@@ -3,7 +3,7 @@ function tests
 %
 %   TRIAXIAL.TESTS
 %
-%   runs a variety of tests for the TRIAIAL class.  It produces no output it
+%   runs a variety of tests for the TRIAXIAL class.  It produces no output it
 %   they are successful.
 
 % Copyright (c) Charles Karney (2024) <karney@alum.mit.edu>.

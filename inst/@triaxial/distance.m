@@ -176,7 +176,7 @@ function [s12, v1, v2, m12, M12, M21, count] = distanceint(t, r1, r2)
   done = false;                         % A marker
 
   if bet1 == -90 && omg1 == 0
-    % point 1 is an umbilic point at (bet,omg) = (-90,0)
+    % point 1 is an umbilical point at (bet,omg) = (-90,0)
     assert(r2(2) >= 0);
     if vecabs(r1 + r2) == 0
       % point 2 is opposite umbilic (bet,omg) = (90,180)
@@ -186,7 +186,7 @@ function [s12, v1, v2, m12, M12, M21, count] = distanceint(t, r1, r2)
       cond = [2, 0, -1];                % Check crossing Y = 0 plane
       [~, v2, sa] = hybridint(t, r0, v0, cond);
       s12 = 2*sa;
-      % m12 = 0 for any geodesics between opposite umbilic points
+      % m12 = 0 for any geodesics between opposite umbilical points
       m12 = 0;
       % M12 = M21 = -1 only for this symmetric case going through [0, 1, 0].
       M12 = -1; M21 = -1;
@@ -205,7 +205,7 @@ function [s12, v1, v2, m12, M12, M21, count] = distanceint(t, r1, r2)
   end
   if r1(2) == 0 && r2(2) == 0 && ~done
     % Both points on middle ellipse.  This excludes the case of two
-    % opposite umbilic points (already treated above).
+    % opposite umbilical points (already treated above).
     E = signx(r1(3) * r2(1) - r1(1) * r2(3)); % Better to call this an SE flag.
     [~, v1] = cart2norm(t, r1, -[1, 0, 1] * E);
     cond = [14, 0, -1];
@@ -245,7 +245,7 @@ function [s12, v1, v2, m12, M12, M21, count] = distanceint2(t, r1, r2)
 % For prolate: bet2 = 0, omg1 <= abs(omg2) <= 180-omg1
 %
 % and the points aren't very close
-% and neither point is an umbilic point (or pole)
+% and neither point is an umbilical point (or pole)
 
 % If r1(2) = 0, then either bet1 = -90 or omg1 = 0.
 
@@ -256,10 +256,10 @@ function [s12, v1, v2, m12, M12, M21, count] = distanceint2(t, r1, r2)
 
 % Now r2(2) > 0.
 
-% If bet1 = -90, then there are two umbilic geodesics U[12] and U[34].
+% If bet1 = -90, then there are two umbilical geodesics U[12] and U[34].
 % with omgu[34] = 0, omgu[12] = 180.  alp1 lies in in (-90, 90)
 
-% If omg1 = 0, then there are two umbilic geodesics U[14] and U[23] and
+% If omg1 = 0, then there are two umbilical geodesics U[14] and U[23] and
 % omgu[14] = 0, check omgu[23] = 180.  alp1 lies in (0, 180).
 
 % If r1 doesn't lie on Y = 0 then there are distinct four umbilical
@@ -285,7 +285,7 @@ function [s12, v1, v2, m12, M12, M21, count] = distanceint2(t, r1, r2)
 
 % For bet2 = bet1, omgu1 = omgu4 = omg1.  Replace alp1u = 90, alp4u = -90.
 % For omg2 > 0, we have E (because omg2 > omg1) and alp1 is in (alp1u,
-% alp2u) (no need to compute umbilic geodesics).  For omg2 < 0, compute
+% alp2u) (no need to compute umbilical geodesics).  For omg2 < 0, compute
 % omgu2 first if omg2 < -90.
 
   fzerop = false;
@@ -375,7 +375,7 @@ function [s12, v1, v2, m12, M12, M21, count] = distanceint2(t, r1, r2)
     omgp = 1;
   else
     % That's the end of the cases where we can avoid computing umbilics
-    % Last test in condu is to stop geodesic at umbilic point (needed if
+    % Last test in condu is to stop geodesic at umbilical point (needed if
     % bet2 is close to 90).
     condu = [11, bet2, 1; 14, 0, -1];
     if bet2 == bet1
