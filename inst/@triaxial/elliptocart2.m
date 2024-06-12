@@ -50,16 +50,18 @@ function [r, v] = elliptocart2(t, ellip, alp)
 
   v = ca .* N + sa .* E;
 
-  umb = cb == 0 & so == 0;
+  cb = cb + 0*alp; so = so + 0*alp;
+  umb = cb+0*alp == 0 & so+0*alp == 0;
   if any(umb) && t.k2 ~= 0 && t.kp2 ~= 0
+    co = co + 0*alp; sb = sb + 0*alp;
     % sin(2*alp) and cos(2*alp)
     sa2 = 2 * sa(umb) .* ca(umb);
     ca2 = (ca(umb) - sa(umb)) .* (ca(umb) + sa(umb));
     % sign on 2nd component is -sign(cos(bet)*sin(omg)).  negative sign
-    % gives normal conventipon of alpha measured clockwise.
-    v(umb,:) = [t.a/sqrt(t.kp2) * co(umb) .* ca2, ...
-                -t.b/sqrt(t.k2*t.kp2) * co(umb).* sb(umb) .* sa2, ...
-                -t.c/sqrt(t.k2) * sb(umb) .* ca2];
+    % gives normal convention of alpha measured clockwise.
+    v(umb,:) = [t.a*sqrt(t.k2)/t.b * co(umb) .* ca2, ...
+                -co(umb) .* sb(umb) .* sa2, ...
+                -t.c*sqrt(t.kp2)/t.b * sb(umb) .* ca2];
   end
-  v = vecunit(v);                      % Is this needed?
+  % v = vecunit(v); v is already normalized
 end

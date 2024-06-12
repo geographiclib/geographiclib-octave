@@ -11,8 +11,8 @@ function [A, P, N] = geodarea(lats, lons, ellipsoid)
 %   precisely, the value returned by defaultellipsoid) is used.  There is
 %   no need to "close" the polygon by repeating the first point.  Multiple
 %   polygons can be specified by separating the vertices by NaNs in the
-%   vectors.  Thus a series of quadrilaterals can be specified as two 5 x K
-%   arrays where the 5th row is NaN.  The output, A, is in meters^2.
+%   vectors.  Thus a series of K quadrilaterals can be specified as two
+%   5 x K arrays where the 5th row is NaN.  The output, A, is in meters^2.
 %   Counter-clockwise traversal counts as a positive area.  Arbitrarily
 %   complex polygons are allowed.  In the case of self-intersecting
 %   polygons the area is accumulated "algebraically", e.g., the areas of

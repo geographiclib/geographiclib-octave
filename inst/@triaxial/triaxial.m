@@ -141,7 +141,8 @@ classdef triaxial
     [r2, v2, s12, m12, M12, M21]     = hybridint(t, r1, v1, cond, omgp, r2)
   end
   methods (Static = true)
-    [ellipn, alpn]                   = ellipnorm(ellip, alp, alt)
+    [ellipn, alpn, flip]             = ellipnorm(ellip, alp, alt)
+    [ellipn, alpn]                   = ellipflip(ellip, alp)
                                        demo(n)
                                        doc
                                        tests

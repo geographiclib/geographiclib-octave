@@ -32,7 +32,7 @@ function [r, v] = cart2rand(t, n)
   end
   if nargout > 1
     v = randn(n, 3);
-    % up(rej,:) = rn(rej,:) ./ t.axesn(rej,:);
+    % up(rej,:) = r(rej,:) ./ t.axes.^2
     up = r ./ t.axes.^2;
     u2 = sum(up.^2, 2);
     v = vecunit(v - up .* vecdot(up, v) ./ u2);

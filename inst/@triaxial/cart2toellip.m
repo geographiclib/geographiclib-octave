@@ -76,6 +76,8 @@ function [ellip, alp, gam, latrad] = cart2toellip(t, r, v)
   alp = atan2d(ve, vn);
   h = hypot(ve, vn);
   sa = ve./h; ca = vn./h;
+
+  cb = cb + 0*alp; so = so + 0*alp;
   umb = cb == 0 & so == 0;
   sa(umb) = 1; ca(umb) = 0;
 
@@ -88,20 +90,33 @@ function [ellip, alp, gam, latrad] = cart2toellip(t, r, v)
 
   % recompute cos(bet) and sin(omg) to see if r effectively corresponds to
   % an umbilical point.
-  umb = cosd(bet) == 0 & sind(omg) == 0;
+  umb = cosd(bet + 0*alp) == 0 & sind(omg + 0*alp) == 0;
   if any(umb) && t.k2 ~= 0 && t.kp2 ~= 0
-    w = sb .* co;
-    up = vecunit(rn ./ t.axes);
-    % return result in [-pi/2, pi/2]
-    % 2*alp = atan2(s2, c2)
+    co = co + 0*alp; sb = sb + 0*alp; rn = rn + 0*alp;
+
+    w = sb(umb) .* co(umb);
+    up = vecunit(rn(umb,:) ./ t.axes);
+    % compute direction cosines of v wrt the plane y = 0; angle = 2*alp
+    s2a = -v(umb,2).*w;
+    c2a = (up(:,3).*v(umb,1) - up(:,1).*v(umb,3)).*w;
+    h2 = 1;                             % h2 = hypot(c2a, s2a) = 1
+    % 2*alp = atan2(s2a, c2a), h2 = hypot(s2a, c2a)
+    % alp = atan2(sa, ca)
     % tan(2*alp) = 2*tan(alp)/(1-tan(alp)^2)
-    % cos(alp) = sqrt((1+cos(2*alp))/2) = sin(2*alp) / sqrt(2*(1-cos(2*alp)))
-    % sin(alp) = sqrt((1-cos(2*alp))/2) = sin(2*alp) / sqrt(2*(1+cos(2*alp)))
-    alpu = atan2d(-v(:,2)./w / t.b, ...
-                  (up(:,3).*v(:,1) - up(:,1).*v(:,3))./w * ...
-                  (t.a * t.c / t.b^2)) / 2;
-    % for northern umbilic flip by 180
-    alpu(sb > 0) = alpu(sb > 0) - signx(alpu(sb > 0)) * 180;
-    alp(umb) = alpu(umb);
+    % for alp in [-pi/2, pi/2]
+    % c2a>0
+    % [sa, ca] = [s2a / sqrt(2*(1+c2a)), sqrt((1+c2a)/2)]
+    %    -> [s2a, h2+c2a]
+    % c2a<0
+    % [sa, ca] = sign(s2a)*[sqrt((1-c2a)/2), s2a / sqrt(2*(1-c2a))]
+    %    -> [sign(s2a) * (h2-c2a), abs(s2a)]
+    % for northern umbilical points, we want to flip alp to alp + pi; so
+    % multiply [sa, ca] by -sb.
+    flip = -sb(umb);
+    alpu = atan2d(flip .* s2a, flip .* (h2 + c2a));
+    l = c2a < 0;
+    alpu(l) = atan2d(flip(l) .* signx(s2a(l)) .* (h2 - c2a(l)), ...
+                     flip(l) .* abs(s2a(l)));
+    alp(umb) = alpu;
   end
 end

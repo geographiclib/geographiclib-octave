@@ -40,3 +40,31 @@ Documentation
   geoddoc
   projdoc
   gedoc
+Class for triaxial ellipsoids
+  triaxial.triaxial
+  triaxial.carttocart2
+  triaxial.cart2tocart
+  triaxial.cart2toellip
+  triaxial.elliptocart2
+  triaxial.carttoellip
+  triaxial.elliptocart
+  triaxial.cart2togeod
+  triaxial.carttogeod
+  triaxial.geodtocart
+  triaxial.cart2toparam
+  triaxial.paramtocart2
+  triaxial.cart2togeocen
+  triaxial.geocentocart2
+  triaxial.convert
+  triaxial.cart2rand
+  triaxial.reckon
+  triaxial.distance
+  triaxial.hybrid
+  triaxial.cart2norm
+  triaxial.scaled
+  triaxial.cartproj
+  triaxial.horizon
+  triaxial.ellipnorm
+  triaxial.demo
+  triaxial.doc
+  triaxial.tests

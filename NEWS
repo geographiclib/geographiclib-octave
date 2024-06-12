@@ -1,7 +1,17 @@
 Changes in geographiclib-octave
 
-Version 2.2 (released 2024-04.09)
+Version 2.3 (released 2024-mm-dd)
+  * Fix vectorization bugs for triaxial.elliptocart2 and
+    triaxial.cart2toellip; these arose if the position was a single
+    umbilical point, and several directions were specified.
+  * Fix bug in triaxial.cart2toellip for the computation of azimuth
+    for umbilical points.
+  * Fix bug in handling default arguments for triaxial.ellipnorm.
+  * Add triaxial.ellipflip.
+  * Fix triaxial.distance with ellipsoidal coodinates so that the
+    azimuths returned are consistent with the sheets of the endpoints.
 
+Version 2.2 (released 2024-04-09)
   * Add a class, triaxial, to solve problems on a triaxial ellipsoid.
     This involves a lot of new code so...  Expect there to be errors
     in the documentation (please report).  Also be prepared for the

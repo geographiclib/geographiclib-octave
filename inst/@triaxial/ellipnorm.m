@@ -1,17 +1,18 @@
-function [ellip, alp] = ellipnorm(ellip, alp, alt)
-%TRIAXIAL.ELLIPNORM  self tests for the TRIAXIAL class
+function [ellipn, alpn, flip] = ellipnorm(ellip, alp, alt)
+%TRIAXIAL.ELLIPNORM  reduce ellipsoidal coordinates to convention range
 %
 %   ellip = TRIAXIAL.ELLIPNORM(ellip)
 %   [ellip, alp] = TRIAXIAL.ELLIPNORM(ellip, alp)
-%   [ellip, alp] = TRIAXIAL.ELLIPNORM(ellip, alp, alt)
+%   [ellip, alp, switch] = TRIAXIAL.ELLIPNORM(ellip, alp, alt)
 %
 %   Input:
 %     ellip an n x 2 array of ellipsoidal coordinates [bet, omg]
-%     alp an n x 1 array of azimuths alpha.
+%     alp an n x 1 array of azimuths alpha
 %     alt a flag, if true use alternate ranges for bet and omg (default false)
 %   Output:
-%     ellip an n x 2 array of ellipsoidal coordinates [bet, omg]
-%     alp an n x 1 array of azimuths alpha.
+%     ellipn an n x 2 array of ellipsoidal coordinates [bet, omg]
+%     alpn an n x 1 array of azimuths alpha.
+%     flip an n x 1 logical array specifies if the sheet was switched
 %
 %   bet, omg, and alp are measured in degrees.  This reduces bet to the
 %   range [-90, 90] and omg and alp to the range [-180, 180].  If alt is
@@ -19,8 +20,8 @@ function [ellip, alp] = ellipnorm(ellip, alp, alt)
 
 % Copyright (c) Charles Karney (2024) <karney@alum.mit.edu>.
 
-  if nargin < 3, alp = 0; end
-  if nargin < 4, alt = 0; end
+  if nargin < 2, alp = nan; end
+  if nargin < 3, alt = 0; end
   bet = ellip(:,1);
   omg = ellip(:,2);
   bet = remx(bet, 360, true);
@@ -46,6 +47,10 @@ function [ellip, alp] = ellipnorm(ellip, alp, alt)
   end
   bet(l) = remx( signx(bet(l))*180-bet(l), 360, true);
   omg(l) = remx(                  -omg(l), 360, true);
-  alp(l) = remx(-signx(alp(l))*180+alp(l), 360, true);
-  ellip = [bet, omg];
+  if nargin >= 2,
+    alp(l) = remx(-signx(alp(l))*180+alp(l), 360, true);
+  end
+  ellipn = [bet, omg];
+  alpn = alp;
+  flip = l;
 end

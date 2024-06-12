@@ -46,6 +46,8 @@ function [s12, dir1, dir2, m12, M12, M21, count] = distance(t, pos1, pos2)
   pos2 = pos2 + Z;
   ellip = size(Z, 2) == 2;
   if ellip
+    [pos1, ~, flip1] = triaxial.ellipnorm(pos1);
+    [pos2, ~, flip2] = triaxial.ellipnorm(pos2);
     r1 = elliptocart2(t, pos1);
     r2 = elliptocart2(t, pos2);
   else
@@ -62,6 +64,8 @@ function [s12, dir1, dir2, m12, M12, M21, count] = distance(t, pos1, pos2)
   if ellip
     [~, dir1] = cart2toellip(t, r1, v1);
     [~, dir2] = cart2toellip(t, r2, v2);
+    [~, dir1(flip1)] = triaxial.ellipflip(pos1(flip1,:), dir1(flip1));
+    [~, dir2(flip2)] = triaxial.ellipflip(pos2(flip2,:), dir2(flip2));
   else
     [dir1, dir2] = deal(v1, v2);
   end
@@ -147,7 +151,7 @@ function [s12, v1, v2, m12, M12, M21, count] = distanceint(t, r1, r2)
   % Reflect about Z=0 if Z1 > 0.
   flip = [rr(1,1) < 0 | (rr(1,1) == 0 & rr(2,1) < 0), ...
           rr(1,2) < 0 | (rr(1,2) == 0 & rr(2,2) < 0), ...
-          rr(1,3) > 0];                   % Logical version
+          rr(1,3) > 0];                 % Logical version
   flip = 1 - 2*flip;                    % +/-1 version
   rr = rr .* flip + 0;                  % convert -0 to +0
   M = M * diag(flip);
@@ -182,7 +186,7 @@ function [s12, v1, v2, m12, M12, M21, count] = distanceint(t, r1, r2)
       % point 2 is opposite umbilic (bet,omg) = (90,180)
       % this handles prolate and oblate cases too
       r0 = [0, 1, 0];
-      v0 = [-sqrt(t.kp2), 0, sqrt(t.k2)];   % Already normalized
+      v0 = [-sqrt(t.kp2), 0, sqrt(t.k2)]; % Already normalized
       cond = [2, 0, -1];                % Check crossing Y = 0 plane
       [~, v2, sa] = hybridint(t, r0, v0, cond);
       s12 = 2*sa;

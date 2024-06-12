@@ -58,10 +58,11 @@ function doc
 %     [pos2, dir2] = t.RECKON(pos1, dir1, s12)
 %     [s12, dir1, dir2] = t.DISTANCE(pos1, pos2)
 %     [r2, v2, s12] = t.HYBRID(r1, v1, cond)
-
+%
 %   Other
 %     CART2NORM -- force points to lie on the surface
 %     TRIAXIAL.ELLIPNORM -- reduce ellipoidal coords to conventional ranges
+%     TRIAXIAL.ELLIPFLIP -- switch ellipoidal coords to other sheet
 %     SCALED -- return a scaled ellipsoid
 %     TRIAXIAL.DEMO -- run demonstrations
 %     TRIAXIAL.DOC -- this documentation

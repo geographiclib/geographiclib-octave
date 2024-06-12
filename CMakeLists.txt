@@ -3,16 +3,16 @@ project (GeographicLib-Octave NONE)
 
 # Version information
 set (PROJECT_VERSION_MAJOR 2)
-set (PROJECT_VERSION_MINOR 2)
+set (PROJECT_VERSION_MINOR 3)
 set (PROJECT_VERSION_PATCH 0)
 set (PROJECT_VERSION "${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}")
 if (PROJECT_VERSION_PATCH GREATER 0)
   set (PROJECT_VERSION "${PROJECT_VERSION}.${PROJECT_VERSION_PATCH}")
 endif ()
-set (PROJECT_VERSION_SUFFIX "")
+set (PROJECT_VERSION_SUFFIX "-dev")
 set (PROJECT_FULLVERSION "${PROJECT_VERSION}${PROJECT_VERSION_SUFFIX}")
 
-set (RELEASE_DATE "2022-04-09")
+set (RELEASE_DATE "2022-dd-mm")
 
 # Set a default build type for single-configuration cmake generators if
 # no build type is set.
