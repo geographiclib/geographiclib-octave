@@ -123,6 +123,7 @@
 %   triaxial.cartproj      - Plot a curve on the ellipsoid
 %   triaxial.horizon       - Point on the horizon of the ellipsoid
 %   triaxial.ellipnorm     - Reduce ellipsoidal coordinates to standard ranges
+%   triaxial.ellipflip     - Switch ellipsoidal coordinates to the other sheet
 %   triaxial.demo          - Demonstrate geodesics
 %   triaxial.doc           - Summary documentation of triaxial class
 %   triaxial.tests         - Self test

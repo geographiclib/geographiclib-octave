@@ -263,6 +263,8 @@ some of the algorithms used here.
     Point on the horizon of the ellipsoid
   * [`triaxial.ellipnorm`](inst/@triaxial/ellipnorm.m) -
     Reduce ellipsoidal coordinates to standard ranges
+  * [`triaxial.ellipflip`](inst/@triaxial/ellipflip.m) -
+    Switch ellipsoidal coordinates to the other sheet
   * [`triaxial.demo`](inst/@triaxial/demo.m) -
     Demonstrate geodesics
   * [`triaxial.doc`](inst/@triaxial/doc.m) -

@@ -1,4 +1,4 @@
-function [r2, v2, s12, m12, M12, M21] = hybridint(t, r1, v1, cond, omgp, r2)
+function [r2, v2, s12, m12, M12, M21] = hybridint(t, r1, v1, cond, altp, r2)
 %HYBRIDINT  the internal version of the hybrid geodesic problem
 %
 %   [r2, v2, s12, m12, M12, M21] = HYBRIDINT(t, r1, v1, cond, omgp, r2)
@@ -11,11 +11,11 @@ function [r2, v2, s12, m12, M12, M21] = hybridint(t, r1, v1, cond, omgp, r2)
 
 % Copyright (c) Charles Karney (2024) <karney@alum.mit.edu>.
 
-  if nargin < 5, omgp = 0; end
+  if nargin < 5, altp = 0; end
   if nargin < 6, r2 = nan(1,3); end
   opt = odeset('AbsTol', 1e-6 * t.odemult, ...
                'RelTol', max(100*eps, 1.0e-3 * t.odemult), ...
-               'Events', @(s, y) fexit(s, y, t, cond, omgp, r2));
+               'Events', @(s, y) fexit(s, y, t, cond, altp, r2));
   % components of y are r,y,z, vx, vy, vz, m, m', M, M'
   y1 = [r1(:); v1(:); 0; 1; 1; 0];
   ie = [];
@@ -46,7 +46,7 @@ function yp = deriv(~, y, t)
   yp = [yp; mp; -K*m; Mp; -K*M];
 end
 
-function [w, term, dir] = fexit(~, y, t, cond, omgp, rt)
+function [w, term, dir] = fexit(~, y, t, cond, altp, rt)
   n = size(cond, 1);
   w = zeros(n, 1);
   term = ones(n, 1);
@@ -65,7 +65,12 @@ function [w, term, dir] = fexit(~, y, t, cond, omgp, rt)
     else
       boa(1:2) = cart2toellip(t, rr);
     end
-    if omgp && boa(2) < 0, boa(2) = boa(2) + 360; end
+    if bitand(altp, 1) && boa(2) < 0, boa(2) = boa(2) + 360; end
+    if bitand(altp, 2) && boa(2) < 0 && boa(1) > 0
+      boa(1) = 180-boa(1); boa(2) = -boa(2);
+    elseif bitand(altp, 4) && boa(2) > 0 && boa(1) > 0
+      boa(1) = 180-boa(1); boa(2) = -boa(2);
+    end
   end
   for i = 1:n
     c = cond(i, 1);

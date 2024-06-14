@@ -86,6 +86,7 @@ set (TRIAXIAL_SOURCES
   @triaxial/demo.m
   @triaxial/distance.m
   @triaxial/doc.m
+  @triaxial/ellipflip.m
   @triaxial/ellipnorm.m
   @triaxial/elliptocart2.m
   @triaxial/elliptocart.m

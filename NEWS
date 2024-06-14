@@ -1,6 +1,9 @@
 Changes in geographiclib-octave
 
 Version 2.3 (released 2024-mm-dd)
+  * Fix serious BUG in triaxial.distance where incorrect results were
+    sometimes returned when bet1 and bet2 had opposite signs and were
+    both close to +/-90deg.
   * Fix vectorization bugs for triaxial.elliptocart2 and
     triaxial.cart2toellip; these arose if the position was a single
     umbilical point, and several directions were specified.

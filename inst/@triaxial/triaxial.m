@@ -129,7 +129,7 @@ classdef triaxial
 
     [pos2, dir2, m12, M12, M21]      = reckon(t, pos1, dir1, s12)
     [s12, dir1, dir2, m12, M12, M21, count] = distance(t, pos1, pos2)
-    [pos2, dir2, s12, m12, M12, M21] = hybrid(t, pos1, dir1, cond, omgp, r2)
+    [pos2, dir2, s12, m12, M12, M21] = hybrid(t, pos1, dir1, cond, altp, r2)
 
     [r, v]                           = cart2norm(t, r, v)
     t0                               = scaled(t)
@@ -138,7 +138,7 @@ classdef triaxial
   end
   methods (Access = private)
     [v, acc, K]                      = accel(t, r, v)
-    [r2, v2, s12, m12, M12, M21]     = hybridint(t, r1, v1, cond, omgp, r2)
+    [r2, v2, s12, m12, M12, M21]     = hybridint(t, r1, v1, cond, altp, r2)
   end
   methods (Static = true)
     [ellipn, alpn, flip]             = ellipnorm(ellip, alp, alt)

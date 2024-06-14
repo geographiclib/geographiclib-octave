@@ -45,12 +45,12 @@ function [ellipn, alpn, flip] = ellipnorm(ellip, alp, alt)
           (bet ==  90 &  (alp > -90 & alp <= 90)) | ...
           (bet == -90 & ~(alp > -90 & alp <= 90)));
   end
-  bet(l) = remx( signx(bet(l))*180-bet(l), 360, true);
-  omg(l) = remx(                  -omg(l), 360, true);
-  if nargin >= 2,
-    alp(l) = remx(-signx(alp(l))*180+alp(l), 360, true);
-  end
   ellipn = [bet, omg];
   alpn = alp;
+  if nargin >= 2
+    [ellipn(l, :), alpn(l)] = triaxial.ellipflip(ellipn(l, :), alpn(l));
+  else
+    ellipn(l, :) = triaxial.ellipflip(ellipn(l, :));
+  end
   flip = l;
 end

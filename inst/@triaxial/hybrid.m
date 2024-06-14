@@ -1,11 +1,11 @@
 function [pos2, dir2, s12, m12, M12, M21] = ...
-      hybrid(t, pos1, dir1, cond, omgp, r2)
+      hybrid(t, pos1, dir1, cond, altp, r2)
 %HYBRID  the hybrid geodesic problem for a triaxial ellipsoid
 %
 %   [ellip2, alp2, s12, m12, M12, M21] = HYBRID(t, ellip1, alp1, cond)
 %   [r2, v2, s12, m12, M12, M21] = HYBRID(t, r1, v1, cond)
-%   [ellip2, alp2, s12, m12, M12, M21] = HYBRID(t, ellip1, alp1, cond, omgp,r2)
-%   [r2, v2, s12, m12, M12, M21] = HYBRID(t, r1, v1, cond, omgp,r2)
+%   [ellip2, alp2, s12, m12, M12, M21] = HYBRID(t, ellip1, alp1, cond, altp,r2)
+%   [r2, v2, s12, m12, M12, M21] = HYBRID(t, r1, v1, cond, altp,r2)
 %
 %   Input:
 %     t the triaxial ellipsoid object
@@ -14,7 +14,12 @@ function [pos2, dir2, s12, m12, M12, M21] = ...
 %     r1 1 x 3 vector for cartesian the starting point
 %     v1 1 x 3 array of the starting direction at r1
 %     cond k x 3 set of exit conditions
-%     omgp (default 0), if set use [0, 360) as range for omg
+%     altp (default 0), control interpretation of bet, omg
+%        if bitand(altp, 1) use [0, 360) as range for omg
+%        if bitand(altp, 2) set [bet, omg] = [180-bet, -omg],
+%          if omg < 0 and bet > 0
+%        if bitand(altp, 4) set [bet, omg] = [180-bet, -omg],
+%          if omg > 0 and bet > 0
 %     r2 (default nan(1,3)), needed for cond(:,1) == 14
 %   Output:
 %     ellip2 1 x 2 vector of ellipsoidal coordinates at the endpoint
@@ -36,7 +41,7 @@ function [pos2, dir2, s12, m12, M12, M21] = ...
 %     cond(:,1) = quantity tested
 %        0 = s12 (but you should use RECKON instead)
 %        [1-10] any of the components of the ode state [r, v, m, mp, M, Mp]
-%        [11-13] bet, omg, alp -- see also omgp flag
+%        [11-13] bet, omg, alp -- see also altp flags
 %        14 the directed distance to r2
 %     cond(:,2) = value of corresponding variable
 %     cond(:,3) = direction
@@ -65,7 +70,7 @@ function [pos2, dir2, s12, m12, M12, M21] = ...
 
 % Copyright (c) Charles Karney (2024) <karney@alum.mit.edu>.
 
-  if nargin < 5, omgp = 0; end
+  if nargin < 5, altp = 0; end
   if nargin < 6, r2 = nan(1,3); end
   ellip = size(pos1, 2) == 2;
   if ellip
@@ -76,7 +81,7 @@ function [pos2, dir2, s12, m12, M12, M21] = ...
   l = cond(:, 1) <= 3 | cond(:, 1) == 6;
   cond(l, 2) = cond(l, 2) / t.b;
   [r2, v2, s12, m12, M12, M21] = ...
-    hybridint(scaled(t), r1 / t.b, v1, cond, omgp, r2 / t.b);
+    hybridint(scaled(t), r1 / t.b, v1, cond, altp, r2 / t.b);
   r2 = r2 * t.b; s12 = s12 * t.b; m12 = m12 * t.b;
   if ellip
     [pos2, dir2] = cart2toellip(t, r2, v2);

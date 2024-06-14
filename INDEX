@@ -65,6 +65,7 @@ Class for triaxial ellipsoids
   triaxial.cartproj
   triaxial.horizon
   triaxial.ellipnorm
+  triaxial.ellipflip
   triaxial.demo
   triaxial.doc
   triaxial.tests

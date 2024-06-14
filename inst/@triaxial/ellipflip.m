@@ -18,7 +18,7 @@ function [ellipn, alpn] = ellipflip(ellip, alp)
 %   set, the ranges are instead: bet in [-180, 180], omg in [0, 180].
 
 % Copyright (c) Charles Karney (2024) <karney@alum.mit.edu>.
- 
+
   bet = ellip(:,1);
   omg = ellip(:,2);
   betn = remx( signx(bet)*180-bet, 360, true);
@@ -27,6 +27,4 @@ function [ellipn, alpn] = ellipflip(ellip, alp)
   if nargin > 1
     alpn = remx(-signx(alp)*180+alp, 360, true);
   end
-
 end
-

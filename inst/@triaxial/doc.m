@@ -61,8 +61,8 @@ function doc
 %
 %   Other
 %     CART2NORM -- force points to lie on the surface
-%     TRIAXIAL.ELLIPNORM -- reduce ellipoidal coords to conventional ranges
-%     TRIAXIAL.ELLIPFLIP -- switch ellipoidal coords to other sheet
+%     TRIAXIAL.ELLIPNORM -- reduce ellipoidal coords to standard ranges
+%     TRIAXIAL.ELLIPFLIP -- switch ellipoidal coords to the other sheet
 %     SCALED -- return a scaled ellipsoid
 %     TRIAXIAL.DEMO -- run demonstrations
 %     TRIAXIAL.DOC -- this documentation

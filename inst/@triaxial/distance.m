@@ -335,6 +335,7 @@ function [s12, v1, v2, m12, M12, M21, count] = distanceint2(t, r1, r2)
 
   range = [];
   cond = [];
+  betp = 0;
   omgp = 0;
   if t.kp2 == 0
     % Oblate.
@@ -361,6 +362,7 @@ function [s12, v1, v2, m12, M12, M21, count] = distanceint2(t, r1, r2)
     if bet2 == 90
       cond = [2, 0, -1];                  % crossing Y = 0 plane
     else
+      betp = 1;
       cond = [11, bet2, 1];
     end
   elseif bet2 == bet1 && omg2 > 0
@@ -381,7 +383,7 @@ function [s12, v1, v2, m12, M12, M21, count] = distanceint2(t, r1, r2)
     % That's the end of the cases where we can avoid computing umbilics
     % Last test in condu is to stop geodesic at umbilical point (needed if
     % bet2 is close to 90).
-    condu = [11, bet2, 1; 14, 0, -1];
+    condu = [11, bet2, 1];
     if bet2 == bet1
       omgu(1) = omg1; omgu(4) = omg1;
       alpu(1) = 90; alpu(4) = -90;
@@ -407,11 +409,12 @@ function [s12, v1, v2, m12, M12, M21, count] = distanceint2(t, r1, r2)
         if isnan(omgu(q))
           alp1 = alpu(q);
           [~, v1] = elliptocart2(t, [bet1, omg1], alp1);
-          r2t = hybridint(t, r1, v1, condu, 0, umb(q,:));
+          betpu = (q == 4 | q == 1) + 2 * (q == 2 | q == 3);
+          r2t = hybridint(t, r1, v1, condu, 2*betpu);
           ellip2t = cart2toellip(t, r2t);
           [bet2t, omgu(q)] = deal(ellip2t(1), ellip2t(2)); %#ok<ASGLU>
           if check
-            assert(abs(bet2t - bet2) < 512 * slopa);
+            assert(abs(bet2t - bet2) < 1024 * slopa);
           end
           done = abs(omg2 - omgu(q)) <= slopa;
           if done, break; end
@@ -423,7 +426,7 @@ function [s12, v1, v2, m12, M12, M21, count] = distanceint2(t, r1, r2)
         omgs(omgs < 0) = omgs(omgs < 0) + 360;
       end
       % Replace < by <= in case the addition of 360 causes equality.  This is
-      % probably caught by the fussy test on omg2 == omgu(q) above.
+      % probably caught by the fuzzy test on omg2 == omgu(q) above.
       if omgs(1) <= omgs(2) && omgs(2) <= omgs(3)
         % Good ranking omgs(1) < omg2(2) < omgs(3)
         switch k
@@ -436,6 +439,7 @@ function [s12, v1, v2, m12, M12, M21, count] = distanceint2(t, r1, r2)
         end
         range = [alpu(k), alpu(l)];
         omgp = k == 1;
+        betp = (k == 4) + 2 * (k == 2);
         break;
       end
     end
@@ -446,7 +450,7 @@ function [s12, v1, v2, m12, M12, M21, count] = distanceint2(t, r1, r2)
     if omgp && omg2 < 0, omg2 = omg2 + 360; end
 
     cond = [cond; 7, 0, -1];
-    fun = @(alp1t) domgf(alp1t, t, cond, r1, bet1, omg1, omg2, omgp);
+    fun = @(alp1t) domgf(alp1t, t, cond, r1, bet1, omg1, omg2, omgp+2*betp);
     if fzerop
       % Maybe narrow range slightly, since fzero evaluates fun at the
       % end points.
@@ -461,16 +465,16 @@ function [s12, v1, v2, m12, M12, M21, count] = distanceint2(t, r1, r2)
   [~, v2, s12, m12, M12, M21] = hybridint(t, r1, v1, cond, 0, r2);
 end
 
-function [domg, domgp] = domgf(alp1t, t, cond, r1, bet1, omg1, omg2, omgp)
-  if nargin < 8, omgp = 0; end
+function [domg, domgp] = domgf(alp1t, t, cond, r1, bet1, omg1, omg2, altp)
+  if nargin < 8, altp = 0; end
   [~, v1] = elliptocart2(t, [bet1, omg1], alp1t);
-  [r2, v2, ~, m12] = hybridint(t, r1, v1, cond, omgp);
+  [r2, v2, ~, m12] = hybridint(t, r1, v1, cond, altp);
   if size(cond, 1) > 0 && cond(1,1) == 2
     % If Y = 0 is the stopping condition, make this so
     r2(2) = cond(1,2);
   end
   [ellip2t, alp2, ~, rad2] = cart2toellip(t, r2, v2); omg2t = ellip2t(2);
-  if omgp && omg2t < 0, omg2t = omg2t + 360; end
+  if bitand(altp, 1) && omg2t < 0, omg2t = omg2t + 360; end
   domg = omg2t - omg2;
   domgp = m12 / ( cosd(alp2) * rad2 );
 end
