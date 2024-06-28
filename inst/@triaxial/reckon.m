@@ -12,7 +12,7 @@ function [pos2, dir2, m12, M12, M21] = reckon(t, pos1, dir1, s12)
 %     alp1 n x 1 array of azimuths at ellip1
 %     r1 n x 3 array of cartesian starting points
 %     v1 n x 3 array of cartesian directions at r1
-%     s12 an m long vector of distances
+%     s12 an n x m long array of distances
 %   Output:
 %     ellip2 m*n x 2 arrays of ellipsoidal coordinates [bet, omg]
 %     alp2 m*n x 1 array of azimuths at ellip2
@@ -38,11 +38,13 @@ function [pos2, dir2, m12, M12, M21] = reckon(t, pos1, dir1, s12)
 %   this is @ode45 for Octave and @ode89 for MATLAB.  The default error
 %   tolerances are multiplied by t.odemult which is set to 1e-10 by default.
 %
-%   This routine is lamely vectorized.  The positions along each geodesic are
-%   calculated handled independently.  For each geodesic, the positions at all
-%   the values of s12 are computed.  Thus ellip2(1:m, :) and alp2(1:m) are the
-%   positions and azimuths at distances s12(1:m) along the geodesic starting
-%   at ellip1(1,:) and alp1(1).
+%   This routine is lamely vectorized.  The positions along each geodesic
+%   are calculated handled independently.  For each geodesic, the positions
+%   at all the values of the corresponding row s12 are computed.  Thus
+%   ellip2((k-1)*m+[1:m], :) and alp2((k-1)*m+[1:m]) are the positions and
+%   azimuths at distances s12(k, 1:m) along the geodesic starting at
+%   ellip1(k,:) and alp1(k).  s12 can be a row vector, in which case the
+%   same set of distances are used for each geodesic.
 %
 %   The cost of the computation is proportional to the maximum positive value
 %   of s12 plus the maximum absolute negative value of s12.  There's no big
@@ -62,24 +64,27 @@ function [pos2, dir2, m12, M12, M21] = reckon(t, pos1, dir1, s12)
   else
     [r1, v1] = deal(pos1, dir1);
   end
-  r1 = r1 / t.b; s12 = s12(:) / t.b;
+  r1 = r1 / t.b; s12 = s12 / t.b;
   Z = 0 * (r1 + v1);
   n = size(Z, 1);
   r1 = r1 + Z;
   v1 = v1 + Z;
-  m = length(s12);
+  Z = Z(:, 1);
+  s12 = Z + s12;
+  m = size(s12, 2);
   r2 = zeros(m*n, 3); v2 = r2;
   if nargout <= 2
     for k = 1:n
       ind = m * (k-1) + (1:m);
-      [r2(ind,:), v2(ind, :)] = reckonint(scaled(t), r1(k,:), v1(k,:), s12);
+      [r2(ind,:), v2(ind, :)] = ...
+          reckonint(scaled(t), r1(k,:), v1(k,:), s12(k,:)');
     end
   else
     m12 = zeros(m*n, 1); M12 = m12; M21 = m12;
     for k = 1:n
       ind = m * (k-1) + (1:m);
       [r2(ind, :), v2(ind, :), m12(ind), M12(ind), M21(ind)] = ...
-          reckonint(scaled(t), r1, v1, s12);
+          reckonint(scaled(t), r1(k,:), v1(k,:), s12(k,:)');
     end
     m12 = m12 * t.b;
   end

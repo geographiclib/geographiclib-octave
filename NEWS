@@ -4,15 +4,21 @@ Version 2.3 (released 2024-mm-dd)
   * Fix serious BUG in triaxial.distance where incorrect results were
     sometimes returned when bet1 and bet2 had opposite signs and were
     both close to +/-90deg.
+  * Fix bug in the vectorization of triaxial.reckon when m12, M12, and
+    M21 are requested.
   * Fix vectorization bugs for triaxial.elliptocart2 and
     triaxial.cart2toellip; these arose if the position was a single
     umbilical point, and several directions were specified.
   * Fix bug in triaxial.cart2toellip for the computation of azimuth
     for umbilical points.
   * Fix bug in handling default arguments for triaxial.ellipnorm.
-  * Add triaxial.ellipflip.
   * Fix triaxial.distance with ellipsoidal coodinates so that the
     azimuths returned are consistent with the sheets of the endpoints.
+  * triaxial.cart2toellip has a new signature to allow directions to
+    be converted to azimuths consistent with a particular choice of
+    elliptic coordinates.
+  * Allow s12 to be a n x m array in triaxial.reckon.
+  * Add triaxial.ellipflip.
 
 Version 2.2 (released 2024-04-09)
   * Add a class, triaxial, to solve problems on a triaxial ellipsoid.

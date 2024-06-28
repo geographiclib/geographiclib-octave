@@ -29,6 +29,22 @@ function doc
 %   All angles are given in degrees.  All distances are given in the units
 %   of the semiaxes.
 %
+%   The accuracy of the geodesic routines for can be found using the
+%   test set available at
+%
+%     https://10.5281/zenodo.1251079
+%
+%   This consists of 500000 shortest geodesics on the ellipsoid uses
+%   triaxial(sqrt([2, 1, 1/2])).  Scaling the errors by 6.4e6 m to obtain
+%   the results for an ellipsoid roughly the size of the earth,
+%   we have the following estimates of the maximum error:
+%
+%               MATLAB  Octave
+%               R2023a  8.4.0
+%
+%     reckon    0.1 um  0.5 um
+%     distance   10 um  500 m
+%
 %   Conversion routines
 %
 %     [r2, h] = t.CARTTOCART2(r)

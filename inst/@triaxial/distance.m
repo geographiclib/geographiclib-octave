@@ -40,16 +40,28 @@ function [s12, dir1, dir2, m12, M12, M21, count] = distance(t, pos1, pos2)
 
 % Copyright (c) Charles Karney (2024) <karney@alum.mit.edu>.
 
+% Biggest error in distance with test set is for
+%  -89 -179 125.264389682754654315
+%  -90 0 0.00508935298572015
+% 2.41969095257529344553 1.71451268367223232925 0.0001845474104102257 0.00006279539595941223
+% Computed distance = 2.419690952576201, error = 9.1e-13 (MATLAB), 7.1e-13 (Octave)
+
+% Next biggest
+%   90 0 90.015261865118026289
+%   87 179 154.751620586596881957
+% 2.42055166682738704032 1.71451199706494557219 -0.00043933375632808661 -0.00129295666346354547
+% Computed distance = 2.420551666827091, error = 3.0e-13 (MATLAB), 6.7e-13 (Octave)
+
+% Next biggest error is = 2.0e-13
+% Mean error in distance is 1e-14
   Z = 0 * (pos1 + pos2);
   n = size(Z, 1);
   pos1 = pos1 + Z;
   pos2 = pos2 + Z;
   ellip = size(Z, 2) == 2;
   if ellip
-    [pos1, ~, flip1] = triaxial.ellipnorm(pos1);
-    [pos2, ~, flip2] = triaxial.ellipnorm(pos2);
-    r1 = elliptocart2(t, pos1);
-    r2 = elliptocart2(t, pos2);
+    r1 = elliptocart2(t, triaxial.ellipnorm(pos1));
+    r2 = elliptocart2(t, triaxial.ellipnorm(pos2));
   else
     [r1, r2] = deal(pos1, pos2);
   end
@@ -62,10 +74,8 @@ function [s12, dir1, dir2, m12, M12, M21, count] = distance(t, pos1, pos2)
   end
   s12 = s12 * t.b; m12 = m12 * t.b;
   if ellip
-    [~, dir1] = cart2toellip(t, r1, v1);
-    [~, dir2] = cart2toellip(t, r2, v2);
-    [~, dir1(flip1)] = triaxial.ellipflip(pos1(flip1,:), dir1(flip1));
-    [~, dir2(flip2)] = triaxial.ellipflip(pos2(flip2,:), dir2(flip2));
+    [~, dir1] = cart2toellip(t, pos1, v1);
+    [~, dir2] = cart2toellip(t, pos2, v2);
   else
     [dir1, dir2] = deal(v1, v2);
   end
@@ -80,7 +90,10 @@ function [s12, v1, v2, m12, M12, M21, count] = distanceint(t, r1, r2)
   if ~(s12 > sqrt(eps))
     if s12 == 0
       ellip = cart2toellip(t, (r1+r2)/2);
-      [~, v1] = elliptocart2(t, ellip, 0);
+      % head north/south in southern/northern hemisphere
+      % east on the equator
+      [~, v1] = elliptocart2(t, ellip, ...
+                             180 * (ellip(1) > 0) + 90 * (ellip(1) == 0));
     end
     [~, v2] = cart2norm(t, r2, v1);
     [~, v1] = cart2norm(t, r1, v1);

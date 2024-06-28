@@ -3,12 +3,14 @@ function [ellip, alp, gam, latrad] = cart2toellip(t, r, v)
 %
 %   ellip = CART2TOELLIP(t, r)
 %   [ellip, alp] = CART2TOELLIP(t, r, v)
+%   [ellip, alp] = CART2TOELLIP(t, ellip, v)
 %   [ellip, alp, gam, latrad] = CART2TOELLIP(t, r, v)
 %
 %   Input:
 %     t the triaxial ellipsoid object
 %     r an n x 3 array of cartesian points on the ellipsoid
 %     v an n x 3 array of cartesian directions on the ellipsoid
+%     ellip an n x 2 array of ellipsoidal coordinates [bet, omg]
 %   Output:
 %     ellip an n x 2 array of ellipsoidal coordinates [bet, omg]
 %     alp an n x 1 array of azimuths alpha (only if v is given)
@@ -20,6 +22,10 @@ function [ellip, alp, gam, latrad] = cart2toellip(t, r, v)
 %   ellipsoid at r.  To ensure that this is the case, call CARTNORM.  To
 %   convert arbitrary points use CARTTOELLIP.
 %
+%   The invocation [ellip, alp] = CART2TOELLIP(t, ellip, v) returns ellip
+%   unchanged and can be used to ensure that the return value of alp is
+%   consistent with ellip.
+%
 %   This routine can be called with r being a 1 x 3 array and v being an n x 3
 %   array.  In this case, ellip is a 1 x 2 array and alp is an n x 1 array.
 %
@@ -27,33 +33,43 @@ function [ellip, alp, gam, latrad] = cart2toellip(t, r, v)
 
 % Copyright (c) Charles Karney (2024) <karney@alum.mit.edu>.
 
-  rn = r ./ t.axes;
-  xi = rn(:,1); eta = rn(:,2); zeta = rn(:,3);
-  g = vecdot([t.k2, t.k2 - t.kp2, -t.kp2], rn.^2);
-  % Force umbilical point to be returned regardless of rounding errors in
-  % multiplying and dividing by t.axes.
-  g(vecabs(abs(r) - t.axes .* sqrt([t.kp2, 0, t.k2])) == 0) = 0;
-  h = sqrt(g.^2 + (4*t.k2*t.kp2) * eta.^2);
-  cb = sqrt( (h + g)/2 ) / sqrt(t.k2);
-  so = eta ./ cb;
-  l = g < 0;
-  so(l) = signx(eta(l)) .* sqrt( (h(l) - g(l))/2 ) / sqrt(t.kp2);
-  cb(l) = abs(eta(l) ./ so(l));
-  l = h == 0;
-  so(l) = 0; cb(l) = 0;
-  tz = sqrt(t.k2 + t.kp2 * so.^2);
-  sb = zeta ./ tz;
-  % at a prolate pole omg = 0 or 180, bet is arbitrary; pick bet = -90
-  sb(tz == 0) = -1;
-  tx = sqrt(t.k2 * cb.^2 + t.kp2);
-  co = xi ./ tx;
-  % at an oblate pole bet = +/-90, omg is arbirary; pick omg = 0
-  co(tx == 0) = 1;
-  bet = atan2d(sb, cb);
-  omg = atan2d(so, co);
+  if size(r, 2) == 2
+    ellip = r;
+    bet = ellip(:,1);
+    omg = ellip(:,2);
+    sb = sind(bet); cb = cosd(bet);
+    so = sind(omg); co = cosd(omg);
+    tz = sqrt(t.k2 + t.kp2 * so.^2);
+    tx = sqrt(t.k2 * cb.^2 + t.kp2);
 
-  ellip = [bet, omg];
+  else
+    rn = r ./ t.axes;
+    xi = rn(:,1); eta = rn(:,2); zeta = rn(:,3);
+    g = vecdot([t.k2, t.k2 - t.kp2, -t.kp2], rn.^2);
+    % Force umbilical point to be returned regardless of rounding errors in
+    % multiplying and dividing by t.axes.
+    g(vecabs(abs(r) - t.axes .* sqrt([t.kp2, 0, t.k2])) == 0) = 0;
+    h = sqrt(g.^2 + (4*t.k2*t.kp2) * eta.^2);
+    cb = sqrt( (h + g)/2 ) / sqrt(t.k2);
+    so = eta ./ cb;
+    l = g < 0;
+    so(l) = signx(eta(l)) .* sqrt( (h(l) - g(l))/2 ) / sqrt(t.kp2);
+    cb(l) = abs(eta(l) ./ so(l));
+    l = h == 0;
+    so(l) = 0; cb(l) = 0;
+    tz = sqrt(t.k2 + t.kp2 * so.^2);
+    sb = zeta ./ tz;
+    % at a prolate pole omg = 0 or 180, bet is arbitrary; pick bet = -90
+    sb(tz == 0) = -1;
+    tx = sqrt(t.k2 * cb.^2 + t.kp2);
+    co = xi ./ tx;
+    % at an oblate pole bet = +/-90, omg is arbirary; pick omg = 0
+    co(tx == 0) = 1;
+    bet = atan2d(sb, cb);
+    omg = atan2d(so, co);
 
+    ellip = [bet, omg];
+  end
   if nargin < 2 || nargout < 2, return, end
 
   N = vecunit([-t.a * t.k2 * cb .* sb .* co ./ tx, ...
@@ -92,13 +108,13 @@ function [ellip, alp, gam, latrad] = cart2toellip(t, r, v)
   % an umbilical point.
   umb = cosd(bet + 0*alp) == 0 & sind(omg + 0*alp) == 0;
   if any(umb) && t.k2 ~= 0 && t.kp2 ~= 0
-    co = co + 0*alp; sb = sb + 0*alp; rn = rn + 0*alp;
-
+    co = co + 0*alp; sb = sb + 0*alp;
     w = sb(umb) .* co(umb);
-    up = vecunit(rn(umb,:) ./ t.axes);
+    % Only need up at umbilical points.
+    up = vecunit([co .* tx/t.a, 0*co, sb .* tz/t.c]);
     % compute direction cosines of v wrt the plane y = 0; angle = 2*alp
     s2a = -v(umb,2).*w;
-    c2a = (up(:,3).*v(umb,1) - up(:,1).*v(umb,3)).*w;
+    c2a = (up(umb,3).*v(umb,1) - up(umb,1).*v(umb,3)).*w;
     h2 = 1;                             % h2 = hypot(c2a, s2a) = 1
     % 2*alp = atan2(s2a, c2a), h2 = hypot(s2a, c2a)
     % alp = atan2(sa, ca)
