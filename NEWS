@@ -1,6 +1,6 @@
 Changes in geographiclib-octave
 
-Version 2.3 (released 2024-mm-dd)
+Version 2.3 (released 2024-07-09)
   * Fix serious BUG in triaxial.distance where incorrect results were
     sometimes returned when bet1 and bet2 had opposite signs and were
     both close to +/-90deg.
@@ -19,6 +19,8 @@ Version 2.3 (released 2024-mm-dd)
     elliptic coordinates.
   * Allow s12 to be a n x m array in triaxial.reckon.
   * Add triaxial.ellipflip.
+  * Default ellipsoid parameters (for the Earth) are rounded to the
+    nearest meter.
 
 Version 2.2 (released 2024-04-09)
   * Add a class, triaxial, to solve problems on a triaxial ellipsoid.

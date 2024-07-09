@@ -67,11 +67,18 @@ classdef triaxial
     %
     %     inf > a >= b >= c > 0
     %
-    %   If axes is omitted, the parameters of the triaxial reference ellipsoid
-    %   for the Earth are used; see Hu, Shum, Bevis, J. Geod. 97, 29 (2023)
-    %   https://doi.org/10.1007/s00190-023-01717-1
+    %   If axes is omitted, the parameters of the triaxial reference
+    %   ellipsoid for the Earth, rounded to the nearest meter, are used;
+    %   see
+    %
+    %     Panou, Korakitis, Pantazis, J. Geod. Sci. 10, 69 (2020)
+    %     https://doi.org/10.1515/jogs-2020-0105
+    %     Hu, Shum, Bevis, J. Geod. 97, 29 (2023)
+    %     https://doi.org/10.1007/s00190-023-01717-1
+
       if nargin < 1
-        axes = [6378171.86, 6378102.10, 6356752.33];
+        axes = [6378172, 6378102, 6356752];
+        % The conventional geographical longitude of the x axis is -14.94 deg
       end
       axes = axes(:)';
       assert(numel(axes) == 3 && isfinite(axes(1)) && ...
