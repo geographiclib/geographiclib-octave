@@ -44,16 +44,31 @@ After release
   tag git vM.N
 
 Registered with Octave package site
+
 https://gnu-octave.github.io/packages/geographiclib
 
-Blurb:
+checked out at
+
+  ~/git/octave-packages/packages/geographiclib.yaml
+
+Blurb for MATLAB package:
+https://www.mathworks.com/matlabcentral/fileexchange/50605
 
 Native Octave/MATLAB implementations of a subset of the C++ library,
-GeographicLib. Key components of this toolbox are: (a) Geodesics,
-direct, inverse, area calculations; (b) Projections, transverse
-Mercator, polar stereographic, etc; (c) Grid systems, UTM, UPS, MGRS;
-(d) Geoid lookup, egm84, egm96, egm2008 geoids supported; (e) Geometric
-transformations, geocentric, local cartesian; (f) Great ellipse, direct,
-inverse, area calculations; (g) Various problem for the triaxial
-ellipsoid including the solution of the direct and inverse geodesic
-prolems.  Note (f) and (g) are not part of the C++ library.
+GeographicLib. Key components of this toolbox are:
+
+* Geodesics, direct, inverse, area calculations.
+* Projections, transverse Mercator, polar stereographic, etc.
+* Grid systems, UTM, UPS, MGRS.
+* Geoid lookup, egm84, egm96, egm2008 geoids supported.
+* Geometric transformations, geocentric, local cartesian.
+* Great ellipse, direct, inverse, area calculations.
+* Geodesics and coordinate conversions on a triaxial ellipsoid.
+
+(The last two items are not present in the C++ library.)  All the
+functions are vectorized and so offer speeds comparable to compiled
+C++ code when operating on arrays.
+
+Full documentation is available at
+
+https://github.com/geographiclib/geographiclib-octave#readme

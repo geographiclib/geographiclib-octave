@@ -28,7 +28,7 @@ of the C++ library, GeographicLib.  Key components of this toolbox are
   * Geoid lookup, egm84, egm96, egm2008 geoids supported.
   * Geometric transformations, geocentric, local cartesian.
   * Great ellipse, direct, inverse, area calculations.
-  * A class to solve problems on a triaxial ellipsoid.
+  * Geodesics and coordinate conversions on a triaxial ellipsoid.
 
 (The last two items are not present in the C++ library.)  All the
 functions are vectorized and so offer speeds comparable to compiled
