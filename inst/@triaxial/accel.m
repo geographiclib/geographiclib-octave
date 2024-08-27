@@ -29,7 +29,7 @@ function [v, acc, K] = accel(t, r, v)
   [r, v] = cart2norm(t, r, v);
   axes2 = t.axes.^2;
   n = size(r, 1);
-  if n == 0
+  if n == 1
     up = r ./ axes2;
     u2 = up * up';
     acc = -((v.^2 * (1./axes2)') / u2) * up;

@@ -39,6 +39,7 @@ function geographiclib_test
   i = GeodSolve92; if i, n=n+1; fprintf('GeodSolve92 fail: %d\n', i); end
   i = GeodSolve94; if i, n=n+1; fprintf('GeodSolve94 fail: %d\n', i); end
   i = GeodSolve96; if i, n=n+1; fprintf('GeodSolve96 fail: %d\n', i); end
+  i = GeodSolve99; if i, n=n+1; fprintf('GeodSolve99 fail: %d\n', i); end
   i = Planimeter0 ; if i, n=n+1; fprintf('Planimeter0  fail: %d\n', i); end
   i = Planimeter5 ; if i, n=n+1; fprintf('Planimeter5  fail: %d\n', i); end
   i = Planimeter6 ; if i, n=n+1; fprintf('Planimeter6  fail: %d\n', i); end
@@ -639,6 +640,15 @@ function n = GeodSolve96
   ell = ellipsoid(6378137, 1/298.257222101);
   [~, ~, ~, S12] = geoddistance(0, 0, 60.0832522871723, 89.8492185074635, ell);
   n = n + assertEquals(S12, 42426932221845, 0.5);
+end
+
+function n = GeodSolve99
+% Test case https://github.com/geographiclib/geographiclib-js/issues/3
+  n = 0;
+  [s12, azi1, azi2] = geoddistance(45, 0, -45, 179.572719);
+  n = n + assertEquals(azi1,  90.00000028, 1e-8  );
+  n = n + assertEquals(azi2,  90.00000028, 1e-8  );
+  n = n + assertEquals(s12,  19987083.007, 0.5e-3);
 end
 
 function n = Planimeter0
