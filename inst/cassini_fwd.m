@@ -68,7 +68,7 @@ function [x, y, azi, rk] = cassini_fwd(lat0, lon0, lat, lon, ellipsoid)
   salp0 = salp .* cbet;
   calp0 = hypot(calp, salp .* sbet);
   sbet1 = calp0;
-  c = signbit(lat + Z);
+  c = signbitx(lat + Z);
   sbet1(c) = -sbet1(c);
   cbet1 = abs(salp0);
   c = abs(dlon) <= 90;

@@ -118,7 +118,7 @@ function [lat, lon, h, M] = geocent_inv(X, Y, Z, ellipsoid)
       zz = sqrt(zz / e2m);
       xx = sqrt(xx);
       H = hypot(zz, xx); sphi(c) = zz ./ H; cphi(c) = xx ./ H;
-      sphi(c & signbit(Z)) = - sphi(c & signbit(Z));
+      sphi(c & signbitx(Z)) = - sphi(c & signbitx(Z));
       h(c) = - a *  H / e2a;
       if e2 >= 0
         h(c) = e2m * h(c);
