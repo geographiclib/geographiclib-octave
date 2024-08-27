@@ -33,6 +33,8 @@ Before release:
   NEWS fix date
   check COPYING DESCRIPTION.in INDEX
   Remove alpha versions of the distribution from distrib-Octave
+  make all test
+  make stage-dist deploy-dist
 
 After release
   upload to MATLAB Central
@@ -40,7 +42,7 @@ After release
     update blurb to refer to
       https://github.com/geographiclib/geographiclib-octave#readme
     download toolbox package (after an hour or so)
-  notify Fedora maintainer: Rich Mattes <richmattes@gmail.com>
+    make stage-dist deploy-dist
   tag git vM.N
 
 Registered with Octave package site
@@ -50,6 +52,8 @@ https://gnu-octave.github.io/packages/geographiclib
 checked out at
 
   ~/git/octave-packages/packages/geographiclib.yaml
+
+add info for new package and make PR on cffk/geographiclib/M.N
 
 Blurb for MATLAB package:
 https://www.mathworks.com/matlabcentral/fileexchange/50605
