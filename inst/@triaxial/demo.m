@@ -30,9 +30,9 @@ function demo(n)
   titles = { 'ellipsoidal graticule';
              'circumpolar geodesic a';
              'circumpolar geodesic b';
-             'transpolar geodesic a';
-             'transpolar geodesic b';
-             'umbilical geodesic';
+             'umbilical geodesic c';
+             'transpolar geodesic d';
+             'transpolar geodesic e';
              'cut locus';
              'astroid';
              'geodesic circles';
@@ -50,10 +50,11 @@ function demo(n)
   ds = 0.025;
   dang = 2;
   ang = [-180:dang:180,nan]';
+  viewpt0 = [40, 30];
   if threed
     viewpt = [];
   else
-    viewpt = [40, 30];
+    viewpt = viewpt0;
   end
   t = triaxial([1.01, 1, 0.8]);
   switch m
@@ -70,14 +71,14 @@ function demo(n)
       plotend(t, viewpt);
       title(titles{m+1});
     case {1, 2, 3, 4, 5}
-      dat = [ 45.10472891 0 90 321.89789588;
-              87.47973017 0 90 491.63487824;
-              90 39.89350071 180 232.65487487;
-              90 9.96933777 180 508.78175722;
-              90 0 135 142.63587003 ];
+      dat = [ 42.70330 ,  0       ,  90 , 162.80637 ;
+              87.52250 ,  0       ,  90 , 247.24408 ;
+              90       ,  0       , 135 , 142.63587 ;
+              90       , 10.15216 , 180 , 252.96477 ;
+              90       , 39.25531 , 180 , 156.05191 ];
       [pos1, dir1, s12] = deal(dat(m,1:2), dat(m,3), dat(m,4));
       npts = ceil(s12/ds);
-      s12 = (-npts:npts)' * s12/npts;
+      s12 = (-npts:npts) * s12/npts;
       pos2 = t.reckon(pos1, dir1, s12);
       plotstart(t, viewpt);
       t.cartproj(t.elliptocart2(pos2), viewpt, 'Color', blue);
@@ -86,8 +87,8 @@ function demo(n)
       plotend(t, viewpt);
       title(titles{m+1});
     case 6
-      % pos1 = t.cart2toellip(-t.geodtocart(viewpt))
-      ellip1 = [-34.4575, -149.9417]; bet2 = - ellip1(1);
+      ellip1 = t.cart2toellip(-t.geodtocart(viewpt0));
+      bet2 = - ellip1(1);
       plotstart(t, viewpt);
       r = zeros(0, 3);
       omg2 = [];
@@ -109,7 +110,7 @@ function demo(n)
         end
         [~,~, s12] = t.hybrid(r1, v1, cond);
         npts = ceil((s12-s1)/ds);
-        s12 = linspace(s1, s12, npts)';
+        s12 = linspace(s1, s12, npts);
         r2 = t.reckon(r1, v1, s12);
         r = [r; r2];                    %#ok<*AGROW>
         if mod(alp1-90, 180) ~= 0
@@ -132,8 +133,8 @@ function demo(n)
       title(titles{m+1});
     case 7
       % like 6 but extend to opposite line of long
-      % pos1 = t.cart2toellip(-t.geodtocart(viewpt))
-      ellip1 = [-34.4575, -149.9417]; omg2 = 180 + ellip1(2);
+      ellip1 = t.cart2toellip(-t.geodtocart(viewpt0));
+      omg2 = 180 + ellip1(2);
       plotstart(t, viewpt);
       r = zeros(0, 3);
       bet2 = [];
@@ -155,7 +156,7 @@ function demo(n)
         end
         [~,~, s12] = t.hybrid(r1, v1, cond, 1);
         npts = ceil((s12-s1)/ds);
-        s12 = linspace(s1, s12, npts)';
+        s12 = linspace(s1, s12, npts);
         r2 = t.reckon(r1, v1, s12);
         r = [r; r2];
         if mod(alp1, 180) ~= 0
@@ -177,8 +178,7 @@ function demo(n)
       plotend(t, viewpt);
       title(titles{m+1});
     case 8
-      % pos1 = t.cart2toellip(-t.geodtocart(viewpt))
-      ellip1 = [-34.4575, -149.9417];
+      ellip1 = t.cart2toellip(-t.geodtocart(viewpt0));
       ellip2 = [-ellip1(1), 180 + ellip1(2)];
       plotstart(t, viewpt);
       s12 = t.distance(ellip1, ellip2);
