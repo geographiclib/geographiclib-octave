@@ -65,6 +65,7 @@ function geographiclib_test
   i = mgrs3; if i, n=n+1; fprintf('mgrs3 fail: %d\n', i); end
   i = mgrs4; if i, n=n+1; fprintf('mgrs4 fail: %d\n', i); end
   i = mgrs5; if i, n=n+1; fprintf('mgrs5 fail: %d\n', i); end
+  i = reckonindexing; if i, n=n+1; fprintf('reckonindexing fail: %d\n', i); end
   % check for suppression of "warning: division by zero" in octave
   [~, ~, ~, ~, ~, ~, ~, s12] = geodreckon(-30, 0, 180, 90, 1);
   assert(~isnan(s12));
@@ -961,6 +962,17 @@ function n = mgrs5
   n = n + assertEquals(mgrs{2}, 'BKH', 0);
   n = n + assertEquals(length(mgrs{3}), 5, 0);
   n = n + assertEquals(mgrs{3}, 'BKH41', 0);
+end
+
+function n = reckonindexing
+  n = 0;
+  try
+    lat1 = -33; lon1 = 151; s12 = [0, 10, 50]*1e3;
+    azi1 = [0, 10];                     % Some azimuth array with a 0
+    [lat2, lon2, azi2, S12] = geodreckon(lat1, lon1, s12', azi1);
+  catch
+    n = n +1;
+  end
 end
 
 %!test geographiclib_test

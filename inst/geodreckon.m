@@ -298,6 +298,7 @@ function [lat2, lon2, azi2, S12, m12, M12, M21, a12_s12] = geodreckon ...
                    csig12 <= 0);
     calp12 = salp0.^2 + calp0.^2 .* csig1 .* csig2;
     s = calp0 == 0 | salp0 == 0;
+    salp1 = expand(salp1, S1, Z); calp1 = expand(calp1, S1, Z);
     salp12(s) = salp2(s) .* calp1(s) - calp2(s) .* salp1(s);
     calp12(s) = calp2(s) .* calp1(s) + salp2(s) .* salp1(s);
     if e2 ~= 0
