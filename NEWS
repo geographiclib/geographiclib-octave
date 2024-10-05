@@ -1,5 +1,12 @@
 Changes in geographiclib-octave
 
+Version 2.3.2 (released 2024-10-05)
+  * Fix bug (reported by @xpyctjr) in geodreckon.  The indexing was
+    buggy when S12 is requested and azi1 and s12 have different
+    shapes.
+  * Fix various breakages in triaxial.demo caused by recent changes in
+    triaxial.reclon.
+
 Version 2.3.1 (released 2024-08-27)
   * Bug fix: replace signbit by signbitx in geocent_inv and
     cassini_fwd.
