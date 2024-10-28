@@ -170,6 +170,9 @@ function [s12, v1, v2, m12, M12, M21, count] = distanceint(t, r1, r2)
   M = M * diag(flip);
   ellip = cart2toellip(t, rr);
   [bet, omg] = deal(ellip(:,1), ellip(:,2));
+  % if (t.k2 == 0 && rad(2) == 0)
+  %   bet = [0,0]';
+  % end
   omg(omg == -180) = 180;
   [r1, r2] = deal(rr(1,:), rr(2,:));
   [bet1, bet2] = deal(bet(1), bet(2));
@@ -183,11 +186,12 @@ function [s12, v1, v2, m12, M12, M21, count] = distanceint(t, r1, r2)
          0 <= omg1 && omg1 <= 90);
   % if abs(bet2) = bet1 or prolate, then omg1 <= abs(omg2) <= 180-omg1
   assert(~(abs(bet2) == bet1 || t.k2 == 0) || ...
-         omg1 <= abs(omg2) && abs(omg2) <= 180-omg1+eps(180));
+         omg1-eps(180) <= abs(omg2) && abs(omg2) <= 180-omg1+eps(180));
   % For oblate: omg1 = 0, omg2 >= 0
   assert(~(t.kp2 == 0) || ...
            omg1 == 0 && omg2 >= 0);
-  % For prolate: bet2 = 0
+  % For prolate: bet2 = 0.  For both points at prolate poles, this is
+  % provided by cart2toellip.
   assert(~(t.k2 == 0) || ...
          bet2 == 0);
   done = false;                         % A marker

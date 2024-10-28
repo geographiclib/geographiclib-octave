@@ -58,6 +58,8 @@ add info for new package and make PR on cffk/geographiclib/M.N
 Blurb for MATLAB package:
 https://www.mathworks.com/matlabcentral/fileexchange/50605
 
+(Update version number in blurb)
+
 Native Octave/MATLAB implementations of a subset of the C++ library,
 GeographicLib. Key components of this toolbox are:
 

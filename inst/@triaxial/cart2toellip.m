@@ -60,7 +60,10 @@ function [ellip, alp, gam, latrad] = cart2toellip(t, r, v)
     tz = sqrt(t.k2 + t.kp2 * so.^2);
     sb = zeta ./ tz;
     % at a prolate pole omg = 0 or 180, bet is arbitrary; pick bet = -90
-    sb(tz == 0) = -1;
+    % sb(tz == 0) = -1;
+    % or better to pick bet = 0 to help triaxial.distance.
+    sb(tz == 0) = 0;
+    cb(tz == 0) = 1;
     tx = sqrt(t.k2 * cb.^2 + t.kp2);
     co = xi ./ tx;
     % at an oblate pole bet = +/-90, omg is arbirary; pick omg = 0

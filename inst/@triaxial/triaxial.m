@@ -3,9 +3,11 @@ classdef triaxial
 %
 %   t = TRIAXIAL
 %   t = TRIAXIAL(axes)
+%   t = TRIAXIAL(ellipsoid)
 %
 %   Input:
 %     axes = [a, b, c] a length 3 vector of semiaxes
+%     ellipsoid = [b, e2, k2, kp2]
 %   Output:
 %     t the triaxial ellipsoid object
 %
@@ -17,23 +19,28 @@ classdef triaxial
 %   the Earth are used; see Hu, Shum, Bevis, J. Geod. 97, 29 (2023)
 %   https://doi.org/10.1007/s00190-023-01717-1
 %
+%   The initialization with [b, e2, k2, kp2] specifies the ellipsoid in
+%   terms of
+%
+%     e2 = (a^2 - c^2) / b
+%     k2 = (b^2 - c^2) / (a^2 - c^2)
+%     kp2 = (a^2 - b^2) / (a^2 - c^2)
+%
+%   (N.B., k2 + kp2 must equal 1), so that
+%
+%     a = b * sqrt(1 + e2*kp2)
+%     c = b * sqrt(1 - e2*k2)
+%
 %   The properties of t that can be changed are
 %
 %     linesimptol the tolerance for line simplification in CARTPROJ
 %     odesolver the name of the ODE solver
 %     odemult the multiplier for the error tolerances for the ODE solver
 %
-%   The case a == b == c. the sphere, is a nonuniform limit.  How
-%   ellipsoidal coordinates in this case depends on the properties
-%
-%     k2 = (b^2 - c^2) / (a^2 - c^2)
-%     kp2 = (a^2 - b^2) / (a^2 -  c^2)
-%
-%   By default, this class treats the sphere as a limiting form of an oblate
-%   ellipsoid, i.e., k2 = 1, kp2 = 0.  However, these values can be
-%   overridden.  The values must satisfy k2 >= 0, kp2 >= 0, k2 + kp2 == 1.
-%   This choice governs the definition of ellipsoidal coordinates and
-%   affects the inner workings of DISTANCE
+%   The case a == b == c. the sphere, is a nonuniform limit.  By default,
+%   this class treats the sphere a limiting form of an oblate ellipsoid,
+%   i.e., as triaxial([b, 0, 1, 0]).  This choice governs the definition of
+%   ellipsoidal coordinates and affects the inner workings of DISTANCE
 %
 %   See also DOC, DEMO, TESTS, CART2TOELLIP, DISTANCE
 
@@ -81,23 +88,39 @@ classdef triaxial
         % The conventional geographical longitude of the x axis is -14.94 deg
       end
       axes = axes(:)';
-      assert(numel(axes) == 3 && isfinite(axes(1)) && ...
-             axes(1) >= axes(2) && axes(2) >= axes(3) && axes(3) > 0);
-      obj.axes = axes;
-      obj.a = obj.axes(1);
-      obj.b = obj.axes(2);
-      obj.c = obj.axes(3);
+      assert(numel(axes) == 3 || numel(axes) == 4);
+      if numel(axes) == 3
+        assert(isfinite(axes(1)) && ...
+               axes(1) >= axes(2) && axes(2) >= axes(3) && axes(3) > 0);
+        obj.axes = axes;
+        obj.a = obj.axes(1);
+        obj.b = obj.axes(2);
+        obj.c = obj.axes(3);
 
-      s = (obj.a - obj.c) * (obj.a + obj.c);
-      obj.e2 = s / obj.b^2;
-      if s == 0
-        % The sphere is a nonuniform limit, we can pick any values in [0,1]
-        % s.t. k2 + kp2 = 1.  Here we choose to treat the sphere as an
-        % oblate ellipsoid.
-        obj.kp2 = 0; obj.k2 = 1 - obj.kp2;
-      else
-        obj.kp2 = (obj.a - obj.b) * (obj.a + obj.b)/s;
-        obj.k2  = (obj.b - obj.c) * (obj.b + obj.c)/s;
+        s = (obj.a - obj.c) * (obj.a + obj.c);
+        obj.e2 = s / obj.b^2;
+        if s == 0
+          % The sphere is a nonuniform limit, we can pick any values in [0,1]
+          % s.t. k2 + kp2 = 1.  Here we choose to treat the sphere as an
+          % oblate ellipsoid.
+          obj.kp2 = 0; obj.k2 = 1 - obj.kp2;
+        else
+          obj.kp2 = (obj.a - obj.b) * (obj.a + obj.b)/s;
+          obj.k2  = (obj.b - obj.c) * (obj.b + obj.c)/s;
+        end
+      else                              % numel(axes) == 4
+        obj.b = axes(1);
+        obj.e2 = axes(2);
+        obj.k2 = axes(3);
+        obj.kp2 = axes(4);
+        assert(abs((obj.k2 + obj.kp2) - 1) <= eps && ...
+               obj.e2 * obj.k2 < 1);
+        obj.a = obj.b * sqrt(1 + obj.e2 * obj.kp2);
+        obj.c = obj.b * sqrt(1 - obj.e2 * obj.k2);
+        obj.axes = [obj.a, obj.b, obj.c];
+        assert(isfinite(obj.axes(1)) && ...
+               obj.axes(1) >= obj.axes(2) && ...
+               obj.axes(2) >= obj.axes(3) && obj.axes(3) > 0);
       end
       obj.linesimptol = 5e-4;
       obj.odemult = 1e-10;
