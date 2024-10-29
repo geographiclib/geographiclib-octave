@@ -491,8 +491,13 @@ function [domg, domgp] = domgf(alp1t, t, cond, r1, bet1, omg1, omg2, altp)
     r2(2) = cond(1,2);
   end
   [ellip2t, alp2, ~, rad2] = cart2toellip(t, r2, v2); omg2t = ellip2t(2);
-  if bitand(altp, 1) && omg2t < 0, omg2t = omg2t + 360; end
+  % if bitand(altp, 1) && omg2t < 0, omg2t = omg2t + 360; end
   domg = omg2t - omg2;
+  if domg > 180,
+    domg = domg - 360;
+  elseif domg < -180
+    domg = domg + 360;
+  end
   domgp = m12 / ( cosd(alp2) * rad2 );
 end
 
