@@ -71,18 +71,18 @@ function [t, count, err] = newt(axes2, r2, b)
 
   tol = eps^(2/3);
   quadp = true;
-  if ~quadp
-    tmin = max([    r2(:,  3)               , ...
-                    sum(r2(:,2:3), 2) - axes2(2), ...
-                    sum(r2       , 2) - axes2(1)], [], 2);
-    tmax = sum(r2, 2);
-  else
+  if quadp
     % Not worth doing with cubic starting pt
     tmin = max([quad(axes2(:,[2,3]),  r2(:,[2,3])), ...
                 quad(axes2(:,[1,3]), [r2(:,1)+r2(:,2),r2(:,3)]), ...
                 quad(axes2(:,[1,2]), [r2(:,1),r2(:,2)+r2(:,3)])], [], 2);
     tmax = min([quad(axes2(:,[2,3]), [r2(:,1)+r2(:,2),r2(:,3)]), ...
                 quad(axes2(:,[1,3]), [r2(:,1),r2(:,2)+r2(:,3)])], [], 2);
+  % else
+  %   tmin = max([    r2(:,  3)               , ...
+  %                   sum(r2(:,2:3), 2) - axes2(2), ...
+  %                   sum(r2       , 2) - axes2(1)], [], 2);
+  %   tmax = sum(r2, 2);
   end
   n = size(r2, 1);
   count = zeros(n, 1);

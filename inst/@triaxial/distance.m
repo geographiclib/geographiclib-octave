@@ -347,7 +347,7 @@ function [s12, v1, v2, m12, M12, M21, count] = distanceint2(t, r1, r2)
   % lists for 4 quadrants of alp1t
   alpu = atan2d(sqrt(t.kp2)*sind(omg1), sqrt(t.k2)*cosd(bet1));
   alpu = [alpu, 180-alpu, alpu-180, -alpu]';
-  umb = (t.axes .* sqrt([ t.kp2, 0, t.k2])) .* [-1,1,1; 1,1,1; -1,1,1; 1,1,1];
+  % umb = (t.axes.*sqrt([ t.kp2, 0, t.k2])) .* [-1,1,1; 1,1,1; -1,1,1; 1,1,1];
   omgu = nan(4,1);
 
   range = [];
@@ -493,7 +493,7 @@ function [domg, domgp] = domgf(alp1t, t, cond, r1, bet1, omg1, omg2, altp)
   [ellip2t, alp2, ~, rad2] = cart2toellip(t, r2, v2); omg2t = ellip2t(2);
   % if bitand(altp, 1) && omg2t < 0, omg2t = omg2t + 360; end
   domg = omg2t - omg2;
-  if domg > 180,
+  if domg > 180
     domg = domg - 360;
   elseif domg < -180
     domg = domg + 360;

@@ -50,7 +50,7 @@ function [A, P, N] = geodarea(lats, lons, ellipsoid)
   lon1 = lons(:);
   M = length(lat1);
   ind = [0; find(isnan(lat1 + lon1))];
-  if length(ind) == 1 || ind(end) ~= M
+  if isscalar(ind) || ind(end) ~= M
     ind = [ind; M + 1];
   end
   K = length(ind) - 1;

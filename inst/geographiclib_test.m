@@ -969,7 +969,8 @@ function n = reckonindexing
   try
     lat1 = -33; lon1 = 151; s12 = [0, 10, 50]*1e3;
     azi1 = [0, 10];                     % Some azimuth array with a 0
-    [lat2, lon2, azi2, S12] = geodreckon(lat1, lon1, s12', azi1);
+    % Ask for [lat2, lon2, azi2, S12], code for S12 triggers the indexing bug
+    [~, ~, ~, ~] = geodreckon(lat1, lon1, s12', azi1);
   catch
     n = n +1;
   end
