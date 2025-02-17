@@ -26,12 +26,13 @@ classdef triaxial
 %     k2 = (b^2 - c^2) / (a^2 - c^2)
 %     kp2 = (a^2 - b^2) / (a^2 - c^2)
 %
-%   (N.B., k2 + kp2 must equal 1), so that
+%   so that
 %
 %     a = b * sqrt(1 + e2*kp2)
 %     c = b * sqrt(1 - e2*k2)
 %
-%   The properties of t that can be changed are
+%   N.B., k2 and kp2 are normalized to make k2 + kp2 = 1.  The properties
+%   of t that can be changed are
 %
 %     linesimptol the tolerance for line simplification in CARTPROJ
 %     odesolver the name of the ODE solver
@@ -44,7 +45,7 @@ classdef triaxial
 %
 %   See also DOC, DEMO, TESTS, CART2TOELLIP, DISTANCE
 
-% Copyright (c) Charles Karney (2024) <karney@alum.mit.edu>.
+% Copyright (c) Charles Karney (2024-2025) <karney@alum.mit.edu>.
 
   properties
     axes
@@ -109,12 +110,13 @@ classdef triaxial
           obj.k2  = (obj.b - obj.c) * (obj.b + obj.c)/s;
         end
       else                              % numel(axes) == 4
+        ksum = axes(3) + axes(4);
+        assert(ksum > 0 && axes(3) >= 0 && axes(4) >= 0);
         obj.b = axes(1);
         obj.e2 = axes(2);
-        obj.k2 = axes(3);
-        obj.kp2 = axes(4);
-        assert(abs((obj.k2 + obj.kp2) - 1) <= eps && ...
-               obj.e2 * obj.k2 < 1);
+        obj.k2 = axes(3)/ksum;
+        obj.kp2 = axes(4)/ksum;
+        assert(obj.e2 * obj.k2 < 1);
         obj.a = obj.b * sqrt(1 + obj.e2 * obj.kp2);
         obj.c = obj.b * sqrt(1 - obj.e2 * obj.k2);
         obj.axes = [obj.a, obj.b, obj.c];
