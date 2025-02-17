@@ -1,5 +1,10 @@
 Changes in geographiclib-octave
 
+Version 2.3.3 (released 2025-02-17)
+  * Allow triaxial ellipsoid to be specified by [b, e2, k2, kp2] in
+    addition to [a, b, c].
+  * Fix triaxial to deal with prolate, oblate, and spherical cases.
+
 Version 2.3.2 (released 2024-10-05)
   * Fix bug (reported by @xpyctjr) in geodreckon.  The indexing was
     buggy when S12 is requested and azi1 and s12 have different
