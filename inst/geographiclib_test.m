@@ -40,6 +40,7 @@ function geographiclib_test
   i = GeodSolve94; if i, n=n+1; fprintf('GeodSolve94 fail: %d\n', i); end
   i = GeodSolve96; if i, n=n+1; fprintf('GeodSolve96 fail: %d\n', i); end
   i = GeodSolve99; if i, n=n+1; fprintf('GeodSolve99 fail: %d\n', i); end
+  i = GeodSolve100; if i, n=n+1; fprintf('GeodSolve100 fail: %d\n', i); end
   i = Planimeter0 ; if i, n=n+1; fprintf('Planimeter0  fail: %d\n', i); end
   i = Planimeter5 ; if i, n=n+1; fprintf('Planimeter5  fail: %d\n', i); end
   i = Planimeter6 ; if i, n=n+1; fprintf('Planimeter6  fail: %d\n', i); end
@@ -650,6 +651,19 @@ function n = GeodSolve99
   n = n + assertEquals(azi1,  90.00000028, 1e-8  );
   n = n + assertEquals(azi2,  90.00000028, 1e-8  );
   n = n + assertEquals(s12,  19987083.007, 0.5e-3);
+end
+
+function n = GeodSolve100
+% Check fix for meridional failure for a strongly prolate ellipsoid.
+% This was caused by assuming that sig12 < 1 guarantees the meridional
+% geodesic is shortest (even though m12 < 0).  Counter example is tested
+% here.  Bug is not present for f >= -2, b < 3*a.  For f = -2.1 the
+% inverse calculation for 30.61 0 30.61 180 exhibits the bug.
+  n = 0;
+  [s12, azi1, azi2] = geoddistance(30, 0, 30, 180, [1e6, flat2ecc(-3)]);
+  n = n + assertEquals(azi1,  22.368806, 1.0);
+  n = n + assertEquals(azi2, 157.631194, 1.0);
+  n = n + assertEquals(s12,   1074081.6, 1e3);
 end
 
 function n = Planimeter0

@@ -1,10 +1,10 @@
-cmake_minimum_required (VERSION 3.13.0)
+cmake_minimum_required (VERSION 3.17.0)
 project (GeographicLib-Octave NONE)
 
 # Version information
 set (PROJECT_VERSION_MAJOR 2)
-set (PROJECT_VERSION_MINOR 3)
-set (PROJECT_VERSION_PATCH 3)
+set (PROJECT_VERSION_MINOR 4)
+set (PROJECT_VERSION_PATCH 0)
 set (PROJECT_VERSION "${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}")
 if (PROJECT_VERSION_PATCH GREATER 0)
   set (PROJECT_VERSION "${PROJECT_VERSION}.${PROJECT_VERSION_PATCH}")
@@ -12,7 +12,7 @@ endif ()
 set (PROJECT_VERSION_SUFFIX "")
 set (PROJECT_FULLVERSION "${PROJECT_VERSION}${PROJECT_VERSION_SUFFIX}")
 
-set (RELEASE_DATE "2025-02-17")
+set (RELEASE_DATE "2025-08-21")
 
 # Set a default build type for single-configuration cmake generators if
 # no build type is set.
