@@ -39,14 +39,14 @@ function [r, v] = elliptocart2(t, ellip, alp)
   E = vecunit([-t.a * tx .* so, ...
                 t.b * cb .* co, ...
                 t.c * t.kp2 * sb .* co .* so ./ tz]);
-  % At an oblate pole tx -> cb
+  % At an oblate pole tx -> |cb|, a = b, k2 = 1, kp2 = 0
   l = tx == 0;
-  N(l,:) = [-co(l), -so(l), tx(l)] .* sb(l);
-  E(l,:) = [-so(l),  co(l), tx(l)];
-  % At a prolate pole tz -> so
+  N(l,:) = [-co(l).*signx(cb(l)), -so(l),               tx(l)] .* sb(l);
+  E(l,:) = [-so(l),                co(l).*signx(cb(l)), tx(l)];
+  % At a prolate pole tz -> |so|, b = c, k2 = 0, kp2 = 1
   l = tz == 0;
-  N(l,:) = [tz(l), -sb(l), cb(l)];
-  E(l,:) = [tz(l),  cb(l), sb(l)] .* co(l);
+  N(l,:) = [tz(l), -sb(l).*signx(so(l)), cb(l)              ];
+  E(l,:) = [tz(l),  cb(l),               sb(l).*signx(so(l))] .* co(l);
 
   v = ca .* N + sa .* E;
 

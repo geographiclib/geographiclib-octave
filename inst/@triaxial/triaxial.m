@@ -6,8 +6,8 @@ classdef triaxial
 %   t = TRIAXIAL(ellipsoid)
 %
 %   Input:
-%     axes = [a, b, c] a length 3 vector of semiaxes
-%     ellipsoid = [b, e2, k2, kp2]
+%     axes = [a, b, c], the semiaxes
+%     ellipsoid = [b, e2, k2, kp2], the ellipsoid parameters
 %   Output:
 %     t the triaxial ellipsoid object
 %
@@ -16,23 +16,17 @@ classdef triaxial
 %     inf > a >= b >= c > 0
 %
 %   If axes is omitted, the parameters of the triaxial reference ellipsoid for
-%   the Earth are used; see Hu, Shum, Bevis, J. Geod. 97, 29 (2023)
-%   https://doi.org/10.1007/s00190-023-01717-1
+%   the Earth, rounded to the nearest meter, are used:
 %
-%   The initialization with [b, e2, k2, kp2] specifies the ellipsoid in
-%   terms of
+%     a = 6378172, b = 6378102, c = 6356752
 %
-%     e2 = (a^2 - c^2) / b
-%     k2 = (b^2 - c^2) / (a^2 - c^2)
-%     kp2 = (a^2 - b^2) / (a^2 - c^2)
+%   see
+%     Panou, Korakitis, Pantazis, J. Geod. Sci. 10, 69 (2020)
+%     https://doi.org/10.1515/jogs-2020-0105
+%     Hu, Shum, Bevis, J. Geod. 97, 29 (2023)
+%     https://doi.org/10.1007/s00190-023-01717-1
 %
-%   so that
-%
-%     a = b * sqrt(1 + e2*kp2)
-%     c = b * sqrt(1 - e2*k2)
-%
-%   N.B., k2 and kp2 are normalized to make k2 + kp2 = 1.  The properties
-%   of t that can be changed are
+%   The properties of t that can be changed are
 %
 %     linesimptol the tolerance for line simplification in CARTPROJ
 %     odesolver the name of the ODE solver
@@ -65,18 +59,37 @@ classdef triaxial
     %
     %   t = TRIAXIAL
     %   t = TRIAXIAL(axes)
+    %   t = TRIAXIAL(ellipsoid)
     %
     %   Input:
-    %     axes a length 3 vector of semiaxes [a, b, c]
+    %     axes = [a, b, c], the semiaxes
+    %     ellipsoid = [b, e2, k2, kp2], the ellipsoid parameters
     %   Output:
     %     t the triaxial ellipsoid object
     %
-    %   The axes can be in any units but must be ordered so that
+    %   The semiaxes can be in any units but must be ordered so that
     %
     %     inf > a >= b >= c > 0
     %
+    %   The initialization with [b, e2, k2, kp2] specifies the ellipsoid in
+    %   terms of
+    %
+    %     e2 = (a^2 - c^2) / b
+    %     k2 = (b^2 - c^2) / (a^2 - c^2)
+    %     kp2 = (a^2 - b^2) / (a^2 - c^2)
+    %
+    %   so that
+    %
+    %     a = b * sqrt(1 + e2*kp2)
+    %     c = b * sqrt(1 - e2*k2)
+    %
+    %   N.B., k2 and kp2 are normalized to make k2 + kp2 = 1.
+    %
     %   If axes is omitted, the parameters of the triaxial reference
-    %   ellipsoid for the Earth, rounded to the nearest meter, are used;
+    %   ellipsoid for the Earth, rounded to the nearest meter, are used:
+    %
+    %     a = 6378172, b = 6378102, c = 6356752
+    %
     %   see
     %
     %     Panou, Korakitis, Pantazis, J. Geod. Sci. 10, 69 (2020)

@@ -3,7 +3,6 @@ function [ellipn, alpn] = ellipflip(ellip, alp)
 %
 %   ellip = TRIAXIAL.ELLIPFLIP(ellip)
 %   [ellip, alp] = TRIAXIAL.ELLIPFLIP(ellip, alp)
-%   [ellip, alp, switch] = TRIAXIAL.ELLIPNORM(ellip, alp, alt)
 %
 %   Input:
 %     ellip an n x 2 array of ellipsoidal coordinates [bet, omg]
@@ -11,11 +10,9 @@ function [ellipn, alpn] = ellipflip(ellip, alp)
 %   Output:
 %     ellipn an n x 2 array of ellipsoidal coordinates [bet, omg]
 %     alpn an n x 1 array of azimuths alpha.
-%     flip an n x 1 logical array specifies if the sheet was switched
 %
-%   bet, omg, and alp are measured in degrees.  This reduces bet to the
-%   range [-90, 90] and omg and alp to the range [-180, 180].  If alt is
-%   set, the ranges are instead: bet in [-180, 180], omg in [0, 180].
+%   bet, omg, and alp are measured in degrees.  This switch bet, omg, and
+%   alp to the other sheet for ellipsoidal coordinates.
 
 % Copyright (c) Charles Karney (2024) <karney@alum.mit.edu>.
 

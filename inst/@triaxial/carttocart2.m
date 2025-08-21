@@ -21,7 +21,7 @@ function [r2, h, count, err] = carttocart2(t, r)
 % difference is to use an improved starting guess for Newton's method which
 % guarantees convergence.  Panou and Korakitis, J. Geod. (2022) use the
 % bisection method to solve the same equation; but this requires many more
-% iterations to converge compared to Newton's method.  Seom other points:
+% iterations to converge compared to Newton's method.  Some other points:
 %
 % * the method used here is simpler that PK (2022), in that there's no need
 %   to treat special cases separately (indeed the method could easily be
