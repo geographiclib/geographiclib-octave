@@ -1,5 +1,10 @@
 Changes in geographiclib-octave
 
+Version 2.4 (released 2025-08-21)
+  * Fix bug in geoddistance for very prolate ellipsoids.
+  * Fix bug in triaxial.elliptocart2 for biaxial poles.
+  * Minor documentation fixes.
+
 Version 2.3.3 (released 2025-02-17)
   * Allow triaxial ellipsoid to be specified by [b, e2, k2, kp2] in
     addition to [a, b, c].
