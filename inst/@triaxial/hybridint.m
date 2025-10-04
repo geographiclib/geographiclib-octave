@@ -1,7 +1,7 @@
 function [r2, v2, s12, m12, M12, M21] = hybridint(t, r1, v1, cond, altp, r2)
 %HYBRIDINT  the internal version of the hybrid geodesic problem
 %
-%   [r2, v2, s12, m12, M12, M21] = HYBRIDINT(t, r1, v1, cond, omgp, r2)
+%   [R2, V2, s12, m12, M12, M21] = HYBRIDINT(t, R1, V1, cond, omgp, R2)
 %
 %   This is the internal routine called by HYBRID.  This internal routine
 %   assumed that t has been scaled so that t.b == 1.  And it only accepts

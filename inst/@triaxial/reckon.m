@@ -2,22 +2,22 @@ function [pos2, dir2, m12, M12, M21] = reckon(t, pos1, dir1, s12)
 %RECKON  the direct geodesic problem for a triaxial ellipsoid
 %
 %   [ellip2, alp2] = RECKON(t, ellip1, alp1, s12)
-%   [r2, v2] = RECKON(t, r1, v1, s12)
+%   [R2, V2] = RECKON(t, R1, V1, s12)
 %   [ellip2, alp2, m12, M12, M21] = RECKON(t, ellip1, alp1, s12)
-%   [r2, v2, m12, M12, M21] = RECKON(t, r1, v1, s12)
+%   [R2, V2, m12, M12, M21] = RECKON(t, R1, V1, s12)
 %
 %   Input:
 %     t the triaxial ellipsoid object
 %     ellip1 n x 2 array of ellipsoidal coordinates [bet, omg]
 %     alp1 n x 1 array of azimuths at ellip1
-%     r1 n x 3 array of cartesian starting points
-%     v1 n x 3 array of cartesian directions at r1
+%     R1 n x 3 array of cartesian starting points
+%     V1 n x 3 array of cartesian directions at R1
 %     s12 an n x m long array of distances
 %   Output:
 %     ellip2 m*n x 2 arrays of ellipsoidal coordinates [bet, omg]
 %     alp2 m*n x 1 array of azimuths at ellip2
-%     r2 an m*n x 3 array of cartesian positions at distances s12
-%     v2 an m*n x 3 array of cartesian directions at r2
+%     R2 an m*n x 3 array of cartesian positions at distances s12
+%     V2 an m*n x 3 array of cartesian directions at R2
 %     m12, M12, M21 m*n x 1 arrays of reduced length and geodesic scales
 %
 %   Solve the direct geodesic problem, namely given a point ellip1 on the
@@ -27,8 +27,8 @@ function [pos2, dir2, m12, M12, M21] = reckon(t, pos1, dir1, s12)
 %   Compute positions at distances s12 along the geodesic starting at point1.
 %   bet, omg, alp are measured in degrees.  The starting point and direction
 %   can be specified as either ellipsoidal coordinates or cartesian
-%   coordinates.  In the latter case, r1 must lie on the ellipsoid and v1 must
-%   be a unit vector tangent to the ellipsoid at r1; if necessary use
+%   coordinates.  In the latter case, R1 must lie on the ellipsoid and V1 must
+%   be a unit vector tangent to the ellipsoid at R1; if necessary use
 %   CART2NORM to ensure this condition.  The distances can be given in any
 %   order.  Internally the positive and negative distances are handled by two
 %   separated calls to the ODE solver.  You can "punctuate" the results by

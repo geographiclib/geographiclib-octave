@@ -1,19 +1,19 @@
 function [v, acc, K] = accel(t, r, v)
 %ACCEL  Compute the acceleration of an object constrained to the ellipsoid
 %
-%   [v, acc, K] = ACCEL(t, r, v)
+%   [V, acc, K] = ACCEL(t, R, V)
 %
 %   Input:
 %     t the triaxial ellipsoid object
-%     r an n x 3 array of cartesian points on the ellipsoid
-%     v an n x 3 array of velocities
+%     R an n x 3 array of cartesian points on the ellipsoid
+%     V an n x 3 array of velocities
 %   Output:
-%     v the input velocity corrected to be tangent to the ellipsoid
+%     V the input velocity corrected to be tangent to the ellipsoid
 %     acc an n x 3 array of accelerations (normal to the surface)
 %     K the Gaussian curvature
 %
-%   This routine is used for the integration of the geodesic equations.  r
-%   should lie on the surface and v should be a unit vector tangent to the
+%   This routine is used for the integration of the geodesic equations.  R
+%   should lie on the surface and V should be a unit vector tangent to the
 %   surface.  However this function enforces this by an initial call to
 %   CART2NORM in order to make the solution of geodesic ODEs better behaved.
 %   K is returned in order to allow the ODEs for the reduced length and

@@ -1,21 +1,21 @@
 function [r, v] = elliptocart2(t, ellip, alp)
 %ELLIPTOCART2  Convert a surface point from to ellipsoidal to cartesian
 %
-%   r = ELLIPTOCART2(t, ellip)
-%   [r, v] = ELLIPTOCART2(t, ellip, alp)
+%   R = ELLIPTOCART2(t, ellip)
+%   [R, V] = ELLIPTOCART2(t, ellip, alp)
 %
 %   Input:
 %     t the triaxial ellipsoid object
 %     ellip an n x 2 array of ellipsoid coordinates [bet, omg]
 %     alp an n x 1 array of directions alpha
 %   Output:
-%     r an n x 3 array of cartesian coordinates
-%     v an n x 3 array of cartesian directions
+%     R an n x 3 array of cartesian coordinates
+%     V an n x 3 array of cartesian directions
 %
 %   bet, omg, and alp are measured in degrees.  This routine can be called with
-%   ellip being a 1 x 2 array and alp being an n x 1 array.  In this case, r is
-%   a 1 x 3 array and v is an n x 3 array.  On the other hand, if ellip is an n
-%   x 2 array and alp is a scalar, then both r and v are n x 3 arrays.
+%   ellip being a 1 x 2 array and alp being an n x 1 array.  In this case, R is
+%   a 1 x 3 array and V is an n x 3 array.  On the other hand, if ellip is an n
+%   x 2 array and alp is a scalar, then both R and V are n x 3 arrays.
 %
 %   See also CARTNORM, CARTTOELLIP, ELLIPTOCART2, ELLIPTOCART
 

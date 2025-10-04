@@ -1,19 +1,19 @@
 function [ellip3, count, err] = carttoellip(t, r)
 %CARTTOELLIP  Convert a general point from cartesian to ellipsoidal
 %
-%   ellip3 = CARTTOELLIP(t, r)
-%   [ellip3, count, err] = CARTTOELLIP(t, r)
+%   ellip3 = CARTTOELLIP(t, R)
+%   [ellip3, count, err] = CARTTOELLIP(t, R)
 %
 %   Input:
 %     t the triaxial ellipsoid object
-%     r an n x 3 array of cartesian points
+%     R an n x 3 array of cartesian points
 %   Output:
 %     ellip3 an n x 3 array of the ellipsoidal coordinates [bet, omg, u]
 %     count an n x 1 array of the number of Newton's iterations
 %     err an n x 1 array of the error in the function
 %
 %   bet and omg are measured in degrees.  u is the minor semiaxis of the
-%   confocal ellipsoid on which r lies.  Thus, if r lies on t, u = t.c
+%   confocal ellipsoid on which R lies.  Thus, if R lies on t, u = t.c
 %
 %   See also ELLIPTOCART, CART2TOELLIP, ELLIPTOCART2
 

@@ -1,14 +1,14 @@
 function r = horizon(t, ang, viewpt)
 %HORIZON  Return a set of points on the horizon of the ellipsoid
 %
-%   r = HORIZON(t, ang, viewpt)
+%   R = HORIZON(t, ang, viewpt)
 %
 %   Input:
 %     t the triaxial ellipsoid object
 %     ang a vector of length n of angles defining the positions on the horizon
 %     viewpt the geodetic coordinates defining the viewing direction
 %   Output:
-%     r an n x 3 array of 3d points on the horizon
+%     R an n x 3 array of 3d points on the horizon
 %
 %   ang is measured in degrees.  Typically this should include the full set of
 %   angles, e.g., [-180:2:180] The viewpt is defined by the geodetic

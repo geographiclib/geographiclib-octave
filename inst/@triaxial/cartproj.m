@@ -1,29 +1,29 @@
 function [r2f, r2b] = cartproj(t, r, viewpt, varargin)
 %CARTPROJ  Project and plot a curve on the surface of the ellipsoid
 %
-%   r2f = CARTPROJ(t, r, viewpt)
-%   [r2f, r2b] = CARTPROJ(t, r, viewpt)
-%   r3 = CARTPROJ(t, r, [])
-%   CARTPROJ(t, r, viewpt, ...)
-%   CARTPROJ(t, r, [], ...)
+%   R2f = CARTPROJ(t, R, viewpt)
+%   [R2f, R2b] = CARTPROJ(t, R, viewpt)
+%   R3 = CARTPROJ(t, R, [])
+%   CARTPROJ(t, R, viewpt, ...)
+%   CARTPROJ(t, R, [], ...)
 %
 %   Input:
 %     t the triaxial ellipsoid object
-%     r an n x 3 array of 3d cartesian points defining the curve
+%     R an n x 3 array of 3d cartesian points defining the curve
 %     viewpt the geodetic coordinates defining the viewing direction
 %     ... additional arguments for plotting the curve
 %   Output:
-%     r2f an n x 2 array of projected points facing toward the viewpt
-%     r2b an n x 2 array of projected points facing away from the viewpt
-%     r an n x 3 array of 3d points
+%     R2f an n x 2 array of projected points facing toward the viewpt
+%     R2b an n x 2 array of projected points facing away from the viewpt
+%     R3 an n x 3 array of 3d points
 %
-%   This routine can be used to plot geodesics produced by RECKON.  The input r
+%   This routine can be used to plot geodesics produced by RECKON.  The input R
 %   can contained nans; this can be used to plot disconnected lines as a single
 %   array (e.g., the latitude-longitude graticule or several geodesics
 %   emanating from a single point).
 %
 %   The viewpt is defined by the geodetic coordinates [phi, lam].  The points
-%   r2f (front) and r2b (back) are in an orthographic projection from a distant
+%   R2f (front) and R2b (back) are in an orthographic projection from a distant
 %   point above this viewpt.  The hidden points are replaced by nans.  A little
 %   "fuzz" is included in the determination hidden points -- points slightly
 %   over the horizon are counted as visible.  No attempt is made to interpolate

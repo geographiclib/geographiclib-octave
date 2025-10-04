@@ -1,18 +1,18 @@
 function [r, v] = cart2rand(t, n)
 %CART2RAND  Return random points on the ellipsoid.
 %
-%   r = CART2RAND(t, n)
-%   [r, v] = CART2RAND(t, n)
+%   R = CART2RAND(t, n)
+%   [R, V] = CART2RAND(t, n)
 %
 %   Input:
 %     t the triaxial ellipsoid object
 %     n the number of points needed
 %   Output:
-%     r an n x 3 array of cartesian points
-%     v an n x 3 array of cartesian velocities
+%     R an n x 3 array of cartesian points
+%     V an n x 3 array of cartesian velocities
 %
-%   r are uniformly distributed on the surface of the ellipsoid.  v are unit
-%   vectors uniformly distributed in the plane tangent to the surface at r.
+%   R are uniformly distributed on the surface of the ellipsoid.  V are unit
+%   vectors uniformly distributed in the plane tangent to the surface at R.
 %
 %   See also CART2NORM
 

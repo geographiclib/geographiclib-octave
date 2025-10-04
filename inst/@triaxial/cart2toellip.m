@@ -1,32 +1,32 @@
 function [ellip, alp, gam, latrad] = cart2toellip(t, r, v)
 %CART2TOELLIP  Convert a surface point from cartesion to ellipsoidal
 %
-%   ellip = CART2TOELLIP(t, r)
-%   [ellip, alp] = CART2TOELLIP(t, r, v)
-%   [ellip, alp] = CART2TOELLIP(t, ellip, v)
-%   [ellip, alp, gam, latrad] = CART2TOELLIP(t, r, v)
+%   ellip = CART2TOELLIP(t, R)
+%   [ellip, alp] = CART2TOELLIP(t, R, V)
+%   [ellip, alp] = CART2TOELLIP(t, ellip, V)
+%   [ellip, alp, gam, latrad] = CART2TOELLIP(t, R, V)
 %
 %   Input:
 %     t the triaxial ellipsoid object
-%     r an n x 3 array of cartesian points on the ellipsoid
-%     v an n x 3 array of cartesian directions on the ellipsoid
+%     R an n x 3 array of cartesian points on the ellipsoid
+%     V an n x 3 array of cartesian directions on the ellipsoid
 %     ellip an n x 2 array of ellipsoidal coordinates [bet, omg]
 %   Output:
 %     ellip an n x 2 array of ellipsoidal coordinates [bet, omg]
-%     alp an n x 1 array of azimuths alpha (only if v is given)
-%     gam an n x 1 array of gamma, the invariant for a geodesic (if v is given)
+%     alp an n x 1 array of azimuths alpha (only if V is given)
+%     gam an n x 1 array of gamma, the invariant for a geodesic (if V is given)
 %     latrad an n x 1 array of radii of curvature for a line of constant bet
 %
-%   bet, omg, and alp are measured in degrees.  This routine assumes that r lie
-%   on the surface of the ellipsoid and that v is a unit vector tangent to the
-%   ellipsoid at r.  To ensure that this is the case, call CARTNORM.  To
+%   bet, omg, and alp are measured in degrees.  This routine assumes that R lie
+%   on the surface of the ellipsoid and that V is a unit vector tangent to the
+%   ellipsoid at R.  To ensure that this is the case, call CARTNORM.  To
 %   convert arbitrary points use CARTTOELLIP.
 %
-%   The invocation [ellip, alp] = CART2TOELLIP(t, ellip, v) returns ellip
+%   The invocation [ellip, alp] = CART2TOELLIP(t, ellip, V) returns ellip
 %   unchanged and can be used to ensure that the return value of alp is
 %   consistent with ellip.
 %
-%   This routine can be called with r being a 1 x 3 array and v being an n x 3
+%   This routine can be called with R being a 1 x 3 array and V being an n x 3
 %   array.  In this case, ellip is a 1 x 2 array and alp is an n x 1 array.
 %
 %   See also CARTNORM, CARTTOELLIP, ELLIPTOCART2, ELLIPTOCART

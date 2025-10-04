@@ -1,18 +1,18 @@
 function r = elliptocart(t, ellip)
 %ELLIPTOCART  Convert a general point from ellipsoidal to cartesian
 %
-%   r = ELLIPTOCART(t, ellip)
-%   r = ELLIPTOCART(t, ellip3)
+%   R = ELLIPTOCART(t, ellip)
+%   R = ELLIPTOCART(t, ellip3)
 %
 %   Input:
 %     t the triaxial ellipsoid object
 %     ellip an n x 2 array of the ellipsoidal coordinates [bet, omg]
 %     ellip3 an n x 3 array of the ellipsoidal coordinates [bet, omg, u]
 %   Output:
-%     r an n x 3 array of cartesian points
+%     R an n x 3 array of cartesian points
 %
 %   bet and omg are measured in degrees.  With ellip (an n x 2 array), u is
-%   assumed to be t.c so that r lies on the ellipsoid.  In this case,
+%   assumed to be t.c so that R lies on the ellipsoid.  In this case,
 %   ELLIPTOCART2 is called.
 %
 %   See also CARTTOELLIP, CART2TOELLIP, ELLIPTOCART2

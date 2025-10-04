@@ -1,20 +1,20 @@
 function [r, v] = cart2norm(t, r, v)
 %CART2NORM  Force a point to lie on the surface point of the ellipsoid
 %
-%   r = CART2NORM(t, r)
-%   [r, v] = CART2NORM(t, r, v)
+%   R = CART2NORM(t, R)
+%   [R, V] = CART2NORM(t, R, V)
 %
 %   Input:
 %     t the triaxial ellipsoid object
-%     r an n x 3 array of cartesian points on the ellipsoid
-%     v an n x 3 array of cartesian velocities
+%     R an n x 3 array of cartesian points on the ellipsoid
+%     V an n x 3 array of cartesian velocities
 %   Output:
-%     r an n x 3 array of corrected cartesian points
-%     v an n x 3 array of corrected cartesian velocities
+%     R an n x 3 array of corrected cartesian points
+%     V an n x 3 array of corrected cartesian velocities
 %
-%   The expectation is that r and v start close to the ellipsoid and this
-%   routine merely tweaks these to force r to be on the surface and v to be a
-%   unit vector tangent to the surface at r.
+%   The expectation is that R and V start close to the ellipsoid and this
+%   routine merely tweaks these to force R to be on the surface and V to be a
+%   unit vector tangent to the surface at R.
 %
 %   See also CARTTOCART2, CART2TOELLIP, CART2TOGEOD, CART2TOPARAM,
 %     CARTTOGEOD, CARTTOPARAM

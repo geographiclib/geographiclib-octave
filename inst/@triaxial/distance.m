@@ -2,18 +2,18 @@ function [s12, dir1, dir2, m12, M12, M21, count] = distance(t, pos1, pos2)
 %DISTANCE  the inverse geodesic problem on a triaxial ellipsoid
 %
 %   [s12, alp1, alp2] = DISTANCE(t, ellip1, ellip2)
-%   [s12, v1, v2] = DISTANCE(t, r1, r2)
+%   [s12, V1, V2] = DISTANCE(t, R1, R2)
 %   [s12, alp1, alp2, m12, M12, M21, count] = DISTANCE(t, ellip1, ellip2)
-%   [s12, v1, v2, m12, M12, M21, count] = DISTANCE(t, r1, r2)
+%   [s12, V1, V2, m12, M12, M21, count] = DISTANCE(t, R1, R2)
 %
 %   Input:
 %     t the triaxial ellipsoid object
 %     ellip1, ellip2 n x 2 arrays of ellipsoidal coordinates [bet, omg]
-%     r1, r2 n x 3 arrays of 3d cartesian coordinates
+%     R1, R2 n x 3 arrays of 3d cartesian coordinates
 %   Output:
 %     s12 an n x 1 array of distances between point1 and point2
 %     alp1, alp2 n x 1 arrays of azimuths at ellip1 and ellip2
-%     v1, v2 n x 3 arrays of cartesian directions at r1 and r2
+%     V1, V2 n x 3 arrays of cartesian directions at R1 and R2
 %     m12, M12, M21 n x 1 arrays of the reduced length and geodesic scales
 %     count n x 1 array of the number of iterations to find the solution
 %
@@ -251,10 +251,10 @@ end
 function [s12, v1, v2, m12, M12, M21, count] = distanceint2(t, r1, r2)
 % input:
 %   t = ellipsoid
-%   r1, r2 are end points
+%   R1, R2 are end points
 % output:
 %   s12 is the distance
-%   v1, v2 are directions
+%   V1, V2 are directions
 %   m12, M12, M21 is the reduced length and geodesic scale
 %   count is the number of iterations of Newton's method
 % This deals with the generic case with a specific constraints assumed

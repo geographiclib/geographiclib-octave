@@ -1,15 +1,15 @@
 function [r2, h, count, err] = carttocart2(t, r)
 %CARTTOCART2  Find the closest point on an ellipsoid
 %
-%   [r2, h] = CARTTOCART2(t, r)
-%   [r2, h, count, err] = CARTTOCART2(t, r)
+%   [R2, h] = CARTTOCART2(t, R)
+%   [R2, h, count, err] = CARTTOCART2(t, R)
 %
 %   Input:
 %     t the triaxial ellipsoid object
-%     r an n x 3 array of cartesian points
+%     R an n x 3 array of cartesian points
 %   Output:
-%     r2 an n x 3 array of the closest cartesian points lying on t
-%     h an n x 1 array of the directed distances, heights, from r2 to r
+%     R2 an n x 3 array of the closest cartesian points lying on t
+%     h an n x 1 array of the directed distances, heights, from R2 to R
 %     count an n x 1 array of the number of Newton's iterations
 %     err an n x 1 array of the error in the function
 %

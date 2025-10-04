@@ -1,17 +1,17 @@
 function geod = cart2togeod(t, r)
 %CART2TOGEOD  Convert a surface point from cartesion to geodetic
 %
-%   geod = CART2TOGEOD(t, r)
+%   geod = CART2TOGEOD(t, R)
 %
 %   Input:
 %     t the triaxial ellipsoid object
-%     r an n x 3 array of cartesian points on the ellipsoid
+%     R an n x 3 array of cartesian points on the ellipsoid
 %   Output:
 %     geod an n x 2 array of geodetic coordinates [phi, lam]
 %
-%   phi and lam are measured in degrees.  This routine assumes that r lie on
-%   the surface of the ellipsoid and that v is a unit vector tangent to the
-%   ellipsoid at r.  To ensure that this is the case, call CARTNORM.  To
+%   phi and lam are measured in degrees.  This routine assumes that R lie on
+%   the surface of the ellipsoid and that V is a unit vector tangent to the
+%   ellipsoid at R.  To ensure that this is the case, call CARTNORM.  To
 %   convert arbitrary points use CARTTOGEOD.
 %
 %   See also CARTNORM, CARTTOGEOD, GEODTOCART2, GEODTOCART

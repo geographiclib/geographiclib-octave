@@ -11,12 +11,12 @@ function out = convert(t, in, from, to)
 %     out the output coordinates as n x 2 or n x 2 arrays
 %
 %   For arbitrary points, from and to can be
-%     'cartesian'   [x, y, z] as general points
+%     'cartesian'   [X, Y, Z] as general points
 %     'geodetic'    [phi, lam, h]
 %     'ellipsoidal' [bet, omg, u]
 %
 %   For points restricted to the surface of the ellipsoid, from and to can be
-%     'cartesian2'  [x, y, z] confined to the surface of the ellipsoid
+%     'cartesian2'  [X, Y, Z] confined to the surface of the ellipsoid
 %     'geodetic'    [phi, lam]
 %     'parametric'  [phip, lamp]
 %     'geocentric'  [phic, lamc]

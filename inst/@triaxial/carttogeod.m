@@ -1,11 +1,11 @@
 function geod3 = carttogeod(t, r)
 %CARTTOGEOD  Convert a surface point from cartesion to geodetic
 %
-%   geod3 = CARTTOGEOD(t, r)
+%   geod3 = CARTTOGEOD(t, R)
 %
 %   Input:
 %     t the triaxial ellipsoid object
-%     r an n x 3 array of cartesian points
+%     R an n x 3 array of cartesian points
 %   Output:
 %     geod3 an n x 3 array of geodetic coordinates [phi, lam, h]
 %

@@ -1,14 +1,14 @@
 function r = cart2tocart(t, r2, h)
 %CART2TOCART  Convert a surface point + height to a cartesian point
 %
-%   r = CART2TOCART(t, r2, h)
+%   R = CART2TOCART(t, R2, h)
 %
 %   Input:
 %     t the triaxial ellipsoid object
-%     r2 an n x 3 array of cartesian points on the ellipsoid
+%     R2 an n x 3 array of cartesian points on the ellipsoid
 %     h an n x 1 array of heights
 %   Output:
-%     r an n x 3 array of cartesian points a height h above r2
+%     R an n x 3 array of cartesian points a height h above R2
 %
 %   See also CARTTOCART2, CART2TOGEOD, CARTTOGEOD
 
