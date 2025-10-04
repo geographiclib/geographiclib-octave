@@ -70,20 +70,10 @@ function [t, count, err] = newt(axes2, r2, b)
 % and, as in that routine, Newton's method is guaranteed to converge.
 
   tol = eps^(2/3);
-  quadp = true;
-  if quadp
-    % Not worth doing with cubic starting pt
-    tmin = max([quad(axes2(:,[2,3]),  r2(:,[2,3])), ...
-                quad(axes2(:,[1,3]), [r2(:,1)+r2(:,2),r2(:,3)]), ...
-                quad(axes2(:,[1,2]), [r2(:,1),r2(:,2)+r2(:,3)])], [], 2);
-    tmax = min([quad(axes2(:,[2,3]), [r2(:,1)+r2(:,2),r2(:,3)]), ...
-                quad(axes2(:,[1,3]), [r2(:,1),r2(:,2)+r2(:,3)])], [], 2);
-  % else
-  %   tmin = max([    r2(:,  3)               , ...
-  %                   sum(r2(:,2:3), 2) - axes2(2), ...
-  %                   sum(r2       , 2) - axes2(1)], [], 2);
-  %   tmax = sum(r2, 2);
-  end
+  tmin = max([    r2(:,  3)               , ...
+              sum(r2(:,2:3), 2) - axes2(2), ...
+              sum(r2       , 2) - axes2(1)], [], 2);
+  tmax = sum(r2, 2);
   n = size(r2, 1);
   count = zeros(n, 1);
   funp = @(t) f(axes2, r2, t);
@@ -115,23 +105,13 @@ function [t, count, err] = newt(axes2, r2, b)
     % converged if fv <= 8*eps or
     % d <= max(eps^(3/2), |t|) * tol and d <= od.
     % N.B. d and od are always positive.
-    c = d <= max(b^2 * eps^(3/2), t) * tol & d < od;
+    c = d <= max(b^2 * sqrt(eps), t) * tol & d < od;
     c = c | fv <= 8 * eps;
     %    i,fv,fp,d,od
     od = d;
   end
   err = funp(t);
   err(t == 0 & r2(:, 3) == 0 & err < 0) = 0;
-end
-
-function t = quad(l2, r2)
-% Solve r2(1)/(t+l2(1)) + r2(2)/(t+l2(2)) - 1 = 0
-  h = (sum(l2, 2) - sum(r2, 2)) / 2;
-  c = prod(l2, 2) - l2(:,1).*r2(:,2) - l2(:,2).*r2(:,1);
-  d = sqrt(max(0, h.^2 - c));
-  t = d + abs(h);
-  l = h > 0;
-  t(l) = - c(l) ./ t(l);
 end
 
 function t = cubic(axes2, r2)
@@ -141,8 +121,8 @@ function t = cubic(axes2, r2)
       (ea2 + eb2) * r2(:,3);
   a = (ea2 + eb2) - sum(r2, 2);
   l = b > 0;
-  % If b positsive there a cancellation in p = (3*b - a^2) / 3, so transform to
-  % a polynomial in 1/t.  The resulting coefficients are
+  % If b positive there is a cancellation in p = (3*b - a^2) / 3, so transform
+  % to a polynomial in 1/t.  The resulting coefficients are
   [a(l), b(l), c(l)] = deal(b(l)./c(l), a(l)./c(l), 1./c(l));
 
   % Solve t^3 + a*t^2 + b*t + c = 0

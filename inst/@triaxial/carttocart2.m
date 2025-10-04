@@ -56,12 +56,12 @@ function [r2, h, count, err] = carttocart2(t, r)
     % We're done if f(p) <= 0 on initial guess; this can happens when z = 0.
     % However, since Newton converges from below, any negative f(p)
     % indicates convergence.
-    l = ~(fv <= tol^2);
+    l = l & ~(fv <= tol^2);
     d = -fv./fp;
     p(l) = p(l) + d(l);
     l = l & ~c;
     % converged if fv <= 8*eps (after first iteration) or
-    % d <= max(eps, |p|) * tol and d <= od.
+    % d <= max(sqrt(eps), |p|) * tol and d <= od.
     % N.B. d and od are always positive.
     c = d <= max(t.b^2 * sqrt(eps), p) * tol & d < od;
     if i > 1
