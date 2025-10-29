@@ -38,7 +38,7 @@ function [s12, dir1, dir2, m12, M12, M21, count] = distance(t, pos1, pos2)
 %
 %   See also CART2NORM, RECKON, HYBRID, GEODDISTANCE, GEODRECKON
 
-% Copyright (c) Charles Karney (2024) <karney@alum.mit.edu>.
+% Copyright (c) Charles Karney (2024-2025) <karney@alum.mit.edu>.
 
 % Biggest error in distance with test set is for
 %  -89 -179 125.264389682754654315
@@ -335,7 +335,9 @@ function [s12, v1, v2, m12, M12, M21, count] = distanceint2(t, r1, r2)
     [~, v1] = elliptocart2(t, [bet1, omg1], alp1);
     cond = [14, 0, -1];
     [~, v2, s12, m12, M12, M21] = hybridint(t, r1, v1, cond, 0, r2);
-    done = m12 >= -128*slop;
+    cond = [7, 0, -1];
+    [~, ~, s12x] = hybridint(t, r1, v1, cond);
+    done = s12x - s12 >= -128*slop;
     if check
       cond = [14, 0, -1];
       [~, ~, s12a] = hybridint(t, r1, -v1, cond, 0, r2);

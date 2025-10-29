@@ -6,6 +6,7 @@ function doc
 %   prints summary documentation on the TRIAXIAL class
 %
 %   t = TRIAXIAL([a, b, c]) -- set up ellipsoid in terms of the semiaxes.
+%   t = TRIAXIAL([b, e2, k2, kp2]) -- or in terms of ellipsoid parameters.
 %
 %   In function names and function parameters
 %   * cart or R refers to arbitrary points in space expressed as [X, Y, Z];

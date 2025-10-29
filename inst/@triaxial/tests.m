@@ -49,6 +49,19 @@ function tests
   [r2n, v2n] = t.elliptocart2(ellip, alp);
   n = n + assertEquals(r2n, r2, tol);
   n = n + assertEquals(v2n, v2, tol);
+  tola = 0.5e-5; tols = 0.5e-7;
+  t321 = triaxial([3,2,1]/2);
+  % Geod3Solve1 test
+  [s,a1,a2] = t321.distance([0,20],[0,-50]);
+  n = n + assertEquals(a1, -113.80132, tola);
+  n = n + assertEquals(a2,  -71.71938, tola);
+  n = n + assertEquals(s,   1.3325034, tols);
+  % Geod3Solve2 test
+  [s,a1,a2] = t321.distance([0,20],[0,-175]);
+  n = n + assertEquals(a1,  156.55140, tola);
+  n = n + assertEquals(a2,    4.73972, tola);
+  n = n + assertEquals(s,   3.2689702, tols);
+
   assert(n == 0);
 end
 

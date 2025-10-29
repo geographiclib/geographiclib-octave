@@ -15,8 +15,16 @@ classdef triaxial
 %
 %     inf > a >= b >= c > 0
 %
-%   If axes is omitted, the parameters of the triaxial reference ellipsoid for
-%   the Earth, rounded to the nearest meter, are used:
+%   The ellipsoid parameters are
+%
+%     e2  = (a^2 - c^2) / b^2
+%     k2  = (b^2 - c^2) / (a^2 - c^2)
+%     kp2 = (a^2 - b^2) / (a^2 - c^2)
+%
+%   The input parameters k2 and kp2 are scaled so that k2 + kp2 = 1.
+%
+%   If axes is omitted, the parameters of the triaxial reference ellipsoid
+%   for the Earth, rounded to the nearest meter, are used:
 %
 %     a = 6378172, b = 6378102, c = 6356752
 %
@@ -32,12 +40,10 @@ classdef triaxial
 %     odesolver the name of the ODE solver
 %     odemult the multiplier for the error tolerances for the ODE solver
 %
-%   The case a == b == c. the sphere, is a nonuniform limit.  By default,
-%   this class treats the sphere a limiting form of an oblate ellipsoid,
-%   i.e., as triaxial([b, 0, 1, 0]).  This choice governs the definition of
-%   ellipsoidal coordinates and affects the inner workings of DISTANCE
+%   For a summary of the class, type
+%     help @triaxial/doc
 %
-%   See also DOC, DEMO, TESTS, CART2TOELLIP, DISTANCE
+%   See also DOC, DEMO, TESTS
 
 % Copyright (c) Charles Karney (2024-2025) <karney@alum.mit.edu>.
 

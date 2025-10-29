@@ -1,5 +1,10 @@
 Changes in geographiclib-octave
 
+Version 2.5 (released 2025-mm-dd)
+  * Fix bug in triaxial/distance for ellipsoids with a/c > 2.
+  * Documentation fixes (standardize on uppercase R V for geocentric
+    coordinates).
+
 Version 2.4 (released 2025-08-21)
   * Fix bug in geoddistance for very prolate ellipsoids.
   * Fix bug in triaxial.elliptocart2 for biaxial poles.
@@ -15,7 +20,7 @@ Version 2.3.2 (released 2024-10-05)
     buggy when S12 is requested and azi1 and s12 have different
     shapes.
   * Fix various breakages in triaxial.demo caused by recent changes in
-    triaxial.reclon.
+    triaxial.reckon.
 
 Version 2.3.1 (released 2024-08-27)
   * Bug fix: replace signbit by signbitx in geocent_inv and
