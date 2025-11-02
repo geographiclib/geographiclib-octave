@@ -61,6 +61,12 @@ function tests
   n = n + assertEquals(a1,  156.55140, tola);
   n = n + assertEquals(a2,    4.73972, tola);
   n = n + assertEquals(s,   3.2689702, tols);
+  % Cart3Convert1 test
+  t321 = triaxial([3,2,1]);
+  geod3 = t321.carttogeod([1,1,0]);
+  n = n + assertEquals(geod3(1),   61.07208, tola);
+  n = n + assertEquals(geod3(2),   69.44395, tola);
+  n = n + assertEquals(geod3(3), -0.7359801, tols);
 
   assert(n == 0);
 end

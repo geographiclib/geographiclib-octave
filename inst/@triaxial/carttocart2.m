@@ -81,8 +81,8 @@ function [r2, h, count, err] = carttocart2(t, r)
     if axes2(2) == 0                     % sphere or prolate
       r2(l, 2) = r(l, 2);
     end
-    r2(l, 3) = t.axes(3) * r(l, 3) .* ...
-        sqrt(1 - (r2(l, 1)/t.axes(1)).^2 + (r2(l, 2)/t.axes(2)).^2);
+    r2(l, 3) = t.axes(3) * signx(r(l, 3)) .* ...
+        sqrt(1 - (r2(l, 1)/t.axes(1)).^2 - (r2(l, 2)/t.axes(2)).^2);
   end
   h = (p - t.axes(3)^2) .* vecabs(r2 ./ t.axes.^2);
 end
