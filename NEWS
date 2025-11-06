@@ -1,8 +1,11 @@
 Changes in geographiclib-octave
 
 Version 2.5 (released 2025-mm-dd)
-  * Fix bug in triaxial/distance for ellipsoids with a/c > 2.
-  * Documentation fixes (standardize on uppercase R V for geocentric
+  * Fix bug in triaxial/distance when both endpoints are on the major
+    principal ellipe for ellipsoids with a > 2 c.
+  * Fix bug in triaxial/carttocart2 for a point in the interior of the
+    ellipsoid and Z = 0.
+  * Documentation fixes (standardize on uppercase R and V for geocentric
     coordinates).
 
 Version 2.4 (released 2025-08-21)

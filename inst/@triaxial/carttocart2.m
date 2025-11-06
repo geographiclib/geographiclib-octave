@@ -15,7 +15,7 @@ function [r2, h, count, err] = carttocart2(t, r)
 %
 %   See also CART2TOCART, CART2TOGEOD, CARTTOGEOD
 
-% Copyright (c) Charles Karney (2024) <karney@alum.mit.edu>.
+% Copyright (c) Charles Karney (2024-2025) <karney@alum.mit.edu>.
 
 % The formulation is due to Ligas, Stud. Geophys. Geod. (2012).  The major
 % difference is to use an improved starting guess for Newton's method which
