@@ -40,6 +40,15 @@ classdef triaxial
 %     odesolver the name of the ODE solver
 %     odemult the multiplier for the error tolerances for the ODE solver
 %
+%   The coordinate conversions are documented in
+%
+%     C. F. F. Karney,
+%     Jacobi's solution for geodesics on a triaxial ellipsoid (2025).
+%     https://arxiv.org/abs/arxiv:2511.01621
+%
+%   This paper uses a different method for solving the direct geodesic
+%   problem; however, the solution using ODEs is discussed.
+%
 %   For a summary of the class, type
 %     help @triaxial/doc
 %

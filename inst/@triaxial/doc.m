@@ -30,6 +30,15 @@ function doc
 %   All angles are given in degrees.  All distances are given in the units
 %   of the semiaxes.
 %
+%   The coordinate conversions are documented in
+%
+%     C. F. F. Karney,
+%     Jacobi's solution for geodesics on a triaxial ellipsoid (2025).
+%     https://arxiv.org/abs/arxiv:2511.01621
+%
+%   This paper uses a different method for solving the direct geodesic
+%   problem; however, the solution using ODEs is discussed.
+%
 %   The accuracy of the geodesic routines for can be found using the
 %   test set available at
 %
@@ -89,5 +98,5 @@ function doc
 
 % Copyright (c) Charles Karney (2024) <karney@alum.mit.edu>.
 
-  help triaxial/doc
+  help @triaxial/doc
 end

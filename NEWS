@@ -1,6 +1,6 @@
 Changes in geographiclib-octave
 
-Version 2.5 (released 2025-mm-dd)
+Version 2.5 (released 2025-11-07)
   * Fix bug in triaxial/distance when both endpoints are on the major
     principal ellipe for ellipsoids with a > 2 c.
   * Fix bug in triaxial/carttocart2 for a point in the interior of the
