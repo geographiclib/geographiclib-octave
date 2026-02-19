@@ -33,8 +33,9 @@ function doc
 %   The coordinate conversions are documented in
 %
 %     C. F. F. Karney,
-%     Jacobi's solution for geodesics on a triaxial ellipsoid (2025).
-%     https://arxiv.org/abs/arxiv:2511.01621
+%     Jacobi's solution for geodesics on a triaxial ellipsoid,
+%     J. Geodesy 100, 17:1-23 (2026).
+%     https://doi.org/10.1007/s00190-026-02030-3
 %
 %   This paper uses a different method for solving the direct geodesic
 %   problem; however, the solution using ODEs is discussed.
