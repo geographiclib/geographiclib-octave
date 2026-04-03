@@ -9,7 +9,7 @@ function geod = cart2togeod(t, r)
 %   Output:
 %     geod an n x 2 array of geodetic coordinates [phi, lam]
 %
-%   phi and lam are measured in degrees.  This routine assumes that R lie on
+%   phi and lam are measured in degrees.  This routine assumes that R lies on
 %   the surface of the ellipsoid and that V is a unit vector tangent to the
 %   ellipsoid at R.  To ensure that this is the case, call CARTNORM.  To
 %   convert arbitrary points use CARTTOGEOD.

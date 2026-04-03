@@ -70,7 +70,7 @@ function [r2, h, count, err] = carttocart2(t, r)
     od = d;
   end
   err = funp(p);
-  err(p == 0 & r(:, 3) == 0& err < 0) = 0;
+  err(p == 0 & r(:, 3) == 0 & err < 0) = 0;
   r2 = t.axes.^2 .* r./(p + axes2);
   % Deal with case p == 0 (when r2(3) is indeterminate).
   l = p == 0;
