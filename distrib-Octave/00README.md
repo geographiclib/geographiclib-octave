@@ -11,7 +11,7 @@ package geographiclib.
 * The mltbx files are MATLAB toolboxes.  These are also available at
   [MATLAB Central](https://www.mathworks.com/matlabcentral/fileexchange/50605).
 
-Tha Octave package can be installed with the command
+This Octave package can be installed with the command
 ```octave
 pkg install geographiclib-octave-M.N.tar.gz
 pkg load geographiclib

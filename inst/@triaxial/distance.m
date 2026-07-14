@@ -295,8 +295,8 @@ function [s12, v1, v2, m12, M12, M21, count] = distanceint2(t, r1, r2)
 
 % For S, put alp1 in [0, 360).
 
-% For E, put omg in [0,360) for omg comparisions.
-% For S, W, N, then put omg in [-180,180) for omg comparisions.
+% For E, put omg in [0,360) for omg comparisons.
+% For S, W, N, then put omg in [-180,180) for omg comparisons.
 
 % If omg2 > 0, compute omgu[14] only -- S is disallowed.  Compute omgu1
 % first if omg2 > 90.

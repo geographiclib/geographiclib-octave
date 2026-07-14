@@ -51,7 +51,7 @@ function [ellip3, count, err] = carttoellip(t, r)
   sb(tz == 0) = -1;
   tx = sqrt(t.k2 * cb.^2 + t.kp2);
   co = xi ./ tx;
-  % at an oblate pole bet = +/-90, omg is arbirary; pick omg = 0
+  % at an oblate pole bet = +/-90, omg is arbitrary; pick omg = 0
   co(tx == 0) = 1;
   bet = atan2d(sb, cb);
   omg = atan2d(so, co);

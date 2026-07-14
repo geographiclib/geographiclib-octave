@@ -37,7 +37,7 @@ function [s12, azi1, azi2, S12, m12, M12, M21, a12] = geoddistance ...
 %     * The azimuth at the second end point azi2 is returned.
 %     * The solution is accurate to round off for abs(e) < 0.2.
 %     * The algorithm converges for all pairs of input points.
-%     * Additional properties of the geodesic are calcuated.
+%     * Additional properties of the geodesic are calculated.
 %
 %   See also GEODDOC, GEODRECKON, GEODAREA, DEFAULTELLIPSOID, FLAT2ECC.
 

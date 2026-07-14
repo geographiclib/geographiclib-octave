@@ -23,7 +23,7 @@ function [x, y, zone, isnorth, gam, k] = utmups_fwd(lat, lon, setzone)
 %   assignment to be overridden.  The choices are
 %        0, use UPS
 %        [1,60], use the corresponding UTM zone
-%       -1, use the standard assigment (the default)
+%       -1, use the standard assignment (the default)
 %       -2, use closest UTM zone
 %       -4, an undefined zone
 %

@@ -1,5 +1,5 @@
 function param = cart2toparam(t, r)
-%CART2TOPARAM  Convert a surface point from cartesion to parametric
+%CART2TOPARAM  Convert a surface point from cartesian to parametric
 %
 %   param = CART2TOPARAM(t, R)
 %

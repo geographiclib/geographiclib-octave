@@ -42,7 +42,7 @@ Version 2.3 (released 2024-07-09)
   * Fix bug in triaxial.cart2toellip for the computation of azimuth
     for umbilical points.
   * Fix bug in handling default arguments for triaxial.ellipnorm.
-  * Fix triaxial.distance with ellipsoidal coodinates so that the
+  * Fix triaxial.distance with ellipsoidal coordinates so that the
     azimuths returned are consistent with the sheets of the endpoints.
   * triaxial.cart2toellip has a new signature to allow directions to
     be converted to azimuths consistent with a particular choice of
