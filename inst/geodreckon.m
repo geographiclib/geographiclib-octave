@@ -64,7 +64,7 @@ function [lat2, lon2, azi2, S12, m12, M12, M21, a12_s12] = geodreckon ...
 %     * The solution is accurate to round off for abs(e) < 0.2.
 %     * Redundant calculations are avoided when computing multiple
 %       points on a single geodesic.
-%     * Additional properties of the geodesic are calcuated.
+%     * Additional properties of the geodesic are calculated.
 %
 %   See also GEODDOC, GEODDISTANCE, GEODAREA, DEFAULTELLIPSOID, FLAT2ECC.
 

@@ -1,5 +1,5 @@
 function geod3 = carttogeod(t, r)
-%CARTTOGEOD  Convert a surface point from cartesion to geodetic
+%CARTTOGEOD  Convert a surface point from cartesian to geodetic
 %
 %   geod3 = CARTTOGEOD(t, R)
 %
