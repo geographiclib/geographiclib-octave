@@ -2,7 +2,7 @@ function G4x = G4coeff(n)
 %G4COEFF  Evaluate coefficients for C_4 for great ellipse
 %
 %   G4x = G4COEFF(n) evaluates the coefficients of epsilon^l in expansion
-%   of the greater ellipse area (expressed in terms of n and epsi).  n is a
+%   of the great ellipse area (expressed in terms of n and epsi).  n is a
 %   scalar.  G4x is a 1 x 21 array.
 
   persistent coeff nG4 nG4x
